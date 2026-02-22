@@ -107,10 +107,10 @@ settings:
   --d-danger-subtle: oklch(0.950 0.040 20);
   --d-danger-text: oklch(0.550 0.220 20);
 
-  --d-gold: oklch(0.830 0.180 80);
-  --d-gold-hover: oklch(0.790 0.175 78);
+  --d-gold: oklch(0.840 0.175 85);
+  --d-gold-hover: oklch(0.820 0.165 84);
   --d-gold-subtle: oklch(0.965 0.060 85);
-  --d-gold-text: oklch(0.440 0.130 80);
+  --d-gold-text: oklch(0.440 0.130 85);
 
   --d-cyan: oklch(0.650 0.148 210);
   --d-cyan-hover: oklch(0.600 0.150 210);
@@ -157,7 +157,7 @@ settings:
   --color-red-rgb: 232, 78, 52;
   --color-orange: oklch(0.700 0.180 55);
   --color-orange-rgb: 210, 130, 30;
-  --color-yellow: oklch(0.830 0.180 80);
+  --color-yellow: oklch(0.840 0.175 85);
   --color-yellow-rgb: 210, 190, 20;
   --color-green: oklch(0.630 0.170 148);
   --color-green-rgb: 12, 171, 79;
@@ -204,7 +204,7 @@ settings:
   --text-accent: var(--d-pink-text);
   --text-accent-hover: oklch(0.500 0.280 350);
 
-  --text-highlight-bg: oklch(0.830 0.180 80 / 0.4);
+  --text-highlight-bg: oklch(0.840 0.175 85 / 0.4);
   --text-highlight-bg-active: oklch(0.700 0.180 55 / 0.4);
   --text-selection: oklch(0.640 0.270 350 / 0.2);
 
@@ -318,7 +318,7 @@ settings:
   --color-red-rgb: 235, 100, 75;
   --color-orange: oklch(0.720 0.150 55);
   --color-orange-rgb: 220, 145, 50;
-  --color-yellow: oklch(0.820 0.170 80);
+  --color-yellow: oklch(0.840 0.170 85);
   --color-yellow-rgb: 215, 195, 50;
   --color-green: oklch(0.680 0.155 148);
   --color-green-rgb: 52, 195, 108;
@@ -361,11 +361,11 @@ settings:
   --text-on-accent-inverted: oklch(0.935 0.008 70);
   --text-error: oklch(0.720 0.180 20);
   --text-success: oklch(0.740 0.145 148);
-  --text-warning: oklch(0.860 0.160 80);
+  --text-warning: oklch(0.870 0.155 85);
   --text-accent: oklch(0.750 0.210 350);
   --text-accent-hover: oklch(0.780 0.200 350);
 
-  --text-highlight-bg: oklch(0.820 0.170 80 / 0.4);
+  --text-highlight-bg: oklch(0.840 0.170 85 / 0.4);
   --text-highlight-bg-active: oklch(0.720 0.150 55 / 0.4);
   --text-selection: oklch(0.700 0.230 350 / 0.3);
 
@@ -931,12 +931,12 @@ body.accent-gold {
   --interactive-accent: var(--d-gold);
   --interactive-accent-hover: var(--d-gold-hover);
   --text-accent: var(--d-gold-text);
-  --text-accent-hover: oklch(0.380 0.140 80);
+  --text-accent-hover: oklch(0.380 0.140 85);
   --text-on-accent: oklch(0.220 0.020 70);
   --link-color: var(--d-gold-text);
-  --link-color-hover: oklch(0.380 0.140 80);
+  --link-color-hover: oklch(0.380 0.140 85);
   --link-external-color: var(--d-gold-text);
-  --link-external-color-hover: oklch(0.380 0.140 80);
+  --link-external-color-hover: oklch(0.380 0.140 85);
   --tag-color: var(--d-gold-text);
   --tag-background: var(--d-gold-subtle);
   --nav-item-color-active: var(--d-gold-text);
@@ -945,21 +945,21 @@ body.accent-gold {
 
 body.theme-dark.accent-gold {
   --accent-l: 60%;
-  --color-accent: oklch(0.820 0.170 80);
-  --color-accent-hover: oklch(0.860 0.160 78);
-  --interactive-accent: oklch(0.820 0.170 80);
-  --interactive-accent-hover: oklch(0.860 0.160 78);
-  --text-accent: oklch(0.860 0.160 80);
-  --text-accent-hover: oklch(0.890 0.150 80);
+  --color-accent: oklch(0.840 0.170 85);
+  --color-accent-hover: oklch(0.870 0.155 84);
+  --interactive-accent: oklch(0.840 0.170 85);
+  --interactive-accent-hover: oklch(0.870 0.155 84);
+  --text-accent: oklch(0.870 0.155 85);
+  --text-accent-hover: oklch(0.900 0.145 85);
   --text-on-accent: oklch(0.140 0.014 65);
-  --link-color: oklch(0.860 0.160 80);
-  --link-color-hover: oklch(0.890 0.150 80);
-  --link-external-color: oklch(0.860 0.160 80);
-  --link-external-color-hover: oklch(0.890 0.150 80);
-  --tag-color: oklch(0.860 0.160 80);
-  --tag-background: oklch(0.260 0.065 80);
-  --nav-item-color-active: oklch(0.860 0.160 80);
-  --blockquote-border-color: oklch(0.820 0.170 80);
+  --link-color: oklch(0.870 0.155 85);
+  --link-color-hover: oklch(0.900 0.145 85);
+  --link-external-color: oklch(0.870 0.155 85);
+  --link-external-color-hover: oklch(0.900 0.145 85);
+  --tag-color: oklch(0.870 0.155 85);
+  --tag-background: oklch(0.260 0.065 85);
+  --nav-item-color-active: oklch(0.870 0.155 85);
+  --blockquote-border-color: oklch(0.840 0.170 85);
 }
 
 /* Cyan accent */
