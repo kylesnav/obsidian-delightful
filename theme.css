@@ -1,0 +1,1094 @@
+/* ==========================================================================
+   Delightful — Obsidian Theme
+   A warm, neo-brutalist theme with OKLCH colors, solid offset shadows,
+   thick borders, and playful radii.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
+/* ==========================================================================
+   Style Settings Plugin Support
+   ========================================================================== */
+
+/* @settings
+name: Delightful
+id: delightful-theme
+settings:
+  -
+    id: delightful-colors
+    title: Colors
+    type: heading
+    level: 1
+  -
+    id: delightful-accent-color
+    title: Accent Color
+    type: class-select
+    default: accent-blue
+    options:
+      -
+        label: Blue (default)
+        value: accent-blue
+      -
+        label: Red
+        value: accent-red
+      -
+        label: Yellow
+        value: accent-yellow
+      -
+        label: Green
+        value: accent-green
+  -
+    id: delightful-style
+    title: Style
+    type: heading
+    level: 1
+  -
+    id: delightful-shadow-style
+    title: Shadow Style
+    type: class-select
+    default: shadow-normal
+    options:
+      -
+        label: Neo-brutalist (default)
+        value: shadow-normal
+      -
+        label: Subtle
+        value: shadow-subtle
+      -
+        label: None
+        value: shadow-none
+  -
+    id: delightful-border-weight
+    title: Border Weight
+    type: class-select
+    default: border-normal
+    options:
+      -
+        label: Neo-brutalist / 2px (default)
+        value: border-normal
+      -
+        label: Subtle / 1px
+        value: border-subtle
+*/
+
+/* ==========================================================================
+   PRIMITIVES — OKLCH tokens from the Delightful Design System
+   Referenced via var() throughout the theme for single-source-of-truth colors.
+   ========================================================================== */
+
+:root {
+  /* Neutral scale — warm-tinted (hue 90) */
+  --d-neutral-0: oklch(1.00 0.000 0);
+  --d-neutral-50: oklch(0.978 0.005 90);
+  --d-neutral-100: oklch(0.958 0.006 90);
+  --d-neutral-200: oklch(0.905 0.007 90);
+  --d-neutral-300: oklch(0.855 0.008 90);
+  --d-neutral-400: oklch(0.755 0.010 90);
+  --d-neutral-500: oklch(0.610 0.012 90);
+  --d-neutral-600: oklch(0.490 0.010 90);
+  --d-neutral-700: oklch(0.360 0.010 90);
+  --d-neutral-800: oklch(0.240 0.008 90);
+  --d-neutral-900: oklch(0.170 0.007 90);
+  --d-neutral-950: oklch(0.135 0.008 90);
+
+  /* Accent families */
+  --d-blue: oklch(0.600 0.250 260);
+  --d-blue-hover: oklch(0.550 0.260 260);
+  --d-blue-text: oklch(0.550 0.250 260);
+  --d-blue-subtle: oklch(0.940 0.050 260);
+
+  --d-red: oklch(0.600 0.260 20);
+  --d-red-hover: oklch(0.550 0.250 20);
+  --d-red-text: oklch(0.550 0.250 20);
+  --d-red-subtle: oklch(0.940 0.050 20);
+
+  --d-yellow: oklch(0.850 0.200 90);
+  --d-yellow-hover: oklch(0.800 0.190 90);
+  --d-yellow-text: oklch(0.400 0.150 90);
+  --d-yellow-subtle: oklch(0.960 0.080 90);
+
+  --d-green: oklch(0.650 0.200 150);
+  --d-green-hover: oklch(0.600 0.190 150);
+  --d-green-text: oklch(0.500 0.180 150);
+  --d-green-subtle: oklch(0.940 0.060 150);
+}
+
+/* ==========================================================================
+   LIGHT MODE
+   ========================================================================== */
+
+.theme-light {
+  color-scheme: light;
+  --highlight-mix-blend-mode: darken;
+  --mono-rgb-0: 255, 255, 255;
+  --mono-rgb-100: 0, 0, 0;
+
+  /* Color base scale — warm neutrals from Delightful */
+  --color-base-00: oklch(1.00 0.00 0);        /* bg-surface: pure white */
+  --color-base-05: oklch(0.993 0.003 80);      /* interpolated near-white */
+  --color-base-10: oklch(0.985 0.005 80);      /* bg-page: warm off-white */
+  --color-base-20: oklch(0.965 0.010 80);      /* bg-subtle */
+  --color-base-25: oklch(0.950 0.012 80);      /* bg-muted */
+  --color-base-30: oklch(0.905 0.007 90);      /* neutral-200 */
+  --color-base-35: oklch(0.855 0.008 90);      /* neutral-300 */
+  --color-base-40: oklch(0.800 0.020 80);      /* border-subtle */
+  --color-base-50: oklch(0.610 0.012 90);      /* neutral-500 */
+  --color-base-60: oklch(0.550 0.015 80);      /* text-muted */
+  --color-base-70: oklch(0.400 0.015 80);      /* text-secondary */
+  --color-base-100: oklch(0.180 0.010 80);     /* text-primary: warm near-black */
+
+  /* Accent (blue default) — HSL approximation for Obsidian's calc() derivations */
+  --accent-h: 264;
+  --accent-s: 100%;
+  --accent-l: 41%;
+
+  /* Extended semantic colors */
+  --color-red: oklch(0.600 0.260 20);
+  --color-red-rgb: 232, 78, 52;
+  --color-orange: oklch(0.700 0.180 55);
+  --color-orange-rgb: 210, 130, 30;
+  --color-yellow: oklch(0.850 0.200 90);
+  --color-yellow-rgb: 210, 190, 20;
+  --color-green: oklch(0.650 0.200 150);
+  --color-green-rgb: 12, 171, 79;
+  --color-cyan: oklch(0.650 0.150 200);
+  --color-cyan-rgb: 30, 160, 190;
+  --color-blue: oklch(0.600 0.250 260);
+  --color-blue-rgb: 50, 70, 220;
+  --color-purple: oklch(0.550 0.200 300);
+  --color-purple-rgb: 140, 50, 210;
+  --color-pink: oklch(0.600 0.230 350);
+  --color-pink-rgb: 210, 60, 140;
+
+  /* Neo-brutalist shadows */
+  --shadow-s: 2px 2px 0 oklch(0.180 0.010 80);
+  --shadow-l: 4px 4px 0 oklch(0.180 0.010 80);
+
+  /* Accent color — explicit override alongside HSL decomposition */
+  --color-accent: var(--d-blue);
+  --color-accent-hover: var(--d-blue-hover);
+
+  /* Background modifiers */
+  --background-modifier-hover: oklch(0.965 0.010 80);
+  --background-modifier-active-hover: oklch(0.950 0.012 80);
+  --background-modifier-border: oklch(0.905 0.007 90);
+  --background-modifier-border-hover: oklch(0.855 0.008 90);
+  --background-modifier-border-focus: var(--d-blue);
+  --background-modifier-error: var(--d-red-subtle);
+  --background-modifier-error-hover: oklch(0.920 0.070 20);
+  --background-modifier-success: var(--d-green-subtle);
+  --background-modifier-message: var(--d-blue-subtle);
+  --background-modifier-form-field: oklch(0.978 0.005 90);
+  --background-modifier-box-shadow: oklch(0.180 0.010 80 / 0.15);
+  --background-modifier-cover: oklch(0.180 0.010 80 / 0.30);
+
+  /* Text */
+  --text-normal: oklch(0.180 0.010 80);
+  --text-muted: oklch(0.400 0.015 80);
+  --text-faint: oklch(0.550 0.015 80);
+  --text-on-accent: oklch(1.00 0.000 0);
+  --text-on-accent-inverted: oklch(0.180 0.010 80);
+  --text-error: var(--d-red-text);
+  --text-success: var(--d-green-text);
+  --text-warning: var(--d-yellow-text);
+  --text-accent: var(--d-blue-text);
+  --text-accent-hover: oklch(0.500 0.260 260);
+
+  --text-highlight-bg: oklch(0.850 0.200 90 / 0.4);
+  --text-highlight-bg-active: oklch(0.700 0.180 55 / 0.4);
+  --text-selection: oklch(0.600 0.250 260 / 0.2);
+
+  /* Bold / italic */
+  --bold-color: oklch(0.150 0.012 80);
+  --italic-color: inherit;
+
+  /* Interactive */
+  --interactive-normal: oklch(1.00 0.00 0);
+  --interactive-hover: oklch(0.965 0.010 80);
+  --interactive-accent: var(--d-blue);
+  --interactive-accent-hover: var(--d-blue-hover);
+
+  /* Inputs */
+  --input-shadow: 2px 2px 0 oklch(0.180 0.010 80);
+  --input-shadow-hover: 4px 4px 0 var(--d-blue);
+
+  /* Code */
+  --code-normal: var(--d-red-text);
+  --code-background: oklch(0.965 0.010 80);
+
+  /* Tags */
+  --tag-color: var(--d-blue-text);
+  --tag-color-hover: oklch(0.500 0.260 260);
+  --tag-background: var(--d-blue-subtle);
+  --tag-background-hover: oklch(0.920 0.070 260);
+
+  /* Links */
+  --link-color: var(--d-blue-text);
+  --link-color-hover: oklch(0.500 0.260 260);
+  --link-decoration: underline;
+  --link-decoration-hover: underline;
+  --link-external-color: var(--d-blue-text);
+  --link-external-color-hover: oklch(0.500 0.260 260);
+  --link-external-decoration: underline;
+  --link-unresolved-color: oklch(0.550 0.015 80);
+  --link-unresolved-opacity: 0.7;
+
+  /* Headings */
+  --h1-color: oklch(0.150 0.012 80);
+  --h2-color: oklch(0.180 0.010 80);
+  --h3-color: oklch(0.200 0.010 80);
+  --h4-color: oklch(0.250 0.010 80);
+  --h5-color: oklch(0.300 0.012 80);
+  --h6-color: oklch(0.400 0.015 80);
+
+  /* Inline title (file name at top of note) */
+  --inline-title-color: oklch(0.150 0.012 80);
+  --inline-title-size: 2.488em;
+  --inline-title-weight: 760;
+
+  /* Navigation */
+  --nav-item-color: oklch(0.400 0.015 80);
+  --nav-item-color-hover: oklch(0.180 0.010 80);
+  --nav-item-color-active: var(--d-blue-text);
+  --nav-item-color-selected: oklch(0.180 0.010 80);
+  --nav-item-background-hover: oklch(0.965 0.010 80);
+  --nav-item-background-active: oklch(0.950 0.012 80);
+  --nav-indentation-guide-color: oklch(0.905 0.007 90);
+
+  /* Blockquote */
+  --blockquote-border-color: var(--d-blue);
+  --blockquote-color: oklch(0.400 0.015 80);
+  --blockquote-background-color: oklch(0.978 0.005 90);
+
+  /* Table */
+  --table-header-background: oklch(0.965 0.010 80);
+  --table-row-background-hover: oklch(0.978 0.005 90);
+  --table-row-alt-background: oklch(0.985 0.005 80);
+
+  /* Properties / frontmatter */
+  --metadata-label-text-color: oklch(0.400 0.015 80);
+  --metadata-input-text-color: oklch(0.180 0.010 80);
+
+  /* Paragraph spacing */
+  --p-spacing: 0.75rem;
+  --line-width: 42rem;
+}
+
+/* ==========================================================================
+   DARK MODE
+   ========================================================================== */
+
+.theme-dark {
+  color-scheme: dark;
+  --highlight-mix-blend-mode: lighten;
+  --mono-rgb-0: 0, 0, 0;
+  --mono-rgb-100: 255, 255, 255;
+
+  /* Color base scale — warm dark neutrals from Delightful */
+  --color-base-00: oklch(0.135 0.010 90);      /* bg-page */
+  --color-base-05: oklch(0.148 0.011 90);      /* interpolated */
+  --color-base-10: oklch(0.160 0.012 90);      /* bg-surface */
+  --color-base-20: oklch(0.175 0.010 90);      /* bg-muted */
+  --color-base-25: oklch(0.185 0.012 90);      /* bg-elevated */
+  --color-base-30: oklch(0.205 0.012 90);      /* bg-subtle */
+  --color-base-35: oklch(0.260 0.012 90);      /* interpolated */
+  --color-base-40: oklch(0.330 0.012 90);      /* border-subtle */
+  --color-base-50: oklch(0.430 0.012 90);      /* interpolated */
+  --color-base-60: oklch(0.540 0.010 90);      /* text-muted */
+  --color-base-70: oklch(0.690 0.010 90);      /* text-secondary */
+  --color-base-100: oklch(0.935 0.005 90);     /* text-primary */
+
+  /* Accent (blue default) — dark mode adjusted */
+  --accent-h: 264;
+  --accent-s: 75%;
+  --accent-l: 55%;
+
+  /* Extended semantic colors — dark adjusted */
+  --color-red: oklch(0.620 0.210 25);
+  --color-red-rgb: 235, 100, 75;
+  --color-orange: oklch(0.720 0.150 55);
+  --color-orange-rgb: 220, 145, 50;
+  --color-yellow: oklch(0.810 0.160 85);
+  --color-yellow-rgb: 215, 195, 50;
+  --color-green: oklch(0.680 0.170 155);
+  --color-green-rgb: 52, 195, 108;
+  --color-cyan: oklch(0.680 0.130 200);
+  --color-cyan-rgb: 55, 175, 200;
+  --color-blue: oklch(0.670 0.200 260);
+  --color-blue-rgb: 80, 100, 235;
+  --color-purple: oklch(0.600 0.170 300);
+  --color-purple-rgb: 160, 80, 220;
+  --color-pink: oklch(0.640 0.190 350);
+  --color-pink-rgb: 220, 85, 155;
+
+  /* Neo-brutalist shadows — dark mode uses semi-transparent black */
+  --shadow-s: 2px 2px 0 oklch(0 0 0 / 0.8);
+  --shadow-l: 4px 4px 0 oklch(0 0 0 / 0.8);
+
+  /* Accent color */
+  --color-accent: oklch(0.670 0.200 260);
+  --color-accent-hover: oklch(0.720 0.190 260);
+
+  /* Background modifiers */
+  --background-modifier-hover: oklch(0.205 0.012 90);
+  --background-modifier-active-hover: oklch(0.230 0.012 90);
+  --background-modifier-border: oklch(0.330 0.012 90);
+  --background-modifier-border-hover: oklch(0.380 0.012 90);
+  --background-modifier-border-focus: oklch(0.670 0.200 260);
+  --background-modifier-error: oklch(0.250 0.060 25);
+  --background-modifier-error-hover: oklch(0.280 0.070 25);
+  --background-modifier-success: oklch(0.250 0.050 155);
+  --background-modifier-message: oklch(0.250 0.060 260);
+  --background-modifier-form-field: oklch(0.185 0.012 90);
+  --background-modifier-box-shadow: oklch(0 0 0 / 0.3);
+  --background-modifier-cover: oklch(0 0 0 / 0.60);
+
+  /* Text */
+  --text-normal: oklch(0.935 0.005 90);
+  --text-muted: oklch(0.690 0.010 90);
+  --text-faint: oklch(0.540 0.010 90);
+  --text-on-accent: oklch(1.00 0.000 0);
+  --text-on-accent-inverted: oklch(0.935 0.005 90);
+  --text-error: oklch(0.700 0.190 25);
+  --text-success: oklch(0.730 0.160 155);
+  --text-warning: oklch(0.850 0.150 85);
+  --text-accent: oklch(0.730 0.190 260);
+  --text-accent-hover: oklch(0.770 0.180 260);
+
+  --text-highlight-bg: oklch(0.810 0.160 85 / 0.4);
+  --text-highlight-bg-active: oklch(0.720 0.150 55 / 0.4);
+  --text-selection: oklch(0.670 0.200 260 / 0.3);
+
+  /* Bold / italic */
+  --bold-color: oklch(0.960 0.004 90);
+  --italic-color: inherit;
+
+  /* Interactive */
+  --interactive-normal: oklch(0.160 0.012 90);
+  --interactive-hover: oklch(0.205 0.012 90);
+  --interactive-accent: oklch(0.670 0.200 260);
+  --interactive-accent-hover: oklch(0.720 0.190 260);
+
+  /* Inputs */
+  --input-shadow: 2px 2px 0 oklch(0 0 0 / 0.8);
+  --input-shadow-hover: 4px 4px 0 oklch(0.670 0.200 260);
+
+  /* Code */
+  --code-normal: oklch(0.700 0.190 25);
+  --code-background: oklch(0.205 0.012 90);
+
+  /* Tags */
+  --tag-color: oklch(0.730 0.190 260);
+  --tag-color-hover: oklch(0.770 0.180 260);
+  --tag-background: oklch(0.250 0.060 260);
+  --tag-background-hover: oklch(0.280 0.070 260);
+
+  /* Links */
+  --link-color: oklch(0.730 0.190 260);
+  --link-color-hover: oklch(0.770 0.180 260);
+  --link-decoration: underline;
+  --link-decoration-hover: underline;
+  --link-external-color: oklch(0.730 0.190 260);
+  --link-external-color-hover: oklch(0.770 0.180 260);
+  --link-external-decoration: underline;
+  --link-unresolved-color: oklch(0.540 0.010 90);
+  --link-unresolved-opacity: 0.7;
+
+  /* Headings */
+  --h1-color: oklch(0.960 0.004 90);
+  --h2-color: oklch(0.935 0.005 90);
+  --h3-color: oklch(0.900 0.006 90);
+  --h4-color: oklch(0.850 0.008 90);
+  --h5-color: oklch(0.800 0.008 90);
+  --h6-color: oklch(0.690 0.010 90);
+
+  /* Inline title */
+  --inline-title-color: oklch(0.960 0.004 90);
+  --inline-title-size: 2.488em;
+  --inline-title-weight: 760;
+
+  /* Navigation */
+  --nav-item-color: oklch(0.690 0.010 90);
+  --nav-item-color-hover: oklch(0.935 0.005 90);
+  --nav-item-color-active: oklch(0.730 0.190 260);
+  --nav-item-color-selected: oklch(0.935 0.005 90);
+  --nav-item-background-hover: oklch(0.205 0.012 90);
+  --nav-item-background-active: oklch(0.230 0.012 90);
+  --nav-indentation-guide-color: oklch(0.330 0.012 90);
+
+  /* Blockquote */
+  --blockquote-border-color: oklch(0.670 0.200 260);
+  --blockquote-color: oklch(0.690 0.010 90);
+  --blockquote-background-color: oklch(0.160 0.012 90);
+
+  /* Table */
+  --table-header-background: oklch(0.175 0.010 90);
+  --table-row-background-hover: oklch(0.185 0.012 90);
+  --table-row-alt-background: oklch(0.148 0.011 90);
+
+  /* Properties / frontmatter */
+  --metadata-label-text-color: oklch(0.690 0.010 90);
+  --metadata-input-text-color: oklch(0.935 0.005 90);
+
+  /* Paragraph spacing */
+  --p-spacing: 0.75rem;
+  --line-width: 42rem;
+}
+
+/* ==========================================================================
+   TYPOGRAPHY, LAYOUT & GLOBAL BODY VARIABLES
+   ========================================================================== */
+
+body {
+  --font-interface-theme: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-text-theme: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-monospace-theme: 'JetBrains Mono', ui-monospace, 'Cascadia Code', monospace;
+
+  /* Heading scale — from Delightful fluid type steps */
+  --h1-size: 2.488em;
+  --h2-size: 2.074em;
+  --h3-size: 1.728em;
+  --h4-size: 1.44em;
+  --h5-size: 1.2em;
+  --h6-size: 1em;
+
+  /* Heading weights — variable font weights for Inter */
+  --h1-weight: 760;
+  --h2-weight: 700;
+  --h3-weight: 650;
+  --h4-weight: 620;
+  --h5-weight: 600;
+  --h6-weight: 600;
+
+  /* Heading line-heights */
+  --h1-line-height: 1.15;
+  --h2-line-height: 1.15;
+  --h3-line-height: 1.15;
+  --h4-line-height: 1.3;
+  --h5-line-height: 1.3;
+  --h6-line-height: 1.55;
+
+  /* Neo-brutalist radii — larger than Obsidian defaults */
+  --radius-s: 10px;
+  --radius-m: 16px;
+  --radius-l: 24px;
+  --radius-xl: 32px;
+
+  /* Thicker borders */
+  --border-width: 2px;
+
+  /* Line height */
+  --line-height-normal: 1.55;
+  --line-height-tight: 1.15;
+
+  /* Bold */
+  --bold-weight: 700;
+
+  /* Inputs */
+  --input-radius: 10px;
+  --input-border-width: 2px;
+
+  /* Checkbox */
+  --checkbox-radius: 4px;
+  --checkbox-border-color: var(--color-base-100);
+  --checkbox-border-color-hover: var(--interactive-accent);
+
+  /* Modal */
+  --modal-radius: 24px;
+  --modal-border-width: 2px;
+
+  /* Blockquote */
+  --blockquote-border-thickness: 3px;
+
+  /* Horizontal rule */
+  --hr-thickness: 2px;
+
+  /* Tags — pill-shaped */
+  --tag-radius: 9999px;
+  --tag-border-width: 0px;
+  --tag-padding-x: 0.65em;
+  --tag-padding-y: 0.25em;
+
+  /* Toggle */
+  --toggle-border-width: 2px;
+  --toggle-radius: 9999px;
+  --toggle-thumb-radius: 50%;
+
+  /* Tab */
+  --tab-radius: 10px;
+  --tab-radius-active: 10px 10px 0 0;
+
+  /* Callout */
+  --callout-radius: 16px;
+  --callout-border-width: 2px;
+
+  /* Font rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+/* ==========================================================================
+   HEADING LETTER-SPACING
+   ========================================================================== */
+
+.markdown-rendered h1,
+.markdown-rendered h2,
+.cm-header-1,
+.cm-header-2,
+.inline-title {
+  letter-spacing: -0.03em;
+}
+
+.markdown-rendered h3,
+.markdown-rendered h4,
+.cm-header-3,
+.cm-header-4 {
+  letter-spacing: -0.02em;
+}
+
+/* ==========================================================================
+   NEO-BRUTALIST COMPONENT OVERRIDES
+   ========================================================================== */
+
+/* --- Buttons --- */
+
+button.mod-cta,
+.mod-cta {
+  border: 2px solid var(--color-base-100);
+  border-radius: var(--radius-s);
+  box-shadow: 2px 2px 0 var(--color-base-100);
+  font-weight: 700;
+  transition: transform 100ms linear, box-shadow 100ms linear;
+}
+
+button.mod-cta:hover,
+.mod-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 4px 4px 0 var(--color-base-100);
+}
+
+button.mod-cta:active,
+.mod-cta:active {
+  transform: translate(2px, 2px);
+  box-shadow: 0 0 0 transparent;
+}
+
+.theme-dark button.mod-cta,
+.theme-dark .mod-cta {
+  border-color: oklch(0.935 0.005 90 / 0.2);
+  box-shadow: 2px 2px 0 oklch(0 0 0 / 0.8);
+}
+
+.theme-dark button.mod-cta:hover,
+.theme-dark .mod-cta:hover {
+  box-shadow: 4px 4px 0 oklch(0 0 0 / 0.8);
+}
+
+.theme-dark button.mod-cta:active,
+.theme-dark .mod-cta:active {
+  box-shadow: 0 0 0 transparent;
+}
+
+/* --- Inputs & Textareas --- */
+
+input[type='text'],
+input[type='search'],
+input[type='email'],
+input[type='password'],
+input[type='number'],
+input[type='url'],
+textarea,
+.dropdown {
+  border: 2px solid var(--color-base-40);
+  border-radius: var(--radius-s);
+  box-shadow: var(--input-shadow);
+  transition: border-color 160ms cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 100ms linear;
+}
+
+input[type='text']:focus,
+input[type='search']:focus,
+input[type='email']:focus,
+input[type='password']:focus,
+input[type='number']:focus,
+input[type='url']:focus,
+textarea:focus,
+.dropdown:focus {
+  border-color: var(--interactive-accent);
+  box-shadow: var(--input-shadow-hover);
+  outline: none;
+}
+
+/* --- Modals --- */
+
+.modal-container .modal {
+  border: 2px solid var(--color-base-40);
+  border-radius: var(--modal-radius);
+  box-shadow: 8px 8px 0 var(--color-base-100);
+}
+
+.theme-dark .modal-container .modal {
+  border-color: oklch(0.330 0.012 90);
+  box-shadow: 8px 8px 0 oklch(0 0 0 / 0.8);
+}
+
+.modal-close-button {
+  border-radius: var(--radius-s);
+}
+
+/* --- Settings modal --- */
+
+.modal.mod-settings .vertical-tab-header {
+  border-right: 2px solid var(--background-modifier-border);
+}
+
+/* --- Menus --- */
+
+.menu {
+  border: 2px solid var(--color-base-40);
+  border-radius: var(--radius-m);
+  box-shadow: 4px 4px 0 var(--color-base-100);
+  padding: 4px;
+}
+
+.theme-dark .menu {
+  border-color: oklch(0.330 0.012 90);
+  box-shadow: 4px 4px 0 oklch(0 0 0 / 0.8);
+}
+
+.menu-item {
+  border-radius: var(--radius-s);
+}
+
+/* --- Suggestion / autocomplete popups --- */
+
+.suggestion-container {
+  border: 2px solid var(--color-base-40);
+  border-radius: var(--radius-m);
+  box-shadow: 4px 4px 0 var(--color-base-100);
+}
+
+.theme-dark .suggestion-container {
+  border-color: oklch(0.330 0.012 90);
+  box-shadow: 4px 4px 0 oklch(0 0 0 / 0.8);
+}
+
+.suggestion-item {
+  border-radius: var(--radius-s);
+}
+
+/* --- Tooltips --- */
+
+.tooltip {
+  border: 2px solid var(--color-base-100);
+  border-radius: var(--radius-s);
+  box-shadow: 2px 2px 0 var(--color-base-100);
+}
+
+.theme-dark .tooltip {
+  border-color: oklch(0.330 0.012 90);
+  box-shadow: 2px 2px 0 oklch(0 0 0 / 0.8);
+}
+
+/* --- Callouts --- */
+
+.callout {
+  border: 2px solid var(--color-base-40);
+  border-radius: var(--callout-radius);
+  box-shadow: 2px 2px 0 var(--color-base-100);
+  overflow: hidden;
+}
+
+.theme-dark .callout {
+  border-color: oklch(0.330 0.012 90);
+  box-shadow: 2px 2px 0 oklch(0 0 0 / 0.8);
+}
+
+/* --- Code blocks --- */
+
+.markdown-rendered pre,
+.cm-s-obsidian .HyperMD-codeblock-bg {
+  border-radius: var(--radius-s);
+}
+
+.markdown-rendered pre {
+  border: 2px solid var(--color-base-40);
+  box-shadow: 2px 2px 0 var(--color-base-100);
+}
+
+.theme-dark .markdown-rendered pre {
+  border-color: oklch(0.330 0.012 90);
+  box-shadow: 2px 2px 0 oklch(0 0 0 / 0.8);
+}
+
+/* Inline code */
+.markdown-rendered code:not(pre code),
+.cm-s-obsidian span.cm-inline-code {
+  border-radius: 6px;
+  padding: 0.15em 0.35em;
+}
+
+/* --- Tables --- */
+
+.markdown-rendered table {
+  border: 2px solid var(--color-base-40);
+  border-radius: var(--radius-m);
+  overflow: hidden;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.theme-dark .markdown-rendered table {
+  border-color: oklch(0.330 0.012 90);
+}
+
+.markdown-rendered th {
+  font-weight: 600;
+  font-size: 0.6875rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-bottom: 2px solid var(--color-base-40);
+}
+
+.theme-dark .markdown-rendered th {
+  border-bottom-color: oklch(0.330 0.012 90);
+}
+
+.markdown-rendered td,
+.markdown-rendered th {
+  border-right: 1px solid var(--background-modifier-border);
+}
+
+.markdown-rendered td:last-child,
+.markdown-rendered th:last-child {
+  border-right: none;
+}
+
+/* --- Checkboxes --- */
+
+input[type='checkbox'] {
+  border: 2px solid var(--color-base-100);
+  border-radius: var(--checkbox-radius);
+  transition: background-color 160ms cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 160ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+input[type='checkbox']:checked {
+  background-color: var(--interactive-accent);
+  border-color: var(--interactive-accent);
+}
+
+.theme-dark input[type='checkbox'] {
+  border-color: oklch(0.540 0.010 90);
+}
+
+/* --- Sidebar navigation --- */
+
+.nav-file-title,
+.nav-folder-title {
+  border-radius: var(--radius-s);
+  transition: background-color 160ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-file-title.is-active,
+.nav-folder-title.is-active {
+  font-weight: 550;
+}
+
+/* --- Tabs --- */
+
+.workspace-tab-header {
+  border-radius: var(--tab-radius) var(--tab-radius) 0 0;
+}
+
+/* --- Scrollbars --- */
+
+::-webkit-scrollbar-thumb {
+  border-radius: 9999px;
+}
+
+/* --- Focus rings --- */
+
+*:focus-visible {
+  outline: 2px solid var(--interactive-accent);
+  outline-offset: 2px;
+}
+
+/* --- Search --- */
+
+.search-result-file-title {
+  border-radius: var(--radius-s);
+}
+
+/* --- Prompt (command palette) --- */
+
+.prompt {
+  border: 2px solid var(--color-base-40);
+  border-radius: var(--radius-l);
+  box-shadow: 8px 8px 0 var(--color-base-100);
+}
+
+.theme-dark .prompt {
+  border-color: oklch(0.330 0.012 90);
+  box-shadow: 8px 8px 0 oklch(0 0 0 / 0.8);
+}
+
+/* --- Status bar --- */
+
+.status-bar {
+  font-size: 0.75rem;
+  border-top: 2px solid var(--background-modifier-border);
+}
+
+/* --- Dividers --- */
+
+hr {
+  border-color: var(--color-base-40);
+}
+
+/* --- Embedded/transclusion blocks --- */
+
+.markdown-embed {
+  border: 2px solid var(--color-base-40);
+  border-radius: var(--radius-m);
+}
+
+.theme-dark .markdown-embed {
+  border-color: oklch(0.330 0.012 90);
+}
+
+/* --- Graph view --- */
+
+.graph-view.color-fill {
+  color: var(--interactive-accent);
+}
+
+.graph-view.color-line {
+  color: var(--color-base-35);
+}
+
+/* ==========================================================================
+   STYLE SETTINGS — ACCENT COLOR VARIANTS
+   ========================================================================== */
+
+/* Red accent */
+body.accent-red {
+  --accent-h: 15;
+  --accent-s: 95%;
+  --accent-l: 48%;
+  --color-accent: var(--d-red);
+  --color-accent-hover: var(--d-red-hover);
+  --interactive-accent: var(--d-red);
+  --interactive-accent-hover: var(--d-red-hover);
+  --text-accent: var(--d-red-text);
+  --text-accent-hover: oklch(0.500 0.260 20);
+  --link-color: var(--d-red-text);
+  --link-color-hover: oklch(0.500 0.260 20);
+  --link-external-color: var(--d-red-text);
+  --link-external-color-hover: oklch(0.500 0.260 20);
+  --tag-color: var(--d-red-text);
+  --tag-background: var(--d-red-subtle);
+  --nav-item-color-active: var(--d-red-text);
+  --blockquote-border-color: var(--d-red);
+}
+
+body.theme-dark.accent-red {
+  --accent-l: 55%;
+  --color-accent: oklch(0.620 0.210 25);
+  --color-accent-hover: oklch(0.670 0.200 25);
+  --interactive-accent: oklch(0.620 0.210 25);
+  --interactive-accent-hover: oklch(0.670 0.200 25);
+  --text-accent: oklch(0.700 0.190 25);
+  --text-accent-hover: oklch(0.740 0.180 25);
+  --link-color: oklch(0.700 0.190 25);
+  --link-color-hover: oklch(0.740 0.180 25);
+  --link-external-color: oklch(0.700 0.190 25);
+  --link-external-color-hover: oklch(0.740 0.180 25);
+  --tag-color: oklch(0.700 0.190 25);
+  --tag-background: oklch(0.250 0.060 25);
+  --nav-item-color-active: oklch(0.700 0.190 25);
+  --blockquote-border-color: oklch(0.620 0.210 25);
+}
+
+/* Yellow accent */
+body.accent-yellow {
+  --accent-h: 45;
+  --accent-s: 100%;
+  --accent-l: 50%;
+  --color-accent: var(--d-yellow);
+  --color-accent-hover: var(--d-yellow-hover);
+  --interactive-accent: var(--d-yellow);
+  --interactive-accent-hover: var(--d-yellow-hover);
+  --text-accent: var(--d-yellow-text);
+  --text-accent-hover: oklch(0.350 0.160 90);
+  --text-on-accent: oklch(0.200 0.020 90);
+  --link-color: var(--d-yellow-text);
+  --link-color-hover: oklch(0.350 0.160 90);
+  --link-external-color: var(--d-yellow-text);
+  --link-external-color-hover: oklch(0.350 0.160 90);
+  --tag-color: var(--d-yellow-text);
+  --tag-background: var(--d-yellow-subtle);
+  --nav-item-color-active: var(--d-yellow-text);
+  --blockquote-border-color: var(--d-yellow);
+}
+
+body.theme-dark.accent-yellow {
+  --accent-l: 60%;
+  --color-accent: oklch(0.810 0.160 85);
+  --color-accent-hover: oklch(0.850 0.150 85);
+  --interactive-accent: oklch(0.810 0.160 85);
+  --interactive-accent-hover: oklch(0.850 0.150 85);
+  --text-accent: oklch(0.850 0.150 85);
+  --text-accent-hover: oklch(0.880 0.140 85);
+  --text-on-accent: oklch(0.135 0.010 90);
+  --link-color: oklch(0.850 0.150 85);
+  --link-color-hover: oklch(0.880 0.140 85);
+  --link-external-color: oklch(0.850 0.150 85);
+  --link-external-color-hover: oklch(0.880 0.140 85);
+  --tag-color: oklch(0.850 0.150 85);
+  --tag-background: oklch(0.260 0.060 85);
+  --nav-item-color-active: oklch(0.850 0.150 85);
+  --blockquote-border-color: oklch(0.810 0.160 85);
+}
+
+/* Green accent */
+body.accent-green {
+  --accent-h: 150;
+  --accent-s: 80%;
+  --accent-l: 42%;
+  --color-accent: var(--d-green);
+  --color-accent-hover: var(--d-green-hover);
+  --interactive-accent: var(--d-green);
+  --interactive-accent-hover: var(--d-green-hover);
+  --text-accent: var(--d-green-text);
+  --text-accent-hover: oklch(0.450 0.190 150);
+  --link-color: var(--d-green-text);
+  --link-color-hover: oklch(0.450 0.190 150);
+  --link-external-color: var(--d-green-text);
+  --link-external-color-hover: oklch(0.450 0.190 150);
+  --tag-color: var(--d-green-text);
+  --tag-background: var(--d-green-subtle);
+  --nav-item-color-active: var(--d-green-text);
+  --blockquote-border-color: var(--d-green);
+}
+
+body.theme-dark.accent-green {
+  --accent-l: 50%;
+  --color-accent: oklch(0.680 0.170 155);
+  --color-accent-hover: oklch(0.720 0.160 155);
+  --interactive-accent: oklch(0.680 0.170 155);
+  --interactive-accent-hover: oklch(0.720 0.160 155);
+  --text-accent: oklch(0.730 0.160 155);
+  --text-accent-hover: oklch(0.770 0.150 155);
+  --link-color: oklch(0.730 0.160 155);
+  --link-color-hover: oklch(0.770 0.150 155);
+  --link-external-color: oklch(0.730 0.160 155);
+  --link-external-color-hover: oklch(0.770 0.150 155);
+  --tag-color: oklch(0.730 0.160 155);
+  --tag-background: oklch(0.250 0.050 155);
+  --nav-item-color-active: oklch(0.730 0.160 155);
+  --blockquote-border-color: oklch(0.680 0.170 155);
+}
+
+/* ==========================================================================
+   STYLE SETTINGS — SHADOW VARIANTS
+   ========================================================================== */
+
+/* Subtle shadows */
+body.shadow-subtle .modal-container .modal {
+  box-shadow: 4px 4px 0 oklch(0.180 0.010 80 / 0.15);
+}
+body.shadow-subtle .menu,
+body.shadow-subtle .suggestion-container {
+  box-shadow: 2px 2px 0 oklch(0.180 0.010 80 / 0.15);
+}
+body.shadow-subtle .prompt {
+  box-shadow: 4px 4px 0 oklch(0.180 0.010 80 / 0.15);
+}
+body.shadow-subtle button.mod-cta {
+  box-shadow: 1px 1px 0 oklch(0.180 0.010 80 / 0.15);
+}
+body.shadow-subtle .callout,
+body.shadow-subtle .markdown-rendered pre {
+  box-shadow: 1px 1px 0 oklch(0.180 0.010 80 / 0.15);
+}
+body.shadow-subtle .tooltip {
+  box-shadow: 1px 1px 0 oklch(0.180 0.010 80 / 0.15);
+}
+
+/* No shadows */
+body.shadow-none .modal-container .modal,
+body.shadow-none .menu,
+body.shadow-none .suggestion-container,
+body.shadow-none .prompt,
+body.shadow-none button.mod-cta,
+body.shadow-none .callout,
+body.shadow-none .markdown-rendered pre,
+body.shadow-none .tooltip,
+body.shadow-none input[type='text'],
+body.shadow-none input[type='search'],
+body.shadow-none input[type='email'],
+body.shadow-none input[type='password'],
+body.shadow-none input[type='number'],
+body.shadow-none input[type='url'],
+body.shadow-none textarea,
+body.shadow-none .dropdown {
+  box-shadow: none;
+}
+
+/* ==========================================================================
+   STYLE SETTINGS — BORDER WEIGHT VARIANT
+   ========================================================================== */
+
+body.border-subtle {
+  --border-width: 1px;
+  --input-border-width: 1px;
+  --modal-border-width: 1px;
+  --callout-border-width: 1px;
+}
+
+body.border-subtle .modal-container .modal,
+body.border-subtle .menu,
+body.border-subtle .suggestion-container,
+body.border-subtle .prompt,
+body.border-subtle button.mod-cta,
+body.border-subtle .callout,
+body.border-subtle .markdown-rendered pre,
+body.border-subtle .tooltip,
+body.border-subtle .markdown-rendered table,
+body.border-subtle .markdown-embed,
+body.border-subtle .status-bar,
+body.border-subtle input[type='text'],
+body.border-subtle input[type='search'],
+body.border-subtle input[type='email'],
+body.border-subtle input[type='password'],
+body.border-subtle input[type='number'],
+body.border-subtle input[type='url'],
+body.border-subtle textarea,
+body.border-subtle .dropdown,
+body.border-subtle input[type='checkbox'] {
+  border-width: 1px;
+}
+
+/* ==========================================================================
+   REDUCED MOTION
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  button.mod-cta:hover,
+  .mod-cta:hover {
+    transform: none;
+  }
+
+  button.mod-cta:active,
+  .mod-cta:active {
+    transform: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
+}
