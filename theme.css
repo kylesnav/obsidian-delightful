@@ -1086,9 +1086,14 @@ body.border-subtle input[type='checkbox'] {
     transform: none;
   }
 
-  *,
-  *::before,
-  *::after {
-    transition-duration: 0.01ms !important;
+  .theme-light,
+  .theme-light *,
+  .theme-light *::before,
+  .theme-light *::after,
+  .theme-dark,
+  .theme-dark *,
+  .theme-dark *::before,
+  .theme-dark *::after {
+    transition-duration: 0.01ms;
   }
 }
