@@ -2,9 +2,7 @@
 
 A warm, neo-brutalist theme for [Obsidian](https://obsidian.md) based on the Delightful Design System.
 
-## Screenshot
-
-![Obsidian Delightful Theme](screenshot.png)
+![Delightful Theme](screenshot.png)
 
 ## Features
 
