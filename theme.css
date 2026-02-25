@@ -177,6 +177,11 @@ settings:
   /* Accent color — explicit override alongside HSL decomposition */
   --color-accent: var(--d-pink);
   --color-accent-hover: var(--d-pink-hover);
+  --color-accent-1: var(--d-pink);
+  --color-accent-2: var(--d-pink-hover);
+  --color-accent-hsl: var(--accent-h), var(--accent-s), var(--accent-l);
+  --interactive-accent-hsl: var(--accent-h), var(--accent-s), var(--accent-l);
+  --background-modifier-accent: var(--d-pink-subtle);
 
   /* Background modifiers */
   --background-modifier-hover: oklch(0.965 0.012 70);
@@ -338,6 +343,11 @@ settings:
   /* Accent color */
   --color-accent: oklch(0.700 0.230 350);
   --color-accent-hover: oklch(0.740 0.220 350);
+  --color-accent-1: oklch(0.700 0.230 350);
+  --color-accent-2: oklch(0.740 0.220 350);
+  --color-accent-hsl: var(--accent-h), var(--accent-s), var(--accent-l);
+  --interactive-accent-hsl: var(--accent-h), var(--accent-s), var(--accent-l);
+  --background-modifier-accent: oklch(0.250 0.065 350);
 
   /* Background modifiers */
   --background-modifier-hover: oklch(0.210 0.015 65);
@@ -597,6 +607,51 @@ button.mod-cta:active,
 
 .theme-dark button.mod-cta:active,
 .theme-dark .mod-cta:active {
+  box-shadow: 0 0 0 transparent;
+}
+
+/* --- Destructive / warning buttons (e.g. confirm-delete) --- */
+
+button.mod-warning,
+.mod-warning {
+  background-color: var(--d-danger);
+  color: oklch(1.00 0.000 0);
+  border: 2px solid var(--color-base-100);
+  border-radius: var(--radius-s);
+  box-shadow: 2px 2px 0 var(--color-base-100);
+  font-weight: 700;
+  transition: transform 100ms linear, box-shadow 100ms linear;
+}
+
+button.mod-warning:hover,
+.mod-warning:hover {
+  background-color: var(--d-danger-hover);
+  transform: translateY(-2px);
+  box-shadow: 4px 4px 0 var(--color-base-100);
+}
+
+button.mod-warning:active,
+.mod-warning:active {
+  transform: translate(2px, 2px);
+  box-shadow: 0 0 0 transparent;
+}
+
+.theme-dark button.mod-warning,
+.theme-dark .mod-warning {
+  background-color: oklch(0.660 0.200 20);
+  color: oklch(1.00 0.000 0);
+  border-color: oklch(0.935 0.008 70 / 0.2);
+  box-shadow: 2px 2px 0 oklch(0.92 0.010 65);
+}
+
+.theme-dark button.mod-warning:hover,
+.theme-dark .mod-warning:hover {
+  background-color: oklch(0.700 0.190 20);
+  box-shadow: 4px 4px 0 oklch(0.92 0.010 65);
+}
+
+.theme-dark button.mod-warning:active,
+.theme-dark .mod-warning:active {
   box-shadow: 0 0 0 transparent;
 }
 
@@ -889,6 +944,11 @@ body.accent-danger {
   --accent-l: 50%;
   --color-accent: var(--d-danger);
   --color-accent-hover: var(--d-danger-hover);
+  --color-accent-1: var(--d-danger);
+  --color-accent-2: var(--d-danger-hover);
+  --color-accent-hsl: var(--accent-h), var(--accent-s), var(--accent-l);
+  --interactive-accent-hsl: var(--accent-h), var(--accent-s), var(--accent-l);
+  --background-modifier-accent: var(--d-danger-subtle);
   --interactive-accent: var(--d-danger);
   --interactive-accent-hover: var(--d-danger-hover);
   --text-accent: var(--d-danger-text);
@@ -907,6 +967,11 @@ body.theme-dark.accent-danger {
   --accent-l: 55%;
   --color-accent: oklch(0.660 0.200 20);
   --color-accent-hover: oklch(0.700 0.190 20);
+  --color-accent-1: oklch(0.660 0.200 20);
+  --color-accent-2: oklch(0.700 0.190 20);
+  --color-accent-hsl: var(--accent-h), var(--accent-s), var(--accent-l);
+  --interactive-accent-hsl: var(--accent-h), var(--accent-s), var(--accent-l);
+  --background-modifier-accent: oklch(0.250 0.055 20);
   --interactive-accent: oklch(0.660 0.200 20);
   --interactive-accent-hover: oklch(0.700 0.190 20);
   --text-accent: oklch(0.720 0.180 20);
@@ -928,6 +993,11 @@ body.accent-gold {
   --accent-l: 50%;
   --color-accent: var(--d-gold);
   --color-accent-hover: var(--d-gold-hover);
+  --color-accent-1: var(--d-gold);
+  --color-accent-2: var(--d-gold-hover);
+  --color-accent-hsl: var(--accent-h), var(--accent-s), var(--accent-l);
+  --interactive-accent-hsl: var(--accent-h), var(--accent-s), var(--accent-l);
+  --background-modifier-accent: var(--d-gold-subtle);
   --interactive-accent: var(--d-gold);
   --interactive-accent-hover: var(--d-gold-hover);
   --text-accent: var(--d-gold-text);
@@ -947,6 +1017,11 @@ body.theme-dark.accent-gold {
   --accent-l: 60%;
   --color-accent: oklch(0.840 0.170 85);
   --color-accent-hover: oklch(0.870 0.155 84);
+  --color-accent-1: oklch(0.840 0.170 85);
+  --color-accent-2: oklch(0.870 0.155 84);
+  --color-accent-hsl: var(--accent-h), var(--accent-s), var(--accent-l);
+  --interactive-accent-hsl: var(--accent-h), var(--accent-s), var(--accent-l);
+  --background-modifier-accent: oklch(0.260 0.065 85);
   --interactive-accent: oklch(0.840 0.170 85);
   --interactive-accent-hover: oklch(0.870 0.155 84);
   --text-accent: oklch(0.870 0.155 85);
@@ -969,6 +1044,11 @@ body.accent-cyan {
   --accent-l: 50%;
   --color-accent: var(--d-cyan);
   --color-accent-hover: var(--d-cyan-hover);
+  --color-accent-1: var(--d-cyan);
+  --color-accent-2: var(--d-cyan-hover);
+  --color-accent-hsl: var(--accent-h), var(--accent-s), var(--accent-l);
+  --interactive-accent-hsl: var(--accent-h), var(--accent-s), var(--accent-l);
+  --background-modifier-accent: var(--d-cyan-subtle);
   --interactive-accent: var(--d-cyan);
   --interactive-accent-hover: var(--d-cyan-hover);
   --text-accent: var(--d-cyan-text);
@@ -987,6 +1067,11 @@ body.theme-dark.accent-cyan {
   --accent-l: 55%;
   --color-accent: oklch(0.720 0.140 210);
   --color-accent-hover: oklch(0.760 0.130 210);
+  --color-accent-1: oklch(0.720 0.140 210);
+  --color-accent-2: oklch(0.760 0.130 210);
+  --color-accent-hsl: var(--accent-h), var(--accent-s), var(--accent-l);
+  --interactive-accent-hsl: var(--accent-h), var(--accent-s), var(--accent-l);
+  --background-modifier-accent: oklch(0.250 0.045 210);
   --interactive-accent: oklch(0.720 0.140 210);
   --interactive-accent-hover: oklch(0.760 0.130 210);
   --text-accent: oklch(0.780 0.130 210);
@@ -1008,6 +1093,11 @@ body.accent-green {
   --accent-l: 45%;
   --color-accent: var(--d-green);
   --color-accent-hover: var(--d-green-hover);
+  --color-accent-1: var(--d-green);
+  --color-accent-2: var(--d-green-hover);
+  --color-accent-hsl: var(--accent-h), var(--accent-s), var(--accent-l);
+  --interactive-accent-hsl: var(--accent-h), var(--accent-s), var(--accent-l);
+  --background-modifier-accent: var(--d-green-subtle);
   --interactive-accent: var(--d-green);
   --interactive-accent-hover: var(--d-green-hover);
   --text-accent: var(--d-green-text);
@@ -1026,6 +1116,11 @@ body.theme-dark.accent-green {
   --accent-l: 52%;
   --color-accent: oklch(0.680 0.155 148);
   --color-accent-hover: oklch(0.720 0.145 148);
+  --color-accent-1: oklch(0.680 0.155 148);
+  --color-accent-2: oklch(0.720 0.145 148);
+  --color-accent-hsl: var(--accent-h), var(--accent-s), var(--accent-l);
+  --interactive-accent-hsl: var(--accent-h), var(--accent-s), var(--accent-l);
+  --background-modifier-accent: oklch(0.250 0.048 148);
   --interactive-accent: oklch(0.680 0.155 148);
   --interactive-accent-hover: oklch(0.720 0.145 148);
   --text-accent: oklch(0.740 0.145 148);
