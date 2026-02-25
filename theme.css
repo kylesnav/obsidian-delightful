@@ -163,7 +163,7 @@ settings:
   --color-green-rgb: 12, 171, 79;
   --color-cyan: oklch(0.650 0.148 210);
   --color-cyan-rgb: 30, 160, 190;
-  --color-blue: oklch(0.640 0.270 350);
+  --color-blue: oklch(0.580 0.200 260);
   --color-blue-rgb: 50, 70, 220;
   --color-purple: oklch(0.550 0.200 300);
   --color-purple-rgb: 140, 50, 210;
@@ -188,11 +188,11 @@ settings:
   --background-modifier-active-hover: oklch(0.948 0.014 70);
   --background-modifier-border: oklch(0.920 0.012 70);
   --background-modifier-border-hover: oklch(0.860 0.014 70);
-  --background-modifier-border-focus: var(--d-pink);
+  --background-modifier-border-focus: var(--color-accent);
   --background-modifier-error: var(--d-danger-subtle);
   --background-modifier-error-hover: oklch(0.920 0.070 20);
   --background-modifier-success: var(--d-green-subtle);
-  --background-modifier-message: var(--d-pink-subtle);
+  --background-modifier-message: var(--background-modifier-accent);
   --background-modifier-form-field: oklch(0.980 0.008 70);
   --background-modifier-box-shadow: oklch(0.200 0.015 60 / 0.15);
   --background-modifier-cover: oklch(0.200 0.015 60 / 0.30);
@@ -211,7 +211,7 @@ settings:
 
   --text-highlight-bg: oklch(0.840 0.175 85 / 0.4);
   --text-highlight-bg-active: oklch(0.700 0.180 55 / 0.4);
-  --text-selection: oklch(0.640 0.270 350 / 0.2);
+  --text-selection: oklch(0.640 0.270 350 / 0.15);
 
   /* Bold / italic */
   --bold-color: oklch(0.200 0.015 60);
@@ -225,7 +225,7 @@ settings:
 
   /* Inputs */
   --input-shadow: 2px 2px 0 oklch(0.200 0.015 60);
-  --input-shadow-hover: 4px 4px 0 var(--d-pink);
+  --input-shadow-hover: 4px 4px 0 var(--color-accent);
 
   /* Code */
   --code-normal: var(--d-danger-text);
@@ -233,7 +233,7 @@ settings:
 
   /* Tags */
   --tag-color: var(--d-pink-text);
-  --tag-color-hover: oklch(0.500 0.280 350);
+  --tag-color-hover: var(--text-accent-hover);
   --tag-background: var(--d-pink-subtle);
   --tag-background-hover: oklch(0.920 0.060 350);
 
@@ -329,7 +329,7 @@ settings:
   --color-green-rgb: 52, 195, 108;
   --color-cyan: oklch(0.720 0.140 210);
   --color-cyan-rgb: 55, 175, 200;
-  --color-blue: oklch(0.700 0.230 350);
+  --color-blue: oklch(0.640 0.180 260);
   --color-blue-rgb: 80, 100, 235;
   --color-purple: oklch(0.600 0.170 300);
   --color-purple-rgb: 160, 80, 220;
@@ -354,11 +354,11 @@ settings:
   --background-modifier-active-hover: oklch(0.230 0.015 65);
   --background-modifier-border: oklch(0.330 0.015 65);
   --background-modifier-border-hover: oklch(0.380 0.015 65);
-  --background-modifier-border-focus: oklch(0.700 0.230 350);
+  --background-modifier-border-focus: var(--color-accent);
   --background-modifier-error: oklch(0.250 0.055 20);
   --background-modifier-error-hover: oklch(0.280 0.065 20);
   --background-modifier-success: oklch(0.250 0.048 148);
-  --background-modifier-message: oklch(0.250 0.065 350);
+  --background-modifier-message: var(--background-modifier-accent);
   --background-modifier-form-field: oklch(0.190 0.015 65);
   --background-modifier-box-shadow: oklch(0.92 0.010 65 / 0.3);
   --background-modifier-cover: oklch(0 0 0 / 0.60);
@@ -391,7 +391,7 @@ settings:
 
   /* Inputs */
   --input-shadow: 2px 2px 0 oklch(0.92 0.010 65);
-  --input-shadow-hover: 4px 4px 0 oklch(0.700 0.230 350);
+  --input-shadow-hover: 4px 4px 0 var(--color-accent);
 
   /* Code */
   --code-normal: oklch(0.720 0.180 20);
@@ -399,7 +399,7 @@ settings:
 
   /* Tags */
   --tag-color: oklch(0.750 0.210 350);
-  --tag-color-hover: oklch(0.780 0.200 350);
+  --tag-color-hover: var(--text-accent-hover);
   --tag-background: oklch(0.250 0.065 350);
   --tag-background-hover: oklch(0.280 0.075 350);
 
@@ -746,12 +746,19 @@ textarea:focus,
 /* --- Tooltips --- */
 
 .tooltip {
+  background-color: var(--color-base-00);
+  color: var(--text-normal);
   border: 2px solid var(--color-base-100);
   border-radius: var(--radius-s);
   box-shadow: 2px 2px 0 var(--color-base-100);
 }
 
+.tooltip .tooltip-arrow {
+  display: none;
+}
+
 .theme-dark .tooltip {
+  background-color: var(--color-base-25);
   border-color: oklch(0.330 0.015 65);
   box-shadow: 2px 2px 0 oklch(0.92 0.010 65);
 }
@@ -959,6 +966,8 @@ body.accent-danger {
   --link-external-color-hover: oklch(0.500 0.230 20);
   --tag-color: var(--d-danger-text);
   --tag-background: var(--d-danger-subtle);
+  --tag-background-hover: oklch(0.920 0.060 20);
+  --text-selection: oklch(0.620 0.220 20 / 0.15);
   --nav-item-color-active: var(--d-danger-text);
   --blockquote-border-color: var(--d-danger);
 }
@@ -982,6 +991,8 @@ body.theme-dark.accent-danger {
   --link-external-color-hover: oklch(0.750 0.170 20);
   --tag-color: oklch(0.720 0.180 20);
   --tag-background: oklch(0.250 0.055 20);
+  --tag-background-hover: oklch(0.280 0.065 20);
+  --text-selection: oklch(0.660 0.200 20 / 0.2);
   --nav-item-color-active: oklch(0.720 0.180 20);
   --blockquote-border-color: oklch(0.660 0.200 20);
 }
@@ -1009,6 +1020,8 @@ body.accent-gold {
   --link-external-color-hover: oklch(0.380 0.140 85);
   --tag-color: var(--d-gold-text);
   --tag-background: var(--d-gold-subtle);
+  --tag-background-hover: oklch(0.940 0.075 85);
+  --text-selection: oklch(0.840 0.175 85 / 0.15);
   --nav-item-color-active: var(--d-gold-text);
   --blockquote-border-color: var(--d-gold);
 }
@@ -1033,6 +1046,8 @@ body.theme-dark.accent-gold {
   --link-external-color-hover: oklch(0.900 0.145 85);
   --tag-color: oklch(0.870 0.155 85);
   --tag-background: oklch(0.260 0.065 85);
+  --tag-background-hover: oklch(0.290 0.075 85);
+  --text-selection: oklch(0.840 0.170 85 / 0.2);
   --nav-item-color-active: oklch(0.870 0.155 85);
   --blockquote-border-color: oklch(0.840 0.170 85);
 }
@@ -1059,6 +1074,8 @@ body.accent-cyan {
   --link-external-color-hover: oklch(0.460 0.155 210);
   --tag-color: var(--d-cyan-text);
   --tag-background: var(--d-cyan-subtle);
+  --tag-background-hover: oklch(0.915 0.045 210);
+  --text-selection: oklch(0.650 0.148 210 / 0.15);
   --nav-item-color-active: var(--d-cyan-text);
   --blockquote-border-color: var(--d-cyan);
 }
@@ -1082,6 +1099,8 @@ body.theme-dark.accent-cyan {
   --link-external-color-hover: oklch(0.810 0.120 210);
   --tag-color: oklch(0.780 0.130 210);
   --tag-background: oklch(0.250 0.045 210);
+  --tag-background-hover: oklch(0.280 0.055 210);
+  --text-selection: oklch(0.720 0.140 210 / 0.2);
   --nav-item-color-active: oklch(0.780 0.130 210);
   --blockquote-border-color: oklch(0.720 0.140 210);
 }
@@ -1108,6 +1127,8 @@ body.accent-green {
   --link-external-color-hover: oklch(0.420 0.170 148);
   --tag-color: var(--d-green-text);
   --tag-background: var(--d-green-subtle);
+  --tag-background-hover: oklch(0.915 0.050 148);
+  --text-selection: oklch(0.630 0.170 148 / 0.15);
   --nav-item-color-active: var(--d-green-text);
   --blockquote-border-color: var(--d-green);
 }
@@ -1131,6 +1152,8 @@ body.theme-dark.accent-green {
   --link-external-color-hover: oklch(0.770 0.135 148);
   --tag-color: oklch(0.740 0.145 148);
   --tag-background: oklch(0.250 0.048 148);
+  --tag-background-hover: oklch(0.280 0.058 148);
+  --text-selection: oklch(0.680 0.155 148 / 0.2);
   --nav-item-color-active: oklch(0.740 0.145 148);
   --blockquote-border-color: oklch(0.680 0.155 148);
 }
