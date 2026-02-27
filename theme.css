@@ -40,6 +40,9 @@ settings:
       -
         label: Green
         value: accent-green
+      -
+        label: Purple
+        value: accent-purple
   -
     id: delightful-style
     title: Style
@@ -121,6 +124,11 @@ settings:
   --d-green-hover: oklch(0.580 0.165 148);
   --d-green-subtle: oklch(0.945 0.035 148);
   --d-green-text: oklch(0.480 0.165 148);
+
+  --d-purple: oklch(0.640 0.220 300);
+  --d-purple-hover: oklch(0.580 0.230 300);
+  --d-purple-subtle: oklch(0.950 0.035 300);
+  --d-purple-text: oklch(0.520 0.220 300);
 }
 
 /* ==========================================================================
@@ -1156,6 +1164,59 @@ body.theme-dark.accent-green {
   --text-selection: oklch(0.680 0.155 148 / 0.2);
   --nav-item-color-active: oklch(0.740 0.145 148);
   --blockquote-border-color: oklch(0.680 0.155 148);
+}
+
+/* Purple accent */
+body.accent-purple {
+  --accent-h: 290;
+  --accent-s: 65%;
+  --accent-l: 50%;
+  --color-accent: var(--d-purple);
+  --color-accent-hover: var(--d-purple-hover);
+  --color-accent-1: var(--d-purple);
+  --color-accent-2: var(--d-purple-hover);
+  --color-accent-hsl: var(--accent-h), var(--accent-s), var(--accent-l);
+  --interactive-accent-hsl: var(--accent-h), var(--accent-s), var(--accent-l);
+  --background-modifier-accent: var(--d-purple-subtle);
+  --interactive-accent: var(--d-purple);
+  --interactive-accent-hover: var(--d-purple-hover);
+  --text-accent: var(--d-purple-text);
+  --text-accent-hover: oklch(0.460 0.230 300);
+  --link-color: var(--d-purple-text);
+  --link-color-hover: oklch(0.460 0.230 300);
+  --link-external-color: var(--d-purple-text);
+  --link-external-color-hover: oklch(0.460 0.230 300);
+  --tag-color: var(--d-purple-text);
+  --tag-background: var(--d-purple-subtle);
+  --tag-background-hover: oklch(0.920 0.050 300);
+  --text-selection: oklch(0.640 0.220 300 / 0.15);
+  --nav-item-color-active: var(--d-purple-text);
+  --blockquote-border-color: var(--d-purple);
+}
+
+body.theme-dark.accent-purple {
+  --accent-l: 55%;
+  --color-accent: oklch(0.700 0.200 300);
+  --color-accent-hover: oklch(0.740 0.190 300);
+  --color-accent-1: oklch(0.700 0.200 300);
+  --color-accent-2: oklch(0.740 0.190 300);
+  --color-accent-hsl: var(--accent-h), var(--accent-s), var(--accent-l);
+  --interactive-accent-hsl: var(--accent-h), var(--accent-s), var(--accent-l);
+  --background-modifier-accent: oklch(0.250 0.055 300);
+  --interactive-accent: oklch(0.700 0.200 300);
+  --interactive-accent-hover: oklch(0.740 0.190 300);
+  --text-accent: oklch(0.760 0.180 300);
+  --text-accent-hover: oklch(0.790 0.170 300);
+  --link-color: oklch(0.760 0.180 300);
+  --link-color-hover: oklch(0.790 0.170 300);
+  --link-external-color: oklch(0.760 0.180 300);
+  --link-external-color-hover: oklch(0.790 0.170 300);
+  --tag-color: oklch(0.760 0.180 300);
+  --tag-background: oklch(0.250 0.055 300);
+  --tag-background-hover: oklch(0.280 0.065 300);
+  --text-selection: oklch(0.700 0.200 300 / 0.2);
+  --nav-item-color-active: oklch(0.760 0.180 300);
+  --blockquote-border-color: oklch(0.700 0.200 300);
 }
 
 /* ==========================================================================
