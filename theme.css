@@ -673,9 +673,11 @@ button.mod-cta:active,
 /* --- Destructive / warning buttons (e.g. confirm-delete) --- */
 
 button.mod-warning,
-.mod-warning {
+.mod-warning,
+button.mod-destructive,
+.mod-destructive {
   background-color: var(--d-danger);
-  color: oklch(1.00 0.000 0);
+  color: oklch(1.00 0.000 0) !important;
   border: 2px solid var(--color-base-100);
   border-radius: var(--radius-s);
   box-shadow: 2px 2px 0 var(--color-base-100);
@@ -684,34 +686,44 @@ button.mod-warning,
 }
 
 button.mod-warning:hover,
-.mod-warning:hover {
+.mod-warning:hover,
+button.mod-destructive:hover,
+.mod-destructive:hover {
   background-color: var(--d-danger-hover);
   transform: translateY(-2px);
   box-shadow: 4px 4px 0 var(--color-base-100);
 }
 
 button.mod-warning:active,
-.mod-warning:active {
+.mod-warning:active,
+button.mod-destructive:active,
+.mod-destructive:active {
   transform: translate(2px, 2px);
   box-shadow: 0 0 0 transparent;
 }
 
 .theme-dark button.mod-warning,
-.theme-dark .mod-warning {
+.theme-dark .mod-warning,
+.theme-dark button.mod-destructive,
+.theme-dark .mod-destructive {
   background-color: oklch(0.660 0.200 20);
-  color: oklch(1.00 0.000 0);
+  color: oklch(1.00 0.000 0) !important;
   border-color: oklch(0.935 0.008 70 / 0.2);
   box-shadow: 2px 2px 0 oklch(0.92 0.010 65);
 }
 
 .theme-dark button.mod-warning:hover,
-.theme-dark .mod-warning:hover {
+.theme-dark .mod-warning:hover,
+.theme-dark button.mod-destructive:hover,
+.theme-dark .mod-destructive:hover {
   background-color: oklch(0.700 0.190 20);
   box-shadow: 4px 4px 0 oklch(0.92 0.010 65);
 }
 
 .theme-dark button.mod-warning:active,
-.theme-dark .mod-warning:active {
+.theme-dark .mod-warning:active,
+.theme-dark button.mod-destructive:active,
+.theme-dark .mod-destructive:active {
   box-shadow: 0 0 0 transparent;
 }
 
