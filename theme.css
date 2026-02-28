@@ -143,27 +143,27 @@ settings:
   --d-danger: oklch(0.620 0.220 20);
   --d-danger-hover: oklch(0.570 0.230 20);
   --d-danger-subtle: oklch(0.950 0.040 20);
-  --d-danger-text: oklch(0.550 0.220 20);
+  --d-danger-text: oklch(0.570 0.220 20);
 
   --d-gold: oklch(0.840 0.175 85);
   --d-gold-hover: oklch(0.820 0.165 84);
   --d-gold-subtle: oklch(0.965 0.060 85);
-  --d-gold-text: oklch(0.440 0.130 85);
+  --d-gold-text: oklch(0.560 0.170 85);
 
   --d-cyan: oklch(0.650 0.148 210);
   --d-cyan-hover: oklch(0.600 0.150 210);
   --d-cyan-subtle: oklch(0.945 0.030 210);
-  --d-cyan-text: oklch(0.520 0.148 210);
+  --d-cyan-text: oklch(0.560 0.148 210);
 
   --d-green: oklch(0.630 0.170 148);
   --d-green-hover: oklch(0.580 0.165 148);
   --d-green-subtle: oklch(0.945 0.035 148);
-  --d-green-text: oklch(0.480 0.165 148);
+  --d-green-text: oklch(0.520 0.170 148);
 
   --d-purple: oklch(0.640 0.220 300);
   --d-purple-hover: oklch(0.580 0.230 300);
   --d-purple-subtle: oklch(0.950 0.035 300);
-  --d-purple-text: oklch(0.520 0.220 300);
+  --d-purple-text: oklch(0.560 0.230 300);
 }
 
 /* ==========================================================================
@@ -835,6 +835,32 @@ textarea:focus,
   box-shadow: 2px 2px 0 oklch(0.92 0.010 65);
 }
 
+/* --- Notices (toast notifications) --- */
+
+.notice {
+  background-color: var(--color-base-00);
+  color: var(--text-normal);
+  border: 2px solid var(--color-base-100);
+  border-radius: var(--radius-s);
+  box-shadow: 4px 4px 0 var(--color-base-100);
+}
+
+.notice button {
+  color: var(--interactive-accent);
+  font-weight: 600;
+}
+
+.theme-dark .notice {
+  background-color: var(--color-base-25);
+  color: var(--text-normal);
+  border-color: oklch(0.330 0.015 65);
+  box-shadow: 4px 4px 0 oklch(0.92 0.010 65);
+}
+
+.theme-dark .notice button {
+  color: var(--interactive-accent);
+}
+
 /* --- Callouts --- */
 
 .callout {
@@ -1002,6 +1028,20 @@ hr {
   border-color: oklch(0.330 0.015 65);
 }
 
+/* Nested tables inside embeds — remove table border to avoid double ring */
+.markdown-embed .markdown-rendered table {
+  border: none;
+  border-radius: 0;
+}
+
+.markdown-embed .markdown-rendered th {
+  border-bottom: 2px solid var(--color-base-40);
+}
+
+.theme-dark .markdown-embed .markdown-rendered th {
+  border-bottom-color: oklch(0.330 0.015 65);
+}
+
 /* --- Per-type callout colors --- */
 /* IMPORTANT: --callout-color MUST be an RGB triplet (e.g. 30, 160, 190) because
    Obsidian internally wraps it as rgba(var(--callout-color), <alpha>).
@@ -1112,106 +1152,106 @@ hr {
    and .task-list-item[data-task="X"] for text styling. */
 
 /* Cancelled — neutral bg, strikethrough text */
-input[data-task="-"]:checked {
+body.delightful-alt-checkboxes input[data-task="-"]:checked {
   background-color: oklch(0.860 0.014 70);
   border-color: oklch(0.860 0.014 70);
 }
 
-.task-list-item[data-task="-"] {
+body.delightful-alt-checkboxes .task-list-item[data-task="-"] {
   text-decoration: line-through;
   color: var(--text-faint);
 }
 
 /* Important — danger red */
-input[data-task="!"]:checked {
+body.delightful-alt-checkboxes input[data-task="!"]:checked {
   background-color: var(--d-danger);
   border-color: var(--d-danger);
 }
 
 /* Question — gold (dark text for contrast) */
-input[data-task="?"]:checked {
+body.delightful-alt-checkboxes input[data-task="?"]:checked {
   background-color: var(--d-gold);
   border-color: var(--d-gold);
   color: oklch(0.220 0.020 70);
 }
 
 /* Forwarded — cyan */
-input[data-task=">"]:checked {
+body.delightful-alt-checkboxes input[data-task=">"]:checked {
   background-color: var(--d-cyan);
   border-color: var(--d-cyan);
 }
 
 /* Scheduled — gold (dark text) */
-input[data-task="<"]:checked {
+body.delightful-alt-checkboxes input[data-task="<"]:checked {
   background-color: var(--d-gold);
   border-color: var(--d-gold);
   color: oklch(0.220 0.020 70);
 }
 
 /* Star — gold (dark text) */
-input[data-task="*"]:checked {
+body.delightful-alt-checkboxes input[data-task="*"]:checked {
   background-color: var(--d-gold);
   border-color: var(--d-gold);
   color: oklch(0.220 0.020 70);
 }
 
 /* Info — cyan */
-input[data-task="i"]:checked {
+body.delightful-alt-checkboxes input[data-task="i"]:checked {
   background-color: var(--d-cyan);
   border-color: var(--d-cyan);
 }
 
 /* Idea — gold (dark text) */
-input[data-task="I"]:checked {
+body.delightful-alt-checkboxes input[data-task="I"]:checked {
   background-color: var(--d-gold);
   border-color: var(--d-gold);
   color: oklch(0.220 0.020 70);
 }
 
 /* Pro — green */
-input[data-task="p"]:checked {
+body.delightful-alt-checkboxes input[data-task="p"]:checked {
   background-color: var(--d-green);
   border-color: var(--d-green);
 }
 
 /* Con — danger red */
-input[data-task="c"]:checked {
+body.delightful-alt-checkboxes input[data-task="c"]:checked {
   background-color: var(--d-danger);
   border-color: var(--d-danger);
 }
 
 /* Bookmark — purple */
-input[data-task="b"]:checked {
+body.delightful-alt-checkboxes input[data-task="b"]:checked {
   background-color: var(--d-purple);
   border-color: var(--d-purple);
 }
 
 /* Location — green */
-input[data-task="l"]:checked {
+body.delightful-alt-checkboxes input[data-task="l"]:checked {
   background-color: var(--d-green);
   border-color: var(--d-green);
 }
 
 /* Fire/Urgent — danger red */
-input[data-task="f"]:checked {
+body.delightful-alt-checkboxes input[data-task="f"]:checked {
   background-color: var(--d-danger);
   border-color: var(--d-danger);
 }
 
 /* Up — green */
-input[data-task="u"]:checked {
+body.delightful-alt-checkboxes input[data-task="u"]:checked {
   background-color: var(--d-green);
   border-color: var(--d-green);
 }
 
 /* Down — danger red */
-input[data-task="d"]:checked {
+body.delightful-alt-checkboxes input[data-task="d"]:checked {
   background-color: var(--d-danger);
   border-color: var(--d-danger);
 }
 
 /* Win — gold (dark text) */
-input[data-task="w"]:checked {
+body.delightful-alt-checkboxes input[data-task="w"]:checked {
   background-color: var(--d-gold);
   border-color: var(--d-gold);
   color: oklch(0.220 0.020 70);
@@ -1973,6 +2013,15 @@ body.shadow-subtle .kanban-plugin__lane,
 body.shadow-subtle .kanban-plugin__item {
   box-shadow: 1px 1px 0 oklch(0.180 0.010 80 / 0.15);
 }
+body.shadow-subtle .notice {
+  box-shadow: 2px 2px 0 oklch(0.180 0.010 80 / 0.15);
+}
+body.shadow-subtle button.mod-warning,
+body.shadow-subtle .mod-warning,
+body.shadow-subtle button.mod-destructive,
+body.shadow-subtle .mod-destructive {
+  box-shadow: 1px 1px 0 oklch(0.180 0.010 80 / 0.15);
+}
 body.shadow-subtle input[type='text'],
 body.shadow-subtle input[type='search'],
 body.shadow-subtle input[type='email'],
@@ -2005,7 +2054,12 @@ body.shadow-none .graph-controls,
 body.shadow-none .canvas-node-container,
 body.shadow-none .canvas-card-menu,
 body.shadow-none .kanban-plugin__lane,
-body.shadow-none .kanban-plugin__item {
+body.shadow-none .kanban-plugin__item,
+body.shadow-none .notice,
+body.shadow-none button.mod-warning,
+body.shadow-none .mod-warning,
+body.shadow-none button.mod-destructive,
+body.shadow-none .mod-destructive {
   box-shadow: none;
 }
 
@@ -2047,7 +2101,12 @@ body.border-subtle .kanban-plugin__lane,
 body.border-subtle .kanban-plugin__item,
 body.border-subtle .dataview.table-view-table,
 body.border-subtle .calendar,
-body.border-subtle .metadata-container {
+body.border-subtle .metadata-container,
+body.border-subtle .notice,
+body.border-subtle button.mod-warning,
+body.border-subtle .mod-warning,
+body.border-subtle button.mod-destructive,
+body.border-subtle .mod-destructive {
   border-width: 1px;
 }
 
@@ -2268,6 +2327,17 @@ body.theme-dark.delightful-colorful-headings {
 
   button.mod-cta:active,
   .mod-cta:active {
+    transform: none;
+  }
+
+  button.mod-warning:hover,
+  .mod-warning:hover,
+  button.mod-destructive:hover,
+  .mod-destructive:hover,
+  button.mod-warning:active,
+  .mod-warning:active,
+  button.mod-destructive:active,
+  .mod-destructive:active {
     transform: none;
   }
 
