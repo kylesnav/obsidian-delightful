@@ -1,7 +1,11 @@
 {
   "name": "Delightful",
-  "version": "0.5.0",
-  "minAppVersion": "1.0.0",
+  "version": "0.6.0",
+  "minAppVersion": "1.6.0",
   "author": "Kyle S",
-  "authorUrl": "https://github.com/kylesnav"
+  "authorUrl": "https://github.com/kylesnav",
+  "modes": [
+    "dark",
+    "light"
+  ]
 }
