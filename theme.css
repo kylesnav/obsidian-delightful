@@ -232,8 +232,8 @@ settings:
   --background-modifier-accent: var(--d-pink-subtle);
 
   /* Background modifiers */
-  --background-modifier-hover: oklch(0.965 0.012 70);
-  --background-modifier-active-hover: oklch(0.948 0.014 70);
+  --background-modifier-hover: oklch(0.975 0.008 70);
+  --background-modifier-active-hover: oklch(0.960 0.010 70);
   --background-modifier-border: oklch(0.920 0.012 70);
   --background-modifier-border-hover: oklch(0.860 0.014 70);
   --background-modifier-border-focus: var(--color-accent);
@@ -267,7 +267,7 @@ settings:
 
   /* Interactive */
   --interactive-normal: oklch(1.00 0.00 0);
-  --interactive-hover: oklch(0.965 0.012 70);
+  --interactive-hover: oklch(0.975 0.008 70);
   --interactive-accent: var(--d-pink);
   --interactive-accent-hover: var(--d-pink-hover);
 
@@ -277,7 +277,7 @@ settings:
 
   /* Code */
   --code-normal: var(--d-danger-text);
-  --code-background: oklch(0.965 0.012 70);
+  --code-background: oklch(0.975 0.008 70);
 
   /* Tags */
   --tag-color: var(--d-pink-text);
@@ -314,8 +314,8 @@ settings:
   --nav-item-color-hover: oklch(0.200 0.015 60);
   --nav-item-color-active: var(--d-pink-text);
   --nav-item-color-selected: oklch(0.200 0.015 60);
-  --nav-item-background-hover: oklch(0.965 0.012 70);
-  --nav-item-background-active: oklch(0.948 0.014 70);
+  --nav-item-background-hover: oklch(0.975 0.008 70);
+  --nav-item-background-active: oklch(0.960 0.010 70);
   --nav-indentation-guide-color: oklch(0.920 0.012 70);
 
   /* Blockquote */
@@ -324,7 +324,7 @@ settings:
   --blockquote-background-color: oklch(0.980 0.008 70);
 
   /* Table */
-  --table-header-background: oklch(0.965 0.012 70);
+  --table-header-background: oklch(0.975 0.008 70);
   --table-row-background-hover: oklch(0.980 0.008 70);
   --table-row-alt-background: oklch(0.988 0.006 70);
 
@@ -979,7 +979,7 @@ input[type='checkbox']:checked {
 
 *:focus-visible {
   outline: 2px solid var(--interactive-accent);
-  outline-offset: 2px;
+  outline-offset: -2px;
 }
 
 /* --- Search --- */
@@ -1719,8 +1719,8 @@ body.accent-gold {
   --link-external-color-hover: oklch(0.380 0.140 85);
   --tag-color: var(--d-gold-text);
   --tag-background: var(--d-gold-subtle);
-  --tag-background-hover: oklch(0.940 0.075 85);
-  --text-selection: oklch(0.840 0.175 85 / 0.15);
+  --tag-background-hover: oklch(0.920 0.085 85);
+  --text-selection: oklch(0.840 0.175 78 / 0.15);
   --nav-item-color-active: var(--d-gold-text);
   --blockquote-border-color: var(--d-gold);
 }
@@ -1738,7 +1738,7 @@ body.theme-dark.accent-gold {
   --interactive-accent-hover: oklch(0.870 0.155 84);
   --text-accent: oklch(0.870 0.155 85);
   --text-accent-hover: oklch(0.900 0.145 85);
-  --text-on-accent: oklch(0.140 0.014 65);
+  --text-on-accent: oklch(0.160 0.014 65);
   --link-color: oklch(0.870 0.155 85);
   --link-color-hover: oklch(0.900 0.145 85);
   --link-external-color: oklch(0.870 0.155 85);
@@ -1746,7 +1746,7 @@ body.theme-dark.accent-gold {
   --tag-color: oklch(0.870 0.155 85);
   --tag-background: oklch(0.260 0.065 85);
   --tag-background-hover: oklch(0.290 0.075 85);
-  --text-selection: oklch(0.840 0.170 85 / 0.2);
+  --text-selection: oklch(0.840 0.170 78 / 0.2);
   --nav-item-color-active: oklch(0.870 0.155 85);
   --blockquote-border-color: oklch(0.840 0.170 85);
 }
@@ -1930,13 +1930,13 @@ body.accent-gold .graph-view.color-fill,
 body.accent-gold .graph-view.color-fill-focused,
 body.accent-gold .graph-view.color-line-highlight,
 body.accent-gold .graph-view.color-fill-highlight {
-  color: #d4b800;
+  color: #c49a00;
 }
 body.theme-dark.accent-gold .graph-view.color-fill,
 body.theme-dark.accent-gold .graph-view.color-fill-focused,
 body.theme-dark.accent-gold .graph-view.color-line-highlight,
 body.theme-dark.accent-gold .graph-view.color-fill-highlight {
-  color: #d4bc20;
+  color: #d4a820;
 }
 
 body.accent-cyan .graph-view.color-fill,
