@@ -1,9 +1,5 @@
 <p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="screenshots/Obsidian-Dark.png" />
-    <source media="(prefers-color-scheme: light)" srcset="screenshots/Obsidian-Light.png" />
-    <img src="screenshots/Obsidian-Light.png" width="600" alt="Obsidian — Delightful" />
-  </picture>
+  <img src="screenshot.png" width="600" alt="Obsidian — Delightful" />
 </p>
 
 <h1 align="center">Delightful for Obsidian</h1>
@@ -76,6 +72,17 @@ Install the [Style Settings](https://github.com/mgmeyers/obsidian-style-settings
 - Headings: tight tracking, strong weights, compressed line-height
 
 </details>
+
+## Recommended Plugins
+
+These community plugins are tested and styled by the theme:
+
+- **[Style Settings](https://github.com/mgmeyers/obsidian-style-settings)** — accent color, shadow style, border weight, heading scale
+- **[Dataview](https://github.com/blacksmithgu/obsidian-dataview)** — styled tables with neo-brutalist borders
+- **[Kanban](https://github.com/mgmeyers/obsidian-kanban)** — themed board and card styles
+- **[Calendar](https://github.com/liamcain/obsidian-calendar-plugin)** — styled sidebar calendar widget
+- **[Tasks](https://github.com/obsidian-tasks-group/obsidian-tasks)** — 16 custom checkbox types
+- **[Excalidraw](https://github.com/zsviczian/obsidian-excalidraw-plugin)** — themed canvas integration
 
 ## License
 
