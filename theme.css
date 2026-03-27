@@ -3,7 +3,7 @@
  * @description A joyous, neo-brutalist theme built on the Delightful Design System.
  * @author Kyle Snavely
  * @version 0.7.0
- * @built 2026-03-27 02:25:35
+ * @built 2026-03-27 02:39:59
  */
 
 /* ==========================================================================
@@ -2116,12 +2116,15 @@ body {
     padding: 0;
   }
 
-  /* Content sizer — centers content at max-width with generous padding */
+  /* Content sizer — padding always; max-width only when readable line length is on */
   .markdown-preview-sizer {
-    max-width: 900px;
-    margin: 0 auto;
     padding: var(--space-8) var(--space-6);  /* 32px top/bottom, 24px sides */
     box-sizing: border-box;
+  }
+
+  .is-readable-line-width .markdown-preview-sizer {
+    max-width: var(--file-line-width, 900px);
+    margin: 0 auto;
   }
 
   /* Rendered content root */
@@ -2129,7 +2132,7 @@ body {
     background-color: transparent;
     color: var(--text-primary);
     font-family: var(--font-sans);
-    font-size: var(--step-0);
+    font-size: var(--font-text-size);
     line-height: var(--leading-normal);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
@@ -2157,7 +2160,7 @@ body {
     background-color: var(--bg-elevated);
     color: var(--text-primary);
     font-family: var(--font-sans);
-    font-size: var(--step-0);
+    font-size: var(--font-text-size);
     line-height: var(--leading-normal);
     -webkit-font-smoothing: antialiased;
     height: 100%;
@@ -2181,13 +2184,16 @@ body {
      .cm-line — each individual line
      ======================================================================== */
 
-  /* Content host — max-width + padding mirrors reading view */
+  /* Content host — padding always; max-width only when readable line length is on */
   .cm-content {
-    max-width: 900px;
-    margin: 0 auto;
     padding: var(--space-8) var(--space-6);
     box-sizing: border-box;
     caret-color: var(--accent-primary);
+  }
+
+  .is-readable-line-width .cm-content {
+    max-width: var(--file-line-width, 900px);
+    margin: 0 auto;
   }
 
   /* Individual lines */
