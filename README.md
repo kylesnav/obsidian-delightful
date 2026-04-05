@@ -1,89 +1,151 @@
 <p align="center">
-  <img src="screenshot.png" width="600" alt="Obsidian — Delightful" />
+  <img src="screenshots/Obsidian-Light.png" width="800" alt="Delightful — Light Mode" />
 </p>
 
-<h1 align="center">Delightful for Obsidian</h1>
+<h1 align="center">Delightful</h1>
 
 <p align="center">
-  A warm, neo-brutalist theme for <a href="https://obsidian.md">Obsidian</a>, built on the <a href="https://github.com/kylesnav/delightful-design-system">Delightful Design System</a>.
+  A warm, neo-brutalist theme for <a href="https://obsidian.md">Obsidian</a>.<br>
+  Bold borders. Solid shadows. Warm neutrals. Never cold gray.
+</p>
+
+<p align="center">
+  <a href="#install">Install</a> &nbsp;·&nbsp;
+  <a href="#features">Features</a> &nbsp;·&nbsp;
+  <a href="#style-settings">Style Settings</a> &nbsp;·&nbsp;
+  <a href="#screenshots">Screenshots</a> &nbsp;·&nbsp;
+  <a href="#design-system">Design System</a>
 </p>
 
 ---
 
+## Screenshots
+
+|  |  |
+|---|---|
+| ![Light](screenshots/Obsidian-Light.png) | ![Dark](screenshots/Obsidian-Dark.png) |
+| **Light mode** — warm paper tones | **Dark mode** — cozy dark neutrals |
+
+|  |  |
+|---|---|
+| ![Callouts Light](screenshots/Callouts-Light.png) | ![Callouts Dark](screenshots/Callouts-Dark.png) |
+| **Callouts** — 8 color-coded types | **Dark callouts** — visible tinted backgrounds |
+
 ## Install
 
-### From Obsidian Community Themes
+### Community Themes (Recommended)
 
-1. Open **Settings** > **Appearance**
+1. Open **Settings > Appearance**
 2. Click **Manage** next to Themes
-3. Search for "Delightful"
+3. Search for **Delightful**
 4. Click **Install and use**
 
 ### Manual
 
-1. Download `manifest.json` and `theme.css`
+1. Download `theme.css` and `manifest.json` from [Releases](https://github.com/kylesnav/delightful-design-system/releases)
 2. Create `.obsidian/themes/Delightful/` in your vault
 3. Place both files inside
-4. Select **Delightful** in **Settings** > **Appearance**
+4. Select **Delightful** in **Settings > Appearance**
 
 ## Features
 
-- **OKLCH color palette** — warm neutrals (hue 70), 6 accent families, never cold gray
-- **Neo-brutalist aesthetic** — solid offset shadows, 2px borders, generous radii
-- **Full light & dark mode** — warm dark backgrounds with adjusted accent brightness
-- **6 accent colors** — Pink (default), Danger, Gold, Cyan, Green, Purple via Style Settings
-- **Fluid heading scale** — 2.488em down to 1em with decreasing weights (800 to 600)
-- **16 custom checkboxes** — cancelled, important, question, forwarded, scheduled, star, info, idea, pro, con, bookmark, location, fire, up, down, win
-- **Per-type callout colors** — 12 callout types with semantically matched colors
-- **Full graph view theming** — color-coded nodes for tags, attachments, unresolved
-- **Canvas styling** — neo-brutalist nodes with 6 color-coded types
-- **Plugin compatibility** — Dataview tables, Kanban boards, Tasks plugin, Calendar widget
-- **Mobile optimization** — larger touch targets, reduced shadows, phone heading scale
+### Color & Visual Language
+
+- **OKLCH color palette** — warm neutrals on hue 70, 6 accent families with perceptually uniform color math. No cold grays anywhere.
+- **Neo-brutalist aesthetic** — solid offset shadows with ambient depth, 2px borders, generous radii (10/16/24px). Every surface feels tangible.
+- **Light & dark mode** — warm tan in light, cozy dark neutrals in dark. Accent colors adjust brightness per mode for consistent readability.
+
+### Typography
+
+- **Distinct heading scale** — H1 (2.074em) through H6 (1em), each level visibly different. H6 uses uppercase + letter-spacing for distinction at body size.
+- **Natural paragraph rhythm** — 0.75rem gap between consecutive paragraphs. Heading margins use a 2:1 ratio (24px top / 12px bottom) so headings associate with the content they introduce.
+- **Proportional inline code** — 85% of parent font size with 2px borders and 10px radius. Reads naturally in flowing prose without disrupting line height.
+
+### Content Surfaces
+
+- **8 callout types** — note, tip, warning, danger, abstract, question, quote, example. Each with semantically matched colors, shadows, and icons. Nested callouts supported.
+- **Syntax highlighting** — keywords (pink), strings (gold), functions (cyan), comments (green), types (purple), numbers (red). Consistent accent mapping.
+- **Tables** — rounded card treatment with uppercase muted headers, alternating row tints, and hover states.
+- **Task lists** — warm checkboxes with accent hover preview, shadow on checked state, and satisfying click squeeze animation. Nested code blocks flow full-width below task text.
+
+### Workspace
+
+- **Themed scrollbars** — subtle thumb with accent hover, transparent track.
+- **Canvas** — 6 color-coded node types with tinted backgrounds, styled edges and controls.
+- **Graph view** — themed control panel with styled sliders, toggles, and color group pickers.
+- **Mobile optimized** — larger touch targets (44px minimum), reduced shadows, phone-appropriate heading scale, bottom action bar.
+
+### Plugin Compatibility
+
+Tested and styled out of the box:
+
+| Plugin | What's Styled |
+|--------|--------------|
+| [Style Settings](https://github.com/mgmeyers/obsidian-style-settings) | Full customization panel (see below) |
+| [Dataview](https://github.com/blacksmithgu/obsidian-dataview) | Tables with neo-brutalist borders |
+| [Kanban](https://github.com/mgmeyers/obsidian-kanban) | Lanes, cards, headers, drag handles |
+| [Calendar](https://github.com/liamcain/obsidian-calendar-plugin) | Sidebar widget with activity dots |
+| [Tasks](https://github.com/obsidian-tasks-group/obsidian-tasks) | Priority indicators, due dates, overdue styling |
+| [Excalidraw](https://github.com/zsviczian/obsidian-excalidraw-plugin) | Canvas toolbar and panels |
 
 ## Style Settings
 
-Install the [Style Settings](https://github.com/mgmeyers/obsidian-style-settings) plugin for additional customization:
+Install [Style Settings](https://github.com/mgmeyers/obsidian-style-settings) for these options:
 
-| Setting | Options |
-|---|---|
-| Accent Color | Pink (default), Danger, Gold, Cyan, Green, Purple |
-| Shadow Style | Neo-brutalist (default), Subtle, None |
-| Border Weight | 2px (default), 1px |
-| Heading Scale | Normal (default), Compact, Large |
-| Alternative Checkboxes | On (default), Off |
-| Colorful Headings | Off (default), On |
+| Setting | Options | Default |
+|---------|---------|---------|
+| **Accent Color** | Pink, Danger, Gold, Cyan, Green, Purple | Pink |
+| **Shadow Style** | Neo-brutalist, Subtle, None | Neo-brutalist |
+| **Border Weight** | 2px, 1px | 2px |
+| **Heading Scale** | Normal, Compact, Large | Normal |
+| **Animations** | On, Off | On |
 
 ## Design System
 
+Delightful is built on the [Delightful Design System](https://github.com/kylesnav/delightful-design-system) — a cross-platform design system spanning Obsidian, VS Code, Ghostty, iTerm2, Starship, and Claude Code.
+
 <details>
-<summary><strong>Color architecture</strong></summary>
+<summary><strong>Token architecture</strong></summary>
 
 <br>
 
-| Layer | Purpose |
-|---|---|
-| **Primitives** | Raw OKLCH values — neutrals (0–950) and 6 accent families |
-| **Semantic tokens** | Background, text, border, and accent colors for light/dark |
-| **Component tokens** | Typography scale, spacing, radii, motion, easing |
+The theme uses a 3-tier token architecture:
 
-**Typography:**
-- Interface & text: native UI stack (`system-ui`, `-apple-system`, sans-serif)
-- Code: native monospace stack (`ui-monospace`, `"SF Mono"`, monospace)
-- Headings: tight tracking, strong weights, compressed line-height
+| Tier | Purpose | Example |
+|------|---------|---------|
+| **Primitives** | Raw OKLCH values | `--primitive-pink-400: oklch(0.640 0.270 350)` |
+| **Semantic** | Contextual meaning, mode-aware | `--accent-primary: var(--primitive-pink-400)` |
+| **Component** | Shared infrastructure | `--shadow-md: 4px 4px 0 var(--border-default)` |
+
+Components reference semantic tokens. Semantic tokens reference primitives. Primitives are never used directly in component CSS.
+
+**Typography:** Inter for text, JetBrains Mono for code. Fluid type scale from step-0 (1rem) to step-5 (2.488rem).
+
+**Motion:** 5 durations (100ms–500ms), 5 easings including spring curves via `linear()`. Hover lifts, press squeezes, and entrance animations.
 
 </details>
 
-## Recommended Plugins
+## Development
 
-These community plugins are tested and styled by the theme:
+```bash
+# Build theme from modular source files
+node obsidian-theme/build.js
 
-- **[Style Settings](https://github.com/mgmeyers/obsidian-style-settings)** — accent color, shadow style, border weight, heading scale
-- **[Dataview](https://github.com/blacksmithgu/obsidian-dataview)** — styled tables with neo-brutalist borders
-- **[Kanban](https://github.com/mgmeyers/obsidian-kanban)** — themed board and card styles
-- **[Calendar](https://github.com/liamcain/obsidian-calendar-plugin)** — styled sidebar calendar widget
-- **[Tasks](https://github.com/obsidian-tasks-group/obsidian-tasks)** — 16 custom checkbox types
-- **[Excalidraw](https://github.com/zsviczian/obsidian-excalidraw-plugin)** — themed canvas integration
+# Watch mode — rebuilds on file changes
+node obsidian-theme/build.js --watch
+
+# Visual audit — captures 60 CDP screenshots
+python3 obsidian-theme/scripts/visual-audit.py
+```
+
+Source CSS is split into 12 modules in `src/` plus 4 plugin overrides in `src/plugins/`.
 
 ## License
 
 [MIT](LICENSE)
+
+---
+
+<p align="center">
+  Part of the <a href="https://github.com/kylesnav/delightful-design-system">Delightful Design System</a>
+</p>

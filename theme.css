@@ -3,7 +3,7 @@
  * @description A joyous, neo-brutalist theme built on the Delightful Design System.
  * @author Kyle Snavely
  * @version 0.7.0
- * @built 2026-03-27 02:39:59
+ * @built 2026-04-05 08:17:37
  */
 
 /* ==========================================================================
@@ -160,10 +160,10 @@
     --focus-ring:   var(--accent-primary);
     --overlay-bg:   oklch(0.200 0.015 60 / 0.30);
 
-    /* Shadows — solid, zero blur per DS convention */
+    /* Shadows — hard offset + ambient depth per DS convention */
     --shadow-sm:     2px 2px 0 var(--border-default);
-    --shadow-md:     4px 4px 0 var(--border-default);
-    --shadow-lg:     8px 8px 0 var(--border-default);
+    --shadow-md:     4px 4px 0 var(--border-default), 0 4px 8px oklch(0 0 0 / 0.08);
+    --shadow-lg:     8px 8px 0 var(--border-default), 0 12px 24px oklch(0 0 0 / 0.12);
     --shadow-pink:   4px 4px 0 var(--accent-primary);
     --shadow-danger: 4px 4px 0 var(--accent-danger);
     --shadow-gold:   4px 4px 0 var(--accent-gold);
@@ -237,13 +237,13 @@
     --status-success: var(--accent-green);
 
     /* Misc */
-    --focus-ring: oklch(0.700 0.230 350);
+    --focus-ring: var(--accent-primary);
     --overlay-bg: oklch(0 0 0 / 0.60);
 
-    /* Shadows — solid, zero blur, light stroke color in dark mode */
-    --shadow-sm:     2px 2px 0 oklch(0.920 0.010 65);
-    --shadow-md:     4px 4px 0 oklch(0.920 0.010 65);
-    --shadow-lg:     8px 8px 0 oklch(0.920 0.010 65);
+    /* Shadows — hard offset + ambient depth, alpha-transparent in dark mode */
+    --shadow-sm:     2px 2px 0 oklch(0.920 0.010 65 / 0.20);
+    --shadow-md:     4px 4px 0 oklch(0.920 0.010 65 / 0.20), 0 4px 12px oklch(0 0 0 / 0.30);
+    --shadow-lg:     8px 8px 0 oklch(0.920 0.010 65 / 0.20), 0 12px 32px oklch(0 0 0 / 0.40);
     --shadow-pink:   4px 4px 0 var(--accent-primary);
     --shadow-danger: 4px 4px 0 var(--accent-danger);
     --shadow-gold:   4px 4px 0 var(--accent-gold);
@@ -731,8 +731,51 @@
    ========================================================================== */
 
 body {
+  /* --- Mode-agnostic Obsidian vars (resolve through semantic tokens) --- */
+
+  /* Scrollbar */
+  --scrollbar-bg: var(--bg-page);
+  --scrollbar-thumb-bg: var(--border-subtle);
+  --scrollbar-active-thumb-bg: var(--accent-primary);
+
+  /* Checkbox */
+  --checkbox-color: var(--accent-primary);
+  --checkbox-color-hover: var(--accent-primary-hover);
+  --checkbox-border-color: var(--border-strong);
+  --checkbox-border-color-hover: var(--accent-primary);
+
+  /* Icon */
+  --icon-size: 18px;
+  --icon-color: var(--text-muted);
+  --icon-color-hover: var(--text-primary);
+  --icon-color-active: var(--accent-primary);
+  --icon-color-focused: var(--accent-primary);
+
+  /* Embed */
+  --embed-border-left: 4px solid var(--accent-primary);
+
+  /* Indentation guides */
+  --indentation-guide-color: var(--border-subtle);
+  --indentation-guide-color-active: var(--accent-primary);
+
+  /* Tab */
+  --tab-outline-color: transparent;
+  --tab-text-color: var(--text-muted);
+  --tab-text-color-active: var(--text-primary);
+  --tab-text-color-focused: var(--text-primary);
+  --tab-text-color-focused-active: var(--accent-primary);
+
+  /* Pill / multi-select */
+  --pill-color: var(--accent-primary-text);
+  --pill-color-hover: var(--accent-primary-hover);
+  --pill-background: var(--accent-primary-subtle);
+  --pill-background-hover: var(--accent-primary);
+  --pill-color-remove: var(--text-muted);
+  --pill-color-remove-hover: var(--accent-danger);
+  --pill-border-color: transparent;
   /* --- Typography — families + base size --- */
   --font-text-size:        14px;
+  --delightful-text-size:  16px;  /* reading/editing text, independent of baseFontSize */
   --font-interface-theme:  var(--font-sans);
   --font-text-theme:       var(--font-sans);
   --font-monospace-theme:  var(--font-mono);
@@ -740,10 +783,10 @@ body {
   /* --- Heading size scale (maps to DS fluid type steps) --- */
   /* Fixed em sizes — Obsidian is not a fluid viewport, don't use clamp() */
   --h1-size: 2.074em;
-  --h2-size: 2.074em;
-  --h3-size: 1.728em;
-  --h4-size: 1.44em;
-  --h5-size: 1.2em;
+  --h2-size: 1.728em;
+  --h3-size: 1.44em;
+  --h4-size: 1.2em;
+  --h5-size: 1.1em;
   --h6-size: 1em;
 
   /* --- Heading weights --- */
@@ -788,7 +831,7 @@ body {
   --modal-border-width: 2px;
 
   /* --- Blockquote --- */
-  --blockquote-border-thickness: 3px;
+  --blockquote-border-thickness: 4px;
 
   /* --- HR --- */
   --hr-thickness: 2px;
@@ -929,7 +972,8 @@ body {
     font-size: var(--h6-size);
     font-weight: var(--h6-weight);
     line-height: var(--h6-line-height);
-    letter-spacing: normal;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
     color: var(--text-muted);
   }
 
@@ -953,6 +997,17 @@ body {
      3. BODY TEXT
      ======================================================================== */
 
+  /* Reading text size — override Obsidian's scaled --font-text-size
+     to decouple reading text from baseFontSize (which also controls
+     sidebar/interface). Target the view containers directly. */
+  body .markdown-preview-view {
+    font-size: var(--delightful-text-size, 14px);
+  }
+
+  body .markdown-source-view .cm-content {
+    font-size: var(--delightful-text-size, 14px);
+  }
+
   /* Base reading/source container body text */
   .markdown-rendered,
   .markdown-source-view .cm-content {
@@ -961,15 +1016,22 @@ body {
     font-family: var(--font-sans);
   }
 
-  /* Paragraph spacing — gap between consecutive paragraphs */
-  .markdown-rendered p + p {
+  /* Paragraphs — no top margin by default, controlled by cascade */
+  body .markdown-rendered p {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  /* Paragraph spacing — gap between consecutive paragraphs.
+     Obsidian wraps each <p> in <div class="el-p">, so p+p never
+     matches. Target the wrapper divs for the adjacent sibling gap. */
+  body .markdown-rendered .el-p + .el-p {
     margin-top: var(--p-spacing);
   }
 
-  /* Paragraphs — no top margin by default, controlled by cascade */
-  .markdown-rendered p {
-    margin-top: 0;
-    margin-bottom: 0;
+  /* Fallback for contexts without .el-p wrappers (e.g. embeds) */
+  body .markdown-rendered p + p {
+    margin-top: var(--p-spacing);
   }
 
   /* ========================================================================
@@ -1037,22 +1099,22 @@ body {
      6. LISTS — Ordered, Unordered, Task
      ======================================================================== */
 
-  /* Unordered list */
+  /* Unordered list — tight above (connect to heading), spacious below */
   .markdown-rendered ul {
     padding-left: var(--space-6);
-    margin: var(--space-2) 0;
+    margin: var(--space-1) 0 var(--space-4);
   }
 
   /* Ordered list */
   .markdown-rendered ol {
     padding-left: var(--space-6);
-    margin: var(--space-2) 0;
+    margin: var(--space-1) 0 var(--space-4);
   }
 
-  /* List items */
+  /* List items — snug line-height for scannable lists */
   .markdown-rendered li {
-    margin-bottom: var(--space-1);
-    line-height: var(--leading-normal);
+    margin-bottom: 2px;
+    line-height: var(--leading-snug);   /* 1.3 — tighter than prose (1.55) */
     color: var(--text-primary);
   }
 
@@ -1063,25 +1125,26 @@ body {
     color: var(--accent-primary) !important;
   }
 
-  /* Nested list indentation */
+  /* Nested list indentation — generous for clear hierarchy */
   .markdown-rendered ul ul,
   .markdown-rendered ol ol,
   .markdown-rendered ul ol,
   .markdown-rendered ol ul {
     margin-top: var(--space-1);
     margin-bottom: 0;
-    padding-left: var(--space-5);
+    padding-left: var(--space-6);
   }
 
   /* ---- Task list items ---- */
 
-  /* Task list container — flush with text (no extra indent) */
+  /* Task list container — position-based layout so nested block
+     content (code blocks, blockquotes) flows full-width below text */
   .markdown-rendered .task-list-item {
     list-style: none;
-    padding-left: 0;
-    display: flex;
-    align-items: flex-start;
-    gap: var(--space-2);
+    position: relative;
+    padding-left: 24px;
+    margin-bottom: var(--space-1);  /* 4px — scannable but not cramped */
+    line-height: var(--leading-snug);
   }
 
   /* Remove default ::marker on task items */
@@ -1090,28 +1153,32 @@ body {
     content: '';
   }
 
-  /* Checkbox reset + DS styling */
+  /* Checkbox — warm, tactile, DS-styled */
   .markdown-rendered .task-list-item-checkbox {
     appearance: none;
     -webkit-appearance: none;
     width: 18px;
     height: 18px;
     min-width: 18px;
-    border: 2px solid var(--border-strong);
-    border-radius: 4px;
+    border: 2px solid var(--border-subtle);
+    border-radius: 5px;
     background-color: var(--bg-surface);
     cursor: pointer;
-    margin-top: 3px;  /* optical alignment with text baseline */
-    position: relative;
+    position: absolute;
+    left: 0;
+    top: 4px;  /* optical alignment with text baseline */
     transition:
       background-color var(--motion-fast) var(--ease-out),
-      border-color     var(--motion-fast) var(--ease-out);
+      border-color     var(--motion-fast) var(--ease-out),
+      box-shadow       var(--motion-fast) var(--ease-out),
+      transform        var(--motion-instant) linear;
   }
 
   /* Checked state — filled with accent + white checkmark SVG */
   .markdown-rendered .task-list-item-checkbox:checked {
     background-color: var(--accent-primary);
     border-color: var(--accent-primary);
+    box-shadow: 2px 2px 0 var(--accent-primary-subtle);
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23ffffff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' d='M3 8l3.5 3.5L13 4.5'/%3E%3C/svg%3E");
     background-size: 12px 12px;
     background-repeat: no-repeat;
@@ -1125,10 +1192,25 @@ body {
     text-decoration: line-through;
   }
 
-  /* Hover state */
+  /* Hover state — warm accent preview */
   .markdown-rendered .task-list-item-checkbox:hover:not(:checked) {
     border-color: var(--accent-primary);
     background-color: var(--accent-primary-subtle);
+    box-shadow: 2px 2px 0 var(--accent-primary-subtle);
+  }
+
+  /* Click squeeze — satisfying tactile feedback */
+  .markdown-rendered .task-list-item-checkbox:active {
+    transform: scale(0.88);
+  }
+
+  /* Block content inside tasks — breathing room around code blocks,
+     blockquotes, and other block elements nested in task items */
+  .markdown-rendered .task-list-item pre,
+  .markdown-rendered .task-list-item blockquote,
+  .markdown-rendered .task-list-item .callout {
+    margin-top: var(--space-3);   /* 12px above block */
+    margin-bottom: var(--space-4); /* 16px below block — generous before next item */
   }
 
   /* ========================================================================
@@ -1180,33 +1262,8 @@ body {
   }
 
   /* ========================================================================
-     8. INLINE CODE
-     Pink text on subtle background — differentiated from blocks.
+     8. INLINE CODE — defined in 04-editor-rich.css
      ======================================================================== */
-
-  /* Inline code — not inside a pre block */
-  .markdown-rendered code:not(pre code) {
-    background-color: var(--bg-subtle);
-    border: 2px solid var(--border-subtle);
-    border-radius: 6px;
-    font-family: var(--font-mono);
-    font-size: 0.85em;
-    color: var(--accent-primary-text);
-    padding: 1px 4px;
-    white-space: pre-wrap;
-    word-break: break-word;
-  }
-
-  /* CodeMirror inline code in source/live preview */
-  .cm-inline-code {
-    background-color: var(--code-background);
-    border: 2px solid var(--border-subtle);
-    border-radius: 6px;
-    font-family: var(--font-mono);
-    font-size: 0.85em;
-    color: var(--accent-primary-text);
-    padding: 1px 4px;
-  }
 
   /* ========================================================================
      9. HORIZONTAL RULE
@@ -1257,39 +1314,8 @@ body {
 
   /* ========================================================================
      11. TABLES
-     Minimal grid with alternating row tint.
+     Defined in 04-editor-rich.css with DS card treatment and border-radius.
      ======================================================================== */
-
-  .markdown-rendered table {
-    border-collapse: collapse;
-    width: 100%;
-    margin: var(--space-4) 0;
-    font-size: var(--ui-text-md);
-  }
-
-  .markdown-rendered th {
-    background-color: var(--table-header-background);
-    color: var(--text-primary);
-    font-weight: 650;
-    text-align: left;
-    padding: var(--space-2) var(--space-3);
-    border: 2px solid var(--border-subtle);
-  }
-
-  .markdown-rendered td {
-    padding: var(--space-2) var(--space-3);
-    border: 2px solid var(--border-subtle);
-    color: var(--text-primary);
-    vertical-align: top;
-  }
-
-  .markdown-rendered tr:nth-child(even) td {
-    background-color: var(--table-row-alt-background);
-  }
-
-  .markdown-rendered tr:hover td {
-    background-color: var(--table-row-background-hover);
-  }
 
   /* ========================================================================
      12. TAGS
@@ -1602,7 +1628,7 @@ body {
   /* View header container */
   .view-header {
     background-color: var(--bg-page);
-    border-bottom: 1px solid var(--border-subtle);
+    border-bottom: 2px solid var(--border-subtle);
   }
 
   /* Note title in view header */
@@ -1854,6 +1880,13 @@ body {
   /* ========================================================================
      6. BACKLINKS + SEARCH RESULTS
      ======================================================================== */
+
+  /* Backlinks footer — clean break between note content and backlinks */
+  .mod-footer {
+    margin-top: var(--space-6);
+    padding-top: var(--space-4);
+    border-top: 2px solid var(--border-subtle);
+  }
 
   /* Backlink section headers — "Linked mentions", "Unlinked mentions" */
   .backlink-pane .tree-item-self.search-result-file-title {
@@ -2116,15 +2149,12 @@ body {
     padding: 0;
   }
 
-  /* Content sizer — padding always; max-width only when readable line length is on */
+  /* Content sizer — centers content at max-width with generous padding */
   .markdown-preview-sizer {
+    max-width: 900px;
+    margin: 0 auto;
     padding: var(--space-8) var(--space-6);  /* 32px top/bottom, 24px sides */
     box-sizing: border-box;
-  }
-
-  .is-readable-line-width .markdown-preview-sizer {
-    max-width: var(--file-line-width, 900px);
-    margin: 0 auto;
   }
 
   /* Rendered content root */
@@ -2132,7 +2162,7 @@ body {
     background-color: transparent;
     color: var(--text-primary);
     font-family: var(--font-sans);
-    font-size: var(--font-text-size);
+    font-size: var(--step-0);
     line-height: var(--leading-normal);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
@@ -2160,7 +2190,7 @@ body {
     background-color: var(--bg-elevated);
     color: var(--text-primary);
     font-family: var(--font-sans);
-    font-size: var(--font-text-size);
+    font-size: var(--step-0);
     line-height: var(--leading-normal);
     -webkit-font-smoothing: antialiased;
     height: 100%;
@@ -2184,16 +2214,13 @@ body {
      .cm-line — each individual line
      ======================================================================== */
 
-  /* Content host — padding always; max-width only when readable line length is on */
+  /* Content host — max-width + padding mirrors reading view */
   .cm-content {
+    max-width: 900px;
+    margin: 0 auto;
     padding: var(--space-8) var(--space-6);
     box-sizing: border-box;
     caret-color: var(--accent-primary);
-  }
-
-  .is-readable-line-width .cm-content {
-    max-width: var(--file-line-width, 900px);
-    margin: 0 auto;
   }
 
   /* Individual lines */
@@ -2870,7 +2897,7 @@ body {
 
   .callout-content {
     padding: var(--space-3) 0 0 0;
-    color: var(--text-secondary);
+    color: var(--text-primary);
     font-size: var(--ui-text-md);
     line-height: var(--leading-normal);
   }
@@ -3044,6 +3071,12 @@ body {
     color: var(--text-muted);
   }
 
+  /* --- Dark mode: boost base callout tint visibility (0.08 → 0.15) --- */
+  .theme-dark .callout {
+    background-color: rgba(var(--callout-color), 0.15);
+    box-shadow: 4px 4px 0 rgba(var(--callout-color), 0.50);
+  }
+
   /* --- Dark mode overrides: brighter RGB triplets for readable icon/border --- */
   .theme-dark .callout[data-callout="note"],
   .theme-dark .callout[data-callout="info"],
@@ -3113,14 +3146,14 @@ body {
     color: var(--text-primary);
   }
 
-  /* Inline code — distinct from block code */
+  /* Inline code — distinct from block code, proportional to parent */
   .markdown-rendered code:not(pre code),
   .cm-s-obsidian .cm-inline-code {
     font-family: var(--font-mono);
-    font-size: var(--ui-text-sm);
+    font-size: 0.85em;
     background-color: var(--bg-subtle);
-    border: 1px solid var(--border-subtle);
-    border-radius: 6px;
+    border: 2px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
     padding: 2px 6px;
     color: var(--accent-primary-text);
   }
@@ -4489,10 +4522,10 @@ body {
     vertical-align: middle;
   }
 
-  /* ON state — green, not pink */
+  /* ON state — uses toggle token so accent swaps propagate */
   body .checkbox-container.is-enabled {
-    background: var(--accent-green);
-    border-color: var(--accent-green);
+    background: var(--toggle-on-bg);
+    border-color: var(--toggle-on-bg);
   }
 
   /* Knob */
@@ -4505,7 +4538,7 @@ body {
     background: var(--toggle-knob);
     top: 2px;
     left: 2px;
-    box-shadow: 0 1px 3px oklch(0 0 0 / 0.15);
+    box-shadow: 0 1px 3px var(--background-modifier-box-shadow);
     transition: transform var(--motion-fast) var(--ease-spring-gentle);
   }
 
@@ -4878,6 +4911,43 @@ body {
     padding: 0 2px;
   }
 
+  /* ========================================================================
+     12. SCROLLBARS — DS themed
+     ======================================================================== */
+
+  /* Firefox — inherits from body, no need for universal selector */
+  body {
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb-bg) transparent;
+  }
+
+  /* Webkit/Chromium */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb-bg);
+    border-radius: var(--radius-full);
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--scrollbar-active-thumb-bg);
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+
+  ::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+
 /* --- Module: 07-animations.css --- */
 
 /* ==========================================================================
@@ -5168,44 +5238,61 @@ settings:
      body.accent-pink is the default and needs no override — it's the baseline.
      ======================================================================== */
 
-  /* Danger / Red */
+  /* Danger / Red
+     HSL values are approximate — Obsidian's internal rendering uses
+     --interactive-accent-hsl which requires HSL, not OKLCH. */
   body.accent-danger {
+    --accent-h: 20; --accent-s: 65%; --accent-l: 55%;
     --accent-primary:        var(--accent-danger);
     --accent-primary-hover:  var(--accent-danger-hover);
     --accent-primary-subtle: var(--accent-danger-subtle);
     --accent-primary-text:   var(--accent-danger-text);
+    --focus-ring: var(--accent-danger);
+    --toggle-on-bg: var(--accent-danger);
   }
 
   /* Gold */
   body.accent-gold {
+    --accent-h: 85; --accent-s: 70%; --accent-l: 65%;
     --accent-primary:        var(--accent-gold);
     --accent-primary-hover:  var(--accent-gold-hover);
     --accent-primary-subtle: var(--accent-gold-subtle);
     --accent-primary-text:   var(--accent-gold-text);
+    --focus-ring: var(--accent-gold);
+    --toggle-on-bg: var(--accent-gold);
   }
 
   /* Cyan */
   body.accent-cyan {
+    --accent-h: 210; --accent-s: 55%; --accent-l: 55%;
     --accent-primary:        var(--accent-cyan);
     --accent-primary-hover:  var(--accent-cyan-hover);
     --accent-primary-subtle: var(--accent-cyan-subtle);
     --accent-primary-text:   var(--accent-cyan-text);
+    --focus-ring: var(--accent-cyan);
+    --toggle-on-bg: var(--accent-cyan);
   }
 
   /* Green */
   body.accent-green {
+    --accent-h: 148; --accent-s: 60%; --accent-l: 55%;
     --accent-primary:        var(--accent-green);
     --accent-primary-hover:  var(--accent-green-hover);
     --accent-primary-subtle: var(--accent-green-subtle);
     --accent-primary-text:   var(--accent-green-text);
+    --focus-ring: var(--accent-green);
+    --toggle-on-bg: var(--accent-green);
   }
 
   /* Purple */
   body.accent-purple {
+    --accent-h: 300; --accent-s: 65%; --accent-l: 55%;
     --accent-primary:        var(--accent-purple);
     --accent-primary-hover:  var(--accent-purple-hover);
     --accent-primary-subtle: var(--accent-purple-subtle);
     --accent-primary-text:   var(--accent-purple-text);
+    --focus-ring: var(--accent-purple);
+    --toggle-on-bg: var(--accent-purple);
   }
 
   /* ========================================================================
@@ -5214,18 +5301,30 @@ settings:
      shadow-normal is the default — no rule needed as tokens are set in 00.
      ======================================================================== */
 
-  /* Subtle — lighter border-color shadow */
+  /* Subtle — lighter border-color shadow, including accent variants */
   body.shadow-subtle {
     --shadow-sm: 1px 1px 0 var(--border-subtle);
     --shadow-md: 2px 2px 0 var(--border-subtle);
     --shadow-lg: 4px 4px 0 var(--border-subtle);
+    --shadow-pink:   2px 2px 0 var(--accent-primary);
+    --shadow-danger: 2px 2px 0 var(--accent-danger);
+    --shadow-gold:   2px 2px 0 var(--accent-gold);
+    --shadow-cyan:   2px 2px 0 var(--accent-cyan);
+    --shadow-green:  2px 2px 0 var(--accent-green);
+    --shadow-purple: 2px 2px 0 var(--accent-purple);
   }
 
-  /* None — remove shadows entirely */
+  /* None — remove all shadows including accent variants */
   body.shadow-none {
     --shadow-sm: none;
     --shadow-md: none;
     --shadow-lg: none;
+    --shadow-pink:   none;
+    --shadow-danger: none;
+    --shadow-gold:   none;
+    --shadow-cyan:   none;
+    --shadow-green:  none;
+    --shadow-purple: none;
   }
 
   /* ========================================================================
@@ -5249,7 +5348,25 @@ settings:
   body.border-subtle .canvas-node-content,
   body.border-subtle .canvas-controls,
   body.border-subtle .graph-controls,
-  body.border-subtle .graph-control-section {
+  body.border-subtle .graph-control-section,
+  body.border-subtle button,
+  body.border-subtle input[type="text"],
+  body.border-subtle input[type="search"],
+  body.border-subtle select,
+  body.border-subtle textarea,
+  body.border-subtle .callout,
+  body.border-subtle .markdown-rendered pre,
+  body.border-subtle .internal-embed,
+  body.border-subtle .markdown-embed,
+  body.border-subtle .file-embed,
+  body.border-subtle .notice,
+  body.border-subtle .tooltip,
+  body.border-subtle .metadata-container,
+  body.border-subtle .calendar,
+  body.border-subtle .kanban-plugin__lane,
+  body.border-subtle .kanban-plugin__item,
+  body.border-subtle .table-editor,
+  body.border-subtle .popover.hover-editor {
     border-width: var(--border-width);
   }
 
@@ -5268,13 +5385,13 @@ settings:
      Large: expansive editorial presence for presentation-style vaults.
      ======================================================================== */
 
-  /* Compact scale */
+  /* Compact scale — tighter, each level still distinct */
   body.heading-scale-compact {
-    --h1-size: 2em;
-    --h2-size: 1.6em;
-    --h3-size: 1.3em;
-    --h4-size: 1.15em;
-    --h5-size: 1.05em;
+    --h1-size: 1.8em;
+    --h2-size: 1.5em;
+    --h3-size: 1.28em;
+    --h4-size: 1.12em;
+    --h5-size: 1.04em;
     --h6-size: 1em;
   }
 
@@ -5303,14 +5420,14 @@ settings:
     font-size: var(--h6-size);
   }
 
-  /* Large scale */
+  /* Large scale — expansive, each level still distinct */
   body.heading-scale-large {
     --h1-size: 3em;
     --h2-size: 2.4em;
-    --h3-size: 2em;
-    --h4-size: 1.6em;
-    --h5-size: 1.3em;
-    --h6-size: 1.1em;
+    --h3-size: 1.9em;
+    --h4-size: 1.5em;
+    --h5-size: 1.2em;
+    --h6-size: 1em;
   }
 
   body.heading-scale-large .HyperMD-header-1,
@@ -5584,6 +5701,7 @@ settings:
   .canvas-node[data-color="1"] .canvas-node-content {
     border-color: var(--accent-danger);
     box-shadow: 2px 2px 0 var(--accent-danger);
+    background: var(--accent-danger-subtle);
   }
 
   .canvas-node[data-color="1"] .canvas-node-content:hover,
@@ -5595,6 +5713,7 @@ settings:
   .canvas-node[data-color="2"] .canvas-node-content {
     border-color: var(--accent-gold);
     box-shadow: 2px 2px 0 var(--accent-gold);
+    background: var(--accent-gold-subtle);
   }
 
   .canvas-node[data-color="2"] .canvas-node-content:hover,
@@ -5606,6 +5725,7 @@ settings:
   .canvas-node[data-color="3"] .canvas-node-content {
     border-color: var(--accent-green);
     box-shadow: 2px 2px 0 var(--accent-green);
+    background: var(--accent-green-subtle);
   }
 
   .canvas-node[data-color="3"] .canvas-node-content:hover,
@@ -5617,6 +5737,7 @@ settings:
   .canvas-node[data-color="4"] .canvas-node-content {
     border-color: var(--accent-cyan);
     box-shadow: 2px 2px 0 var(--accent-cyan);
+    background: var(--accent-cyan-subtle);
   }
 
   .canvas-node[data-color="4"] .canvas-node-content:hover,
@@ -5628,6 +5749,7 @@ settings:
   .canvas-node[data-color="5"] .canvas-node-content {
     border-color: var(--accent-purple);
     box-shadow: 2px 2px 0 var(--accent-purple);
+    background: var(--accent-purple-subtle);
   }
 
   .canvas-node[data-color="5"] .canvas-node-content:hover,
@@ -5639,6 +5761,7 @@ settings:
   .canvas-node[data-color="6"] .canvas-node-content {
     border-color: var(--accent-primary);
     box-shadow: 2px 2px 0 var(--accent-primary);
+    background: var(--accent-primary-subtle);
   }
 
   .canvas-node[data-color="6"] .canvas-node-content:hover,
@@ -5959,6 +6082,30 @@ settings:
     box-shadow: var(--shadow-sm);
     overflow: hidden;
     color: var(--text-primary);
+  }
+
+  /* Graph action buttons — ghost style, stacked vertically */
+  .graph-controls-button {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-sm);
+    background: var(--bg-elevated);
+    border: none;
+    box-shadow: none;
+    color: var(--text-muted);
+    margin-bottom: var(--space-1);
+    cursor: pointer;
+    transition:
+      background-color var(--motion-fast) var(--ease-out),
+      color var(--motion-fast) var(--ease-out);
+  }
+
+  .graph-controls-button:hover {
+    background: var(--accent-primary-subtle);
+    color: var(--accent-primary);
   }
 
   /* ========================================================================
@@ -6843,22 +6990,9 @@ settings:
   }
 
   /* ========================================================================
-     15. REDUCED MOTION (prefers-reduced-motion) — system-level override
-     Applied globally, not just mobile. Ensures motion-sensitive users
-     are protected regardless of device class.
+     15. REDUCED MOTION
+     Canonical definition lives in 07-animations.css — not duplicated here.
      ======================================================================== */
-
-  @media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-      animation-duration:        0.01ms !important;
-      animation-iteration-count: 1      !important;
-      transition-duration:       0.01ms !important;
-      scroll-behavior:           auto   !important;
-    }
-  }
-
 
   /* ========================================================================
      PRINT / PDF EXPORT
@@ -6904,8 +7038,8 @@ settings:
 
     /* Keep code block styling */
     pre, code {
-      border: 1px solid #ddd !important;
-      background: #f8f8f8 !important;
+      border: 1px solid oklch(0.870 0 0) !important;
+      background: oklch(0.970 0 0) !important;
     }
 
     /* Page break control */
