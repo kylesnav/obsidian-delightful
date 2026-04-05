@@ -1881,11 +1881,10 @@ body {
      6. BACKLINKS + SEARCH RESULTS
      ======================================================================== */
 
-  /* Backlinks footer — clean break between note content and backlinks */
+  /* Backlinks footer — spacing only, no visible divider */
   .mod-footer {
     margin-top: var(--space-6);
     padding-top: var(--space-4);
-    border-top: 2px solid var(--border-subtle);
   }
 
   /* Backlink section headers — "Linked mentions", "Unlinked mentions" */
@@ -3680,7 +3679,35 @@ body {
     transform: translateY(-2px);
   }
 
-  /* Image embed container */
+  /* Image embed container — strip the card treatment from .internal-embed */
+  .internal-embed.image-embed {
+    background: none;
+    border: none;
+    border-left: none;
+    box-shadow: none;
+    padding: 0;
+    border-radius: 0;
+    overflow: visible;
+    display: block;
+    margin: var(--space-4) 0;
+  }
+
+  .internal-embed.image-embed:hover {
+    transform: none;
+    box-shadow: none;
+    border-color: transparent;
+  }
+
+  .internal-embed.image-embed:active {
+    transform: none;
+  }
+
+  .internal-embed.image-embed img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius-sm);
+  }
+
   .image-embed {
     display: inline-block;
     margin: var(--space-2) 0;
@@ -4534,68 +4561,9 @@ body {
     outline: none;
   }
 
-  /* ----- Toggle (CRITICAL — replace Obsidian default) ----- */
-  /* body prefix for specificity over Obsidian's app.css */
-
-  body .checkbox-container {
-    width: 40px;
-    height: 22px;
-    border-radius: var(--radius-full);
-    background: var(--toggle-off-bg);
-    border: 2px solid var(--border-default);
-    position: relative;
-    cursor: pointer;
-    flex-shrink: 0;
-    transition: background var(--motion-fast) var(--ease-bounce),
-                border-color var(--motion-fast) var(--ease-bounce);
-    /* Remove any Obsidian default positioning */
-    display: inline-block;
-    vertical-align: middle;
-  }
-
-  /* ON state — uses toggle token so accent swaps propagate */
+  /* ----- Toggle — Obsidian default with DS accent color ----- */
   body .checkbox-container.is-enabled {
-    background: var(--toggle-on-bg);
-    border-color: var(--toggle-on-bg);
-  }
-
-  /* Knob */
-  body .checkbox-container::after {
-    content: '';
-    position: absolute;
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    background: var(--toggle-knob);
-    top: 2px;
-    left: 2px;
-    box-shadow: 0 1px 3px var(--background-modifier-box-shadow);
-    transition: transform var(--motion-fast) var(--ease-spring-gentle);
-  }
-
-  body .checkbox-container.is-enabled::after {
-    transform: translateX(18px);
-  }
-
-  /* Toggle squeeze on click */
-  body .checkbox-container:active {
-    transform: scale(0.9);
-  }
-
-  /* Remove Obsidian's own ::before knob */
-  body .checkbox-container::before {
-    display: none;
-  }
-
-  /* Obsidian toggle input (the hidden real checkbox) */
-  .checkbox-container input[type="checkbox"] {
-    position: absolute;
-    opacity: 0;
-    width: 0;
-    height: 0;
-    margin: 0;
-    padding: 0;
-    pointer-events: none;
+    background-color: var(--toggle-on-bg) !important;
   }
 
   /* ----- Checkbox ----- */
@@ -6112,7 +6080,6 @@ settings:
     border: 2px solid var(--border-default);
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-sm);
-    overflow: hidden;
     color: var(--text-primary);
   }
 
@@ -6138,6 +6105,11 @@ settings:
   .graph-controls-button:hover {
     background: var(--accent-primary-subtle);
     color: var(--accent-primary);
+  }
+
+  /* Hide close button when graph controls are collapsed */
+  .graph-controls.is-close .graph-controls-button.mod-close {
+    display: none;
   }
 
   /* ========================================================================
