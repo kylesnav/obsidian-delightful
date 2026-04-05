@@ -4461,6 +4461,35 @@ body {
     outline: none;
   }
 
+  /* ----- Search container inputs ----- */
+  /* Obsidian wraps search bars in .search-input-container which provides
+     the visual boundary — strip the DS treatment from the inner input */
+
+  .search-input-container {
+    display: flex;
+    align-items: center;
+    background: var(--bg-surface);
+    border: 2px solid var(--border-default);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-sm);
+    transition:
+      border-color var(--motion-fast) var(--ease-out),
+      box-shadow   var(--motion-instant) linear;
+  }
+
+  .search-input-container input {
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    outline: none !important;
+    padding-left: var(--space-8) !important;
+  }
+
+  .search-input-container:focus-within {
+    border-color: var(--accent-primary);
+    box-shadow: 4px 4px 0 var(--accent-primary);
+  }
+
   /* Placeholder */
   input::placeholder,
   textarea::placeholder {
