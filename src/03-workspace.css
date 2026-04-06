@@ -1,0 +1,630 @@
+/* ==========================================================================
+   03-workspace.css — Workspace Chrome
+   Ribbon · Tabs · File Explorer · Status Bar
+   ========================================================================== */
+
+
+  /* ========================================================================
+     SIGNATURE: Delightful accent line at top of window
+     ======================================================================== */
+
+  /* Thin pink accent line across the very top — brand signature */
+  .workspace-tabs.mod-top .workspace-tab-header-container {
+    border-top: 2px solid var(--accent-primary);
+  }
+
+  /* ========================================================================
+     0. SIDEBAR / SPLIT CONTAINERS
+     ======================================================================== */
+
+  /* Left sidebar — warm tan, smooth collapse */
+  .mod-left-split,
+  .workspace-split.mod-left-split {
+    background-color: var(--bg-page);
+    transition: width var(--motion-base) var(--ease-smooth);
+  }
+
+  /* Right sidebar — same treatment */
+  .mod-right-split,
+  .workspace-split.mod-right-split {
+    background-color: var(--bg-page);
+    transition: width var(--motion-base) var(--ease-smooth);
+  }
+
+  /* Editor area fills smoothly when sidebar collapses */
+  .workspace-split.mod-root {
+    transition: width var(--motion-base) var(--ease-smooth);
+  }
+
+  /* File explorer and any sidebar leaf */
+  .nav-files-container,
+  .workspace-leaf-content[data-type="file-explorer"],
+  .workspace-leaf-content[data-type="search"],
+  .workspace-leaf-content[data-type="backlink"],
+  .workspace-leaf-content[data-type="tag"],
+  .workspace-leaf-content[data-type="outline"] {
+    background-color: var(--bg-page);
+  }
+
+  /* ========================================================================
+     1. RIBBON
+     ======================================================================== */
+
+  /* Ribbon container */
+  .workspace-ribbon.mod-left {
+    background-color: var(--bg-page);
+    width: 44px;
+    border-right: 2px solid var(--border-subtle);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: var(--space-2);
+    padding-bottom: var(--space-2);
+    gap: var(--space-1);
+  }
+
+  /* Ribbon action icons */
+  .side-dock-ribbon-action {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    background-color: transparent;
+    /* SINK pattern: instant transform, fast color */
+    transition:
+      background-color var(--motion-fast) var(--ease-out),
+      color           var(--motion-fast) var(--ease-out),
+      transform       var(--motion-instant) linear;
+    cursor: pointer;
+  }
+
+  .side-dock-ribbon-action:hover {
+    background-color: var(--accent-primary-subtle);
+    color: var(--accent-primary);
+    transform: translateY(-2px);
+  }
+
+  /* Settings icon — muted by default, pushed to bottom via auto margin */
+  .side-dock-ribbon-action.mod-settings {
+    color: var(--text-muted);
+    margin-top: auto;
+  }
+
+  .side-dock-ribbon-action.mod-settings:hover {
+    background-color: var(--accent-primary-subtle);
+    color: var(--accent-primary);
+    transform: translateY(-2px);
+  }
+
+  /* Ribbon collapse button */
+  .workspace-ribbon-collapse-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    background-color: transparent;
+    /* SINK pattern: instant transform, fast color */
+    transition:
+      background-color var(--motion-fast) var(--ease-out),
+      color           var(--motion-fast) var(--ease-out),
+      transform       var(--motion-instant) linear;
+    cursor: pointer;
+  }
+
+  .workspace-ribbon-collapse-btn:hover {
+    background-color: var(--accent-primary-subtle);
+    color: var(--accent-primary);
+    transform: translateY(-2px);
+  }
+
+  /* ========================================================================
+     1.5. VIEW HEADER — Note title bar + action icons
+     ======================================================================== */
+
+  /* View header container */
+  .view-header {
+    background-color: var(--bg-page);
+    border-bottom: 2px solid var(--border-subtle);
+  }
+
+  /* Note title in view header */
+  .view-header-title {
+    font-weight: 600;
+    font-size: var(--ui-text-sm);
+    color: var(--text-primary);
+  }
+
+  /* Breadcrumb path */
+  .view-header-breadcrumb {
+    font-size: var(--ui-text-xs);
+    color: var(--text-muted);
+  }
+
+  /* Action icons (edit/preview toggle, more options, etc.) */
+  .view-action {
+    color: var(--text-muted);
+    border-radius: var(--radius-sm);
+    transition:
+      background-color var(--motion-fast) var(--ease-out),
+      color            var(--motion-fast) var(--ease-out),
+      transform        var(--motion-instant) linear;
+    will-change: transform;
+  }
+
+  .view-action:hover {
+    background-color: var(--bg-subtle);
+    color: var(--text-primary);
+    transform: translateY(-1px);
+  }
+
+  .view-action:active {
+    transform: translateY(1px);
+  }
+
+  /* Active view action (e.g., current editing mode) */
+  .view-action.is-active {
+    color: var(--accent-primary);
+  }
+
+  /* ========================================================================
+     2. TABS
+     Keep it minimal — tabs are chrome, not a focal element.
+     ======================================================================== */
+
+  /* Tab bar container */
+  .workspace-tab-header-container {
+    background-color: var(--bg-page);
+    border-bottom: 2px solid var(--border-subtle);
+  }
+
+  /* Every tab — top corners only, matching DS radius-sm */
+  .workspace-tab-header {
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+
+  /* Active tab — "lifted above" the bar, bottom border overlaps bar border */
+  .workspace-tab-header.is-active {
+    background-color: var(--bg-elevated);
+    color: var(--text-primary);
+    font-weight: 550;
+    /* Negative bottom margin so the tab connects flush to content below */
+    border-bottom: 2px solid var(--bg-elevated);
+    margin-bottom: -2px;
+  }
+
+  /* Close button — fades in on tab hover, pink on close-hover */
+  .workspace-tab-header .workspace-tab-header-inner-close-btn {
+    color: var(--text-muted);
+    opacity: 0;
+    border-radius: var(--radius-sm);
+    transition:
+      opacity var(--motion-fast) var(--ease-out),
+      color   var(--motion-fast) var(--ease-out),
+      background-color var(--motion-fast) var(--ease-out);
+  }
+
+  .workspace-tab-header:hover .workspace-tab-header-inner-close-btn {
+    opacity: 1;
+  }
+
+  .workspace-tab-header .workspace-tab-header-inner-close-btn:hover {
+    color: var(--accent-danger);
+    background-color: var(--accent-danger-subtle);
+  }
+
+  /* New tab "+" button — ghost with pink hover */
+  .workspace-tab-header-new-tab {
+    color: var(--text-muted);
+    border-radius: var(--radius-sm);
+    transition:
+      background-color var(--motion-fast) var(--ease-out),
+      color            var(--motion-fast) var(--ease-out),
+      transform        var(--motion-instant) linear;
+  }
+
+  .workspace-tab-header-new-tab:hover {
+    color: var(--accent-primary);
+    background-color: var(--accent-primary-subtle);
+    transform: translateY(-1px);
+  }
+
+  .workspace-tab-header-new-tab:active {
+    transform: translateY(1px);
+  }
+
+  /* Sidebar pane tab icons — active state with pink accent */
+  .mod-left-split .workspace-tab-header.is-active,
+  .mod-right-split .workspace-tab-header.is-active {
+    color: var(--accent-primary);
+    border-bottom-color: var(--accent-primary);
+  }
+
+  /* Sidebar pane tab hover */
+  .mod-left-split .workspace-tab-header:hover,
+  .mod-right-split .workspace-tab-header:hover {
+    color: var(--text-primary);
+  }
+
+  /* ========================================================================
+     3. FILE EXPLORER
+     ======================================================================== */
+
+  /* Sidebar / file explorer container */
+  .nav-files-container {
+    background-color: var(--bg-page);
+  }
+
+  /* Nav header container — toolbar above file list */
+  .nav-buttons-container {
+    display: flex;
+    gap: var(--space-1);
+    padding: var(--space-1) var(--space-2);
+  }
+
+  /* Action buttons (new note, new folder, sort, etc.) */
+  .nav-action-button {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    border-radius: var(--radius-sm);
+    /* SINK pattern */
+    transition:
+      background-color var(--motion-fast) var(--ease-out),
+      color            var(--motion-fast) var(--ease-out),
+      transform        var(--motion-instant) linear;
+    will-change: transform;
+  }
+
+  .nav-action-button:hover {
+    color: var(--accent-primary);
+    background-color: var(--accent-primary-subtle);
+    transform: translateY(-1px);
+  }
+
+  .nav-action-button:active {
+    transform: translateY(1px);
+  }
+
+  /* Shared nav item base — files and folders */
+  .nav-file-title,
+  .nav-folder-title {
+    font-size: var(--ui-text-sm);   /* 13px */
+    color: var(--text-secondary);
+    border-radius: var(--radius-full);
+    transition:
+      background-color var(--motion-fast) var(--ease-out),
+      color            var(--motion-fast) var(--ease-out);
+  }
+
+  /* Folder title — bolder to distinguish from files */
+  .nav-folder-title {
+    font-weight: 600;
+  }
+
+  /* Hover state — gentle, consistent pill */
+  .nav-file-title:hover,
+  .nav-folder-title:hover {
+    background-color: var(--bg-subtle);
+    border-radius: var(--radius-full);
+    color: var(--text-primary);
+  }
+
+  /* Active file — full pill, pink fill, NO left-border accent bar */
+  .nav-file-title.is-active {
+    background-color: var(--accent-primary-subtle);
+    border-radius: var(--radius-full);
+    color: var(--accent-primary-text);
+    font-weight: 600;
+    /* Explicitly remove any inherited inset shadow (old left-bar accent) */
+    box-shadow: none;
+  }
+
+  /* Active folder title */
+  .nav-folder-title.is-active {
+    background-color: var(--bg-subtle);
+    border-radius: var(--radius-full);
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  /* Remove old ::before pseudo-element left-accent bar if any theme layer adds it */
+  .nav-file-title.is-active::before,
+  .nav-folder-title.is-active::before {
+    display: none;
+    content: none;
+  }
+
+  /* Tree items (used in outline, file explorer tree) */
+  .tree-item-self {
+    border-radius: var(--radius-full);
+    transition:
+      background-color var(--motion-fast) var(--ease-out),
+      color            var(--motion-fast) var(--ease-out);
+  }
+
+  .tree-item-self:hover {
+    background-color: var(--bg-subtle);
+  }
+
+  /* Tree item hover — bg only, no border-left (prevents layout shift) */
+  .tree-item-self.is-clickable:hover {
+    background-color: var(--bg-subtle);
+  }
+
+  /* Collapsed tree item indicator */
+  .tree-item-icon.collapse-icon {
+    color: var(--text-muted);
+    transition:
+      transform var(--motion-instant) linear,
+      color     var(--motion-fast) var(--ease-out);
+  }
+
+  .tree-item-icon.collapse-icon:hover {
+    color: var(--accent-primary);
+  }
+
+  /* Indentation guides */
+  .nav-indentation-guide {
+    border-left: 1px solid var(--border-subtle);
+  }
+
+  /* ========================================================================
+     6. BACKLINKS + SEARCH RESULTS
+     ======================================================================== */
+
+  /* Backlinks footer — spacing only, no visible divider */
+  .mod-footer {
+    margin-top: var(--space-6);
+    padding-top: var(--space-4);
+  }
+
+  /* Backlink section headers — "Linked mentions", "Unlinked mentions" */
+  .backlink-pane .tree-item-self.search-result-file-title {
+    font-weight: 600;
+    color: var(--accent-primary);
+    border-radius: var(--radius-sm);
+  }
+
+  /* Search result file title — accent color */
+  .search-result-file-title {
+    font-weight: 600;
+    color: var(--accent-primary);
+    border-radius: var(--radius-sm);
+    transition: background-color var(--motion-fast) var(--ease-out);
+  }
+
+  .search-result-file-title:hover {
+    background-color: var(--accent-primary-subtle);
+  }
+
+  /* Search result match highlight */
+  .search-result-file-matched-text {
+    color: var(--text-primary);
+    background-color: var(--accent-gold-subtle);
+    border-radius: 3px;
+    padding: 0 2px;
+  }
+
+  /* Search result context text */
+  .search-result-file-match {
+    font-size: var(--ui-text-sm);
+    color: var(--text-secondary);
+    border-radius: var(--radius-sm);
+    padding: var(--space-1) var(--space-3);
+    transition: background-color var(--motion-fast) var(--ease-out);
+  }
+
+  .search-result-file-match:hover {
+    background-color: var(--bg-subtle);
+  }
+
+  /* Folder collapse indicator — smooth rotation on open/close */
+  .nav-folder-collapse-indicator {
+    color: var(--text-muted);
+    transition: transform var(--motion-fast) var(--ease-bounce);
+  }
+
+  /* ========================================================================
+     4. STATUS BAR
+     Keep it minimal — no bold text, no hover effects, no custom padding.
+     ======================================================================== */
+
+  .status-bar {
+    background-color: var(--bg-page);
+    border-top: 2px solid var(--background-modifier-border);
+    font-size: var(--ui-text-xs);   /* 12px / 0.75rem */
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+
+  /* Status bar items — no hover, just inherit text color */
+  .status-bar-item {
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+
+  /* ========================================================================
+     5. FILE EXTENSION + FLAIR BADGES
+     ======================================================================== */
+
+  /* File extension labels (PDF, CANVAS, etc.) and tree flair badges */
+  .nav-file-tag,
+  .tree-item-flair {
+    display: inline-flex;
+    align-items: center;
+    padding: 1px 6px;
+    font-size: var(--ui-text-2xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    border-radius: var(--radius-full);
+    background: var(--accent-primary-subtle);
+    color: var(--accent-primary);
+    line-height: 1.4;
+    white-space: nowrap;
+  }
+
+  /* Flair count badges (backlinks, etc.) */
+  .tree-item-flair-outer {
+    display: inline-flex;
+    align-items: center;
+    padding: 1px 6px;
+    font-size: var(--ui-text-2xs);
+    font-weight: 600;
+    border-radius: var(--radius-full);
+    background: var(--bg-subtle);
+    color: var(--text-muted);
+  }
+
+
+  /* ========================================================================
+     8. RESIZE HANDLE — Subtle accent on drag
+     ======================================================================== */
+
+  /* Pane resize handle — thin, accents on hover */
+  .workspace-leaf-resize-handle {
+    background: transparent;
+    transition: background-color var(--motion-fast) var(--ease-out);
+  }
+
+  .workspace-leaf-resize-handle:hover {
+    background-color: var(--accent-primary-subtle);
+  }
+
+  .workspace-leaf-resize-handle:active {
+    background-color: var(--accent-primary);
+  }
+
+  /* Split resize handle between sidebar and editor */
+  .workspace-split.mod-vertical > .workspace-leaf-resize-handle,
+  .mod-left-split .workspace-leaf-resize-handle,
+  .mod-right-split .workspace-leaf-resize-handle {
+    width: 3px;
+    transition: background-color var(--motion-fast) var(--ease-out);
+  }
+
+  .mod-left-split .workspace-leaf-resize-handle:hover,
+  .mod-right-split .workspace-leaf-resize-handle:hover {
+    background-color: var(--accent-primary-subtle);
+  }
+
+  .mod-left-split .workspace-leaf-resize-handle:active,
+  .mod-right-split .workspace-leaf-resize-handle:active {
+    background-color: var(--accent-primary);
+  }
+
+  /* ========================================================================
+     9. DRAG AND DROP INDICATORS
+     ======================================================================== */
+
+  /* Drop target highlight — pink accent line */
+  .nav-file-title.is-being-dragged-over,
+  .nav-folder-title.is-being-dragged-over {
+    border-top: 2px solid var(--accent-primary);
+    background-color: var(--accent-primary-subtle);
+  }
+
+  /* Dragged item — slight opacity */
+  .is-being-dragged {
+    opacity: 0.5;
+  }
+
+  /* Tab drag indicator */
+  .workspace-tab-header.is-being-dragged {
+    opacity: 0.5;
+  }
+
+  .workspace-tab-header-container .workspace-tab-header.is-drag-over {
+    border-left: 2px solid var(--accent-primary);
+  }
+
+  /* ========================================================================
+     10. OUTLINE PANE — Heading hierarchy
+     ======================================================================== */
+
+  /* Outline pane items — weight decreases with depth */
+  .workspace-leaf-content[data-type="outline"] .tree-item[data-heading-level="1"] .tree-item-inner {
+    font-weight: 700;
+    font-size: var(--ui-text-md);
+  }
+
+  .workspace-leaf-content[data-type="outline"] .tree-item[data-heading-level="2"] .tree-item-inner {
+    font-weight: 600;
+    font-size: var(--ui-text-sm);
+  }
+
+  .workspace-leaf-content[data-type="outline"] .tree-item[data-heading-level="3"] .tree-item-inner {
+    font-weight: 500;
+    font-size: var(--ui-text-sm);
+    color: var(--text-secondary);
+  }
+
+  .workspace-leaf-content[data-type="outline"] .tree-item[data-heading-level="4"] .tree-item-inner,
+  .workspace-leaf-content[data-type="outline"] .tree-item[data-heading-level="5"] .tree-item-inner,
+  .workspace-leaf-content[data-type="outline"] .tree-item[data-heading-level="6"] .tree-item-inner {
+    font-weight: 400;
+    font-size: var(--ui-text-xs);
+    color: var(--text-muted);
+  }
+
+  /* ========================================================================
+     11. MULTI-PANE BORDERS
+     ======================================================================== */
+
+  /* Border between panes in split view */
+  .workspace-split.mod-root > .workspace-leaf:not(:last-child) {
+    border-right: 1px solid var(--border-subtle);
+  }
+
+  /* Active pane gets subtle accent indicator at top */
+  .workspace-leaf.mod-active .view-header {
+    border-top: 2px solid var(--accent-primary);
+  }
+
+  /* Stacked tabs indicator */
+  .workspace-tab-header-status-container {
+    color: var(--text-muted);
+    font-size: var(--ui-text-2xs);
+  }
+
+  /* ========================================================================
+     12. TAB OVERFLOW + STACKED TABS
+     ======================================================================== */
+
+  /* Tab overflow dropdown — appears when many tabs open */
+  .workspace-tab-header-tab-list {
+    background: var(--bg-elevated);
+    border: 2px solid var(--border-default);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    padding: var(--space-1);
+    animation: fade-in var(--motion-fast) var(--ease-out);
+  }
+
+  /* Items in the tab overflow list */
+  .workspace-tab-header-tab-list .workspace-tab-header {
+    border-radius: var(--radius-sm);
+    margin-bottom: 1px;
+  }
+
+  /* Stacked tabs mode — tab list in sidebar */
+  .workspace-tab-header-container.is-stacked .workspace-tab-header {
+    border-radius: 0;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .workspace-tab-header-container.is-stacked .workspace-tab-header.is-active {
+    background-color: var(--bg-elevated);
+    border-left: 3px solid var(--accent-primary);
+  }

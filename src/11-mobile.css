@@ -1,0 +1,601 @@
+/* ==========================================================================
+   11-mobile.css — Mobile & Tablet Responsive
+   .is-mobile · .is-tablet · @media (max-width: 768px)
+   Touch targets · Font sizing · Layout adjustments ·
+   Reduced motion · Sidebar overlay · Navigation
+   ========================================================================== */
+
+
+  /* ========================================================================
+     1. TABLET BREAKPOINT — .is-tablet
+     Moderate adjustments: narrower content column, slightly larger touch.
+     ======================================================================== */
+
+  .is-tablet {
+    /* Narrower readable content line for tablets */
+    --line-width: 32rem;
+
+    /* Slightly larger base font for tablet readability */
+    --font-text-size: 1rem;
+
+    /* Increase control heights for easier touch */
+    --control-sm: 36px;
+    --control-md: 40px;
+    --control-lg: 48px;
+  }
+
+  /* Tablet sidebar width reduction */
+  .is-tablet .workspace-split.mod-left-split {
+    width: 220px;
+  }
+
+  .is-tablet .workspace-split.mod-right-split {
+    width: 220px;
+  }
+
+  /* ========================================================================
+     2. MOBILE BASE — .is-mobile
+     Full mobile treatment: fonts, spacing, layout.
+     ======================================================================== */
+
+  .is-mobile {
+    /* Larger base font for mobile readability (17px) */
+    --font-text-size: var(--ui-text-xl);
+
+    /* Reduced motion cadence on mobile */
+    --motion-fast:    80ms;
+    --motion-base:    150ms;
+    --motion-slow:    220ms;
+
+    /* Full-width modals */
+    --modal-max-width:  100vw;
+    --modal-max-height: 100vh;
+
+    /* Touch-friendly control heights */
+    --control-sm: 40px;
+    --control-md: 44px;
+    --control-lg: 52px;
+    --control-xl: 60px;
+
+    /* Slightly wider tap-spacing on navigation items */
+    --nav-item-padding: var(--space-3) var(--space-4);
+  }
+
+  /* ========================================================================
+     3. MOBILE — TOUCH TARGETS
+     All interactive elements meet 44×44px minimum.
+     ======================================================================== */
+
+  .is-mobile .clickable-icon,
+  .is-mobile .nav-action-button,
+  .is-mobile .view-action,
+  .is-mobile .side-dock-ribbon-action,
+  .is-mobile .workspace-tab-header,
+  .is-mobile button:not([hidden]) {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  .is-mobile .nav-file-title,
+  .is-mobile .nav-folder-title {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+
+  /* ========================================================================
+     4. MOBILE — TYPOGRAPHY
+     ======================================================================== */
+
+  .is-mobile .markdown-source-view,
+  .is-mobile .markdown-reading-view {
+    font-size: var(--font-text-size);
+    line-height: var(--leading-relaxed);
+  }
+
+  /* Inline title larger on mobile for clear context */
+  .is-mobile .inline-title {
+    font-size: clamp(1.6rem, 5vw, 2.2rem);
+    line-height: var(--leading-tight);
+    padding: var(--space-5) var(--space-4) var(--space-3);
+  }
+
+  /* Heading sizing — slightly compressed for narrow screens */
+  .is-mobile .HyperMD-header-1 { font-size: 1.9rem; }
+  .is-mobile .HyperMD-header-2 { font-size: 1.55rem; }
+  .is-mobile .HyperMD-header-3 { font-size: 1.3rem; }
+  .is-mobile .HyperMD-header-4 { font-size: 1.15rem; }
+  .is-mobile .HyperMD-header-5 { font-size: 1.05rem; }
+  .is-mobile .HyperMD-header-6 { font-size: 1rem; }
+
+  /* Code blocks — smaller mono font on narrow screens */
+  .is-mobile pre,
+  .is-mobile code {
+    font-size: var(--ui-text-sm);
+  }
+
+  /* ========================================================================
+     5. MOBILE — WORKSPACE LAYOUT
+     ======================================================================== */
+
+  /* Stack sidebars as full-screen overlays */
+  .is-mobile .workspace-split.mod-left-split,
+  .is-mobile .workspace-split.mod-right-split {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    z-index: var(--z-overlay);
+    width: 85vw;
+    max-width: 320px;
+    box-shadow: var(--shadow-lg);
+    transition: transform var(--motion-base) var(--ease-out);
+  }
+
+  .is-mobile .workspace-split.mod-left-split {
+    left: 0;
+    transform: translateX(-100%);
+  }
+
+  .is-mobile .workspace-split.mod-right-split {
+    right: 0;
+    transform: translateX(100%);
+  }
+
+  /* Show sidebar when open */
+  .is-mobile .workspace-split.mod-left-split.is-open {
+    transform: translateX(0);
+  }
+
+  .is-mobile .workspace-split.mod-right-split.is-open {
+    transform: translateX(0);
+  }
+
+  /* Overlay scrim behind open sidebar */
+  .is-mobile .workspace-drawer-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: var(--overlay-bg);
+    z-index: calc(var(--z-overlay) - 1);
+  }
+
+  .is-mobile .workspace-split.mod-left-split.is-open ~ .workspace-drawer-backdrop,
+  .is-mobile .workspace-split.mod-right-split.is-open ~ .workspace-drawer-backdrop {
+    display: block;
+  }
+
+  /* Remove sidebar resize handle on mobile */
+  .is-mobile .workspace-leaf-resize-handle {
+    display: none;
+  }
+
+  /* ========================================================================
+     6. MOBILE — RIBBON
+     Collapse the left ribbon to a bottom action bar on mobile.
+     ======================================================================== */
+
+  .is-mobile .side-dock-ribbon {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: auto;
+    height: 56px;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 var(--space-2);
+    background: var(--bg-elevated);
+    border-top: 2px solid var(--border-default);
+    border-right: none;
+    z-index: var(--z-fixed);
+    box-shadow: 0 -2px 0 var(--border-default);
+  }
+
+  /* Ribbon action buttons in bottom bar */
+  .is-mobile .side-dock-ribbon-action {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    flex-shrink: 0;
+    transition:
+      background-color var(--motion-fast) var(--ease-out),
+      color            var(--motion-fast) var(--ease-out);
+  }
+
+  .is-mobile .side-dock-ribbon-action:hover,
+  .is-mobile .side-dock-ribbon-action.is-active {
+    background-color: var(--accent-primary-subtle);
+    color: var(--accent-primary);
+  }
+
+  /* Push workspace content above bottom ribbon */
+  .is-mobile .workspace-split.mod-root {
+    padding-bottom: 56px;
+  }
+
+  /* ========================================================================
+     7. MOBILE — TAB BAR
+     Scrollable, touch-friendly height.
+     ======================================================================== */
+
+  .is-mobile .workspace-tab-header-container {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none; /* Firefox */
+    -webkit-overflow-scrolling: touch;
+    height: 48px;
+    flex-shrink: 0;
+  }
+
+  .is-mobile .workspace-tab-header-container::-webkit-scrollbar {
+    display: none;
+  }
+
+  .is-mobile .workspace-tab-header {
+    min-width: 100px;
+    max-width: 200px;
+    height: 48px;
+    padding: 0 var(--space-3);
+    flex-shrink: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .is-mobile .workspace-tab-header.is-active {
+    background: var(--bg-elevated);
+    border-bottom: 3px solid var(--accent-primary);
+  }
+
+  /* Tab close button — larger touch area */
+  .is-mobile .workspace-tab-header-inner-close-button {
+    width: 28px;
+    height: 28px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* ========================================================================
+     8. MOBILE — NAVIGATION PANEL
+     ======================================================================== */
+
+  .is-mobile .nav-files-container {
+    padding: var(--space-2) var(--space-2);
+  }
+
+  .is-mobile .nav-file-title,
+  .is-mobile .nav-folder-title {
+    padding: var(--space-3) var(--space-3);
+    font-size: var(--ui-text-md);
+    border-radius: var(--radius-sm);
+    gap: var(--space-2);
+  }
+
+  .is-mobile .nav-file-title:active,
+  .is-mobile .nav-folder-title:active {
+    background: var(--accent-primary-subtle);
+    color: var(--accent-primary);
+  }
+
+  /* Folder collapse arrow — larger touch area */
+  .is-mobile .nav-folder-collapse-indicator {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-sm);
+  }
+
+  /* ========================================================================
+     9. MOBILE — MODALS
+     Full-screen or near-full-screen on small displays.
+     ======================================================================== */
+
+  .is-mobile .modal {
+    width: 100vw;
+    max-width: 100vw;
+    max-height: 92vh;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
+    /* Slide up from bottom */
+    animation: slide-in-bottom-mobile var(--motion-base) var(--ease-out) both;
+  }
+
+  @keyframes slide-in-bottom-mobile {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Settings modal — single column on mobile */
+  .is-mobile .modal.mod-settings {
+    flex-direction: column;
+    width: 100vw;
+    max-height: 92vh;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  }
+
+  .is-mobile .modal.mod-settings .vertical-tab-header {
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 2px solid var(--border-subtle);
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    flex-shrink: 0;
+    padding: var(--space-2);
+    scrollbar-width: none;
+  }
+
+  .is-mobile .modal.mod-settings .vertical-tab-header::-webkit-scrollbar {
+    display: none;
+  }
+
+  .is-mobile .modal.mod-settings .vertical-tab-nav-item {
+    white-space: nowrap;
+    flex-shrink: 0;
+    min-height: 36px;
+    border-left: none;
+    border-radius: var(--radius-sm);
+    padding: var(--space-2) var(--space-3);
+  }
+
+  .is-mobile .modal.mod-settings .vertical-tab-nav-item.is-active {
+    border-left: none;
+    background: var(--accent-primary-subtle);
+    color: var(--accent-primary);
+  }
+
+  /* Quick switcher / command palette — full width */
+  .is-mobile .prompt {
+    width: 100vw;
+    max-width: 100vw;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    bottom: 0;
+    top: auto;
+    left: 0;
+    right: 0;
+    transform: none;
+    position: fixed;
+    max-height: 75vh;
+  }
+
+  .is-mobile .prompt-input-container {
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  }
+
+  /* ========================================================================
+     10. MOBILE — CONTEXT MENUS
+     ======================================================================== */
+
+  .is-mobile .menu {
+    min-width: 220px;
+    max-width: 85vw;
+    max-height: 60vh;
+    overflow-y: auto;
+  }
+
+  .is-mobile .menu-item {
+    min-height: 44px;
+    font-size: var(--ui-text-md);
+    padding: 0 var(--space-4);
+  }
+
+  .is-mobile .menu-separator {
+    margin: var(--space-1) var(--space-3);
+  }
+
+  /* ========================================================================
+     11. MOBILE — EDITOR CONTENT AREA
+     ======================================================================== */
+
+  .is-mobile .cm-editor {
+    padding: var(--space-4) var(--space-4);
+  }
+
+  .is-mobile .cm-content {
+    max-width: var(--line-width, 100%);
+    margin: 0 auto;
+    padding: 0 var(--space-2);
+  }
+
+  /* Wider padding for reading view on mobile */
+  .is-mobile .markdown-reading-view .markdown-preview-section {
+    padding: var(--space-4) var(--space-4);
+    max-width: 100%;
+  }
+
+  /* Table overflow: horizontal scroll instead of wrapping */
+  .is-mobile .markdown-preview-view table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: var(--radius-md);
+  }
+
+  /* ========================================================================
+     12. MOBILE — NOTICE TOASTS
+     ======================================================================== */
+
+  .is-mobile .notice {
+    width: calc(100vw - var(--space-8));
+    max-width: 400px;
+    bottom: calc(56px + var(--space-4)); /* above bottom ribbon */
+    left: 50%;
+    transform: translateX(-50%);
+    right: auto;
+  }
+
+  /* ========================================================================
+     13. MOBILE — SEARCH
+     ======================================================================== */
+
+  .is-mobile .search-input-container {
+    width: 100%;
+  }
+
+  .is-mobile .search-input-container input {
+    height: var(--control-lg);
+    font-size: var(--ui-text-md);
+    padding: 0 var(--space-5) 0 var(--space-10);
+  }
+
+  /* Clear button in search — larger touch target */
+  .is-mobile .search-input-clear-button {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ========================================================================
+     14. MEDIA QUERY FALLBACK
+     For browsers/contexts where .is-mobile class isn't applied,
+     use @media max-width to apply the most critical mobile rules.
+     ======================================================================== */
+
+  @media (max-width: 768px) {
+    /* Base font */
+    :root {
+      --font-text-size: var(--ui-text-xl);
+      --motion-fast:    80ms;
+      --motion-base:    150ms;
+    }
+
+    /* Touch targets */
+    .clickable-icon,
+    .nav-action-button,
+    .view-action {
+      min-height: 44px;
+      min-width: 44px;
+    }
+
+    /* Full-width modals */
+    .modal {
+      width: 100vw;
+      max-width: 100vw;
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: 0;
+    }
+
+    /* Prompt full width */
+    .prompt {
+      width: 100vw;
+      max-width: 100vw;
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    }
+
+    /* Larger nav items */
+    .nav-file-title,
+    .nav-folder-title {
+      min-height: 44px;
+      font-size: var(--ui-text-md);
+    }
+
+    /* Larger tab bar */
+    .workspace-tab-header {
+      height: 48px;
+    }
+
+    /* Scrollable tab bar */
+    .workspace-tab-header-container {
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .workspace-tab-header-container::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Tablet content width */
+    .workspace-leaf-content {
+      --line-width: 32rem;
+    }
+  }
+
+  /* ========================================================================
+     15. REDUCED MOTION
+     Canonical definition lives in 07-animations.css — not duplicated here.
+     ======================================================================== */
+
+  /* ========================================================================
+     PRINT / PDF EXPORT
+     ======================================================================== */
+
+  @media print {
+    /* Hide chrome — only show content */
+    .workspace-ribbon,
+    .workspace-split.mod-left-split,
+    .workspace-split.mod-right-split,
+    .status-bar,
+    .workspace-tab-header-container,
+    .view-header,
+    .view-actions {
+      display: none !important;
+    }
+
+    /* Full width content */
+    .workspace-leaf-content {
+      width: 100% !important;
+      max-width: 100% !important;
+    }
+
+    /* Clean white background */
+    body,
+    .app-container,
+    .workspace,
+    .markdown-preview-view {
+      background: white !important;
+      color: black !important;
+    }
+
+    /* No shadows or borders on print */
+    * {
+      box-shadow: none !important;
+    }
+
+    /* Keep accent colors for links */
+    a {
+      color: var(--accent-primary) !important;
+      text-decoration: underline !important;
+    }
+
+    /* Keep code block styling */
+    pre, code {
+      border: 1px solid oklch(0.870 0 0) !important;
+      background: oklch(0.970 0 0) !important;
+    }
+
+    /* Page break control */
+    h1, h2, h3 {
+      page-break-after: avoid;
+    }
+
+    pre, table, .callout {
+      page-break-inside: avoid;
+    }
+  }

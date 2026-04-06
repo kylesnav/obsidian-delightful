@@ -1,0 +1,326 @@
+/* ==========================================================================
+   plugins/dataview.css — Dataview Plugin Overrides
+   Scope: .dataview, .block-language-dataview, .block-language-dataviewjs
+   All rules in @layer component to respect DS cascade order.
+   ========================================================================== */
+
+
+  /* ========================================================================
+     1. TABLE OVERRIDES
+     Ensure Dataview-injected tables match DS table styling from 04-editor-rich
+     ======================================================================== */
+
+  /* Outer container wrap */
+  .block-language-dataview .table-wrapper,
+  .block-language-dataviewjs .table-wrapper {
+    border: 2px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    font-size: var(--ui-text-sm);
+    margin: var(--space-4) 0;
+    width: 100%;
+  }
+
+  /* Base table reset */
+  .dataview table,
+  .block-language-dataview table,
+  .block-language-dataviewjs table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-size: var(--ui-text-sm);
+    font-family: var(--font-sans);
+  }
+
+  /* Remove duplicate outer border when inside wrapper */
+  .block-language-dataview .table-wrapper > table,
+  .block-language-dataviewjs .table-wrapper > table {
+    border: none;
+    margin: 0;
+  }
+
+  /* Table header row */
+  .dataview thead th,
+  .block-language-dataview thead th,
+  .block-language-dataviewjs thead th {
+    background-color: var(--bg-subtle);
+    color: var(--text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--ui-text-2xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: var(--space-3) var(--space-4);
+    border-bottom: 2px solid var(--border-default);
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  /* Table cells */
+  .dataview td,
+  .block-language-dataview td,
+  .block-language-dataviewjs td {
+    padding: var(--space-3) var(--space-4);
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border-subtle);
+    vertical-align: top;
+    line-height: var(--leading-normal);
+  }
+
+  /* Remove border on last row */
+  .dataview tr:last-child td,
+  .block-language-dataview tr:last-child td,
+  .block-language-dataviewjs tr:last-child td {
+    border-bottom: none;
+  }
+
+  /* Row hover state */
+  .dataview tbody tr,
+  .block-language-dataview tbody tr,
+  .block-language-dataviewjs tbody tr {
+    transition: background-color var(--motion-fast) var(--ease-out);
+  }
+
+  .dataview tbody tr:hover,
+  .block-language-dataview tbody tr:hover,
+  .block-language-dataviewjs tbody tr:hover {
+    background-color: var(--bg-subtle);
+  }
+
+  /* Alternating row stripe */
+  .dataview tbody tr:nth-child(even),
+  .block-language-dataview tbody tr:nth-child(even),
+  .block-language-dataviewjs tbody tr:nth-child(even) {
+    background-color: var(--bg-surface);
+  }
+
+  .dataview tbody tr:nth-child(even):hover,
+  .block-language-dataview tbody tr:nth-child(even):hover,
+  .block-language-dataviewjs tbody tr:nth-child(even):hover {
+    background-color: var(--bg-subtle);
+  }
+
+  /* ========================================================================
+     2. INLINE FIELDS
+     .dataview-inline-field-key / .dataview-inline-field-value
+     ======================================================================== */
+
+  /* Inline field wrapper — flex row, gap */
+  .dataview-inline-field {
+    display: inline-flex;
+    align-items: baseline;
+    gap: var(--space-1-5);
+    flex-wrap: wrap;
+  }
+
+  /* Key: muted label */
+  .dataview-inline-field-key {
+    color: var(--text-muted);
+    font-size: var(--ui-text-xs);
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+
+  /* Value: badge treatment */
+  .dataview-inline-field-value {
+    display: inline-block;
+    background-color: var(--bg-surface);
+    border: 2px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    padding: var(--badge-py) var(--badge-px);
+    font-size: var(--ui-text-xs);
+    color: var(--text-secondary);
+    line-height: var(--leading-tight);
+    font-family: var(--font-sans);
+  }
+
+  /* ========================================================================
+     3. TASK CHECKBOXES
+     Ensure .dataview .task-list-item-checkbox inherits DS checkbox style
+     ======================================================================== */
+
+  .dataview .task-list-item-checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--border-default);
+    border-radius: 4px;
+    background: var(--bg-surface);
+    cursor: pointer;
+    flex-shrink: 0;
+    transition:
+      border-color var(--motion-fast) var(--ease-out),
+      background-color var(--motion-fast) var(--ease-out);
+    vertical-align: middle;
+    margin-right: var(--space-2);
+  }
+
+  .dataview .task-list-item-checkbox:checked {
+    background-color: var(--accent-primary);
+    border-color: var(--accent-primary);
+  }
+
+  .dataview .task-list-item-checkbox:hover {
+    border-color: var(--accent-primary);
+  }
+
+  /* Done task text */
+  .dataview .task-list-item.is-checked {
+    color: var(--text-muted);
+    text-decoration: line-through;
+  }
+
+  /* ========================================================================
+     4. QUERY ERRORS
+     ======================================================================== */
+
+  .dataview-error-box,
+  .block-language-dataview .dataview-error-box,
+  .block-language-dataviewjs .dataview-error-box {
+    color: var(--accent-danger-text);
+    background-color: var(--accent-danger-subtle);
+    border: 2px solid var(--accent-danger);
+    border-radius: var(--radius-md);
+    padding: var(--space-3) var(--space-4);
+    font-size: var(--ui-text-sm);
+    margin: var(--space-3) 0;
+  }
+
+  /* Inline error message text */
+  .dataview .dataview-error,
+  .block-language-dataview .dataview-error {
+    color: var(--accent-danger-text);
+    font-size: var(--ui-text-sm);
+  }
+
+  /* ========================================================================
+     5. RESULT COUNT / PAGER
+     ======================================================================== */
+
+  /* Result count text (e.g., "Showing X results") */
+  .dataview-result-count,
+  .block-language-dataview .result-count,
+  .block-language-dataviewjs .result-count {
+    color: var(--text-muted);
+    font-size: var(--ui-text-xs);
+    margin: var(--space-2) 0 var(--space-1);
+  }
+
+  /* Pager / pagination controls */
+  .dataview .dataview-paginaton,
+  .block-language-dataview .dataview-pagination,
+  .block-language-dataviewjs .dataview-pagination {
+    display: flex;
+    gap: var(--space-1);
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: var(--space-3);
+    color: var(--text-muted);
+    font-size: var(--ui-text-xs);
+  }
+
+  /* Pager button */
+  .dataview .dataview-pagination button,
+  .block-language-dataview .dataview-pagination button,
+  .block-language-dataviewjs .dataview-pagination button {
+    background: var(--bg-surface);
+    border: 2px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    font-size: var(--ui-text-xs);
+    padding: var(--badge-py) var(--badge-px);
+    cursor: pointer;
+    transition:
+      background-color var(--motion-fast) var(--ease-out),
+      border-color var(--motion-fast) var(--ease-out);
+  }
+
+  .dataview .dataview-pagination button:hover,
+  .block-language-dataview .dataview-pagination button:hover,
+  .block-language-dataviewjs .dataview-pagination button:hover {
+    background-color: var(--bg-subtle);
+    border-color: var(--border-default);
+  }
+
+  /* ========================================================================
+     6. LIST BULLETS
+     Override marker color for dataview list results
+     ======================================================================== */
+
+  .dataview ul,
+  .block-language-dataview ul,
+  .block-language-dataviewjs ul {
+    list-style: disc;
+    padding-left: var(--space-5);
+  }
+
+  .dataview ul li::marker,
+  .block-language-dataview ul li::marker,
+  .block-language-dataviewjs ul li::marker {
+    color: var(--accent-primary);
+  }
+
+  /* Nested list markers */
+  .dataview ul ul li::marker,
+  .block-language-dataview ul ul li::marker {
+    color: var(--accent-primary-text);
+  }
+
+  /* Ordered list numbers */
+  .dataview ol li::marker,
+  .block-language-dataview ol li::marker,
+  .block-language-dataviewjs ol li::marker {
+    color: var(--accent-primary);
+  }
+
+  /* ========================================================================
+     7. GENERAL DATAVIEW CONTAINER
+     ======================================================================== */
+
+  /* Query block container */
+  .block-language-dataview,
+  .block-language-dataviewjs {
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+  }
+
+  /* Dataview loading spinner area */
+  .dataview.small-text,
+  .block-language-dataview .dataview.small-text {
+    color: var(--text-muted);
+    font-size: var(--ui-text-xs);
+  }
+
+  /* Links inside dataview results */
+  .dataview a,
+  .block-language-dataview a,
+  .block-language-dataviewjs a {
+    color: var(--accent-primary);
+    text-decoration: none;
+  }
+
+  .dataview a:hover,
+  .block-language-dataview a:hover,
+  .block-language-dataviewjs a:hover {
+    color: var(--accent-primary-hover);
+    text-decoration: underline;
+  }
+
+  /* Tags inside dataview output */
+  .dataview .tag,
+  .block-language-dataview .tag,
+  .block-language-dataviewjs .tag {
+    display: inline-block;
+    background-color: var(--accent-primary-subtle);
+    border: 2px solid var(--accent-primary);
+    border-radius: var(--radius-sm);
+    padding: var(--badge-py) var(--badge-px);
+    font-size: var(--ui-text-2xs);
+    color: var(--accent-primary-text);
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+
