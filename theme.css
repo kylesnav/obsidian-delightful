@@ -3,7 +3,7 @@
  * @description A joyous, neo-brutalist theme built on the Delightful Design System.
  * @author Kyle Snavely
  * @version 0.7.0
- * @built 2026-04-05 18:52:01
+ * @built 2026-04-06 02:17:06
  */
 
 /* ==========================================================================
@@ -1881,10 +1881,11 @@ body {
      6. BACKLINKS + SEARCH RESULTS
      ======================================================================== */
 
-  /* Backlinks footer — spacing only, no visible divider */
+  /* Backlinks footer — clean break between note content and backlinks */
   .mod-footer {
     margin-top: var(--space-6);
     padding-top: var(--space-4);
+    border-top: 2px solid var(--border-subtle);
   }
 
   /* Backlink section headers — "Linked mentions", "Unlinked mentions" */
@@ -3679,35 +3680,7 @@ body {
     transform: translateY(-2px);
   }
 
-  /* Image embed container — strip the card treatment from .internal-embed */
-  .internal-embed.image-embed {
-    background: none;
-    border: none;
-    border-left: none;
-    box-shadow: none;
-    padding: 0;
-    border-radius: 0;
-    overflow: visible;
-    display: block;
-    margin: var(--space-4) 0;
-  }
-
-  .internal-embed.image-embed:hover {
-    transform: none;
-    box-shadow: none;
-    border-color: transparent;
-  }
-
-  .internal-embed.image-embed:active {
-    transform: none;
-  }
-
-  .internal-embed.image-embed img {
-    max-width: 100%;
-    height: auto;
-    border-radius: var(--radius-sm);
-  }
-
+  /* Image embed container */
   .image-embed {
     display: inline-block;
     margin: var(--space-2) 0;
@@ -4430,7 +4403,6 @@ body {
 
   /* ----- Text inputs ----- */
 
-  input:not([type]),
   input[type="text"],
   input[type="search"],
   input[type="email"],
@@ -4475,7 +4447,6 @@ body {
   }
 
   /* Focus state */
-  input:not([type]):focus,
   input[type="text"]:focus,
   input[type="search"]:focus,
   input[type="email"]:focus,
@@ -4486,35 +4457,6 @@ body {
     border-color: var(--accent-primary);
     box-shadow: 4px 4px 0 var(--accent-primary);
     outline: none;
-  }
-
-  /* ----- Search container inputs ----- */
-  /* Obsidian wraps search bars in .search-input-container which provides
-     the visual boundary — strip the DS treatment from the inner input */
-
-  .search-input-container {
-    display: flex;
-    align-items: center;
-    background: var(--bg-surface);
-    border: 2px solid var(--border-default);
-    border-radius: var(--radius-sm);
-    box-shadow: var(--shadow-sm);
-    transition:
-      border-color var(--motion-fast) var(--ease-out),
-      box-shadow   var(--motion-instant) linear;
-  }
-
-  .search-input-container input {
-    border: none !important;
-    box-shadow: none !important;
-    background: transparent !important;
-    outline: none !important;
-    padding-left: var(--space-8) !important;
-  }
-
-  .search-input-container:focus-within {
-    border-color: var(--accent-primary);
-    box-shadow: 4px 4px 0 var(--accent-primary);
   }
 
   /* Placeholder */
@@ -4561,9 +4503,68 @@ body {
     outline: none;
   }
 
-  /* ----- Toggle — Obsidian default with DS accent color ----- */
+  /* ----- Toggle (CRITICAL — replace Obsidian default) ----- */
+  /* body prefix for specificity over Obsidian's app.css */
+
+  body .checkbox-container {
+    width: 40px;
+    height: 22px;
+    border-radius: var(--radius-full);
+    background: var(--toggle-off-bg);
+    border: 2px solid var(--border-default);
+    position: relative;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background var(--motion-fast) var(--ease-bounce),
+                border-color var(--motion-fast) var(--ease-bounce);
+    /* Remove any Obsidian default positioning */
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  /* ON state — uses toggle token so accent swaps propagate */
   body .checkbox-container.is-enabled {
-    background-color: var(--toggle-on-bg) !important;
+    background: var(--toggle-on-bg);
+    border-color: var(--toggle-on-bg);
+  }
+
+  /* Knob */
+  body .checkbox-container::after {
+    content: '';
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--toggle-knob);
+    top: 2px;
+    left: 2px;
+    box-shadow: 0 1px 3px var(--background-modifier-box-shadow);
+    transition: transform var(--motion-fast) var(--ease-spring-gentle);
+  }
+
+  body .checkbox-container.is-enabled::after {
+    transform: translateX(18px);
+  }
+
+  /* Toggle squeeze on click */
+  body .checkbox-container:active {
+    transform: scale(0.9);
+  }
+
+  /* Remove Obsidian's own ::before knob */
+  body .checkbox-container::before {
+    display: none;
+  }
+
+  /* Obsidian toggle input (the hidden real checkbox) */
+  .checkbox-container input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    pointer-events: none;
   }
 
   /* ----- Checkbox ----- */
@@ -5349,7 +5350,6 @@ settings:
   body.border-subtle .graph-controls,
   body.border-subtle .graph-control-section,
   body.border-subtle button,
-  body.border-subtle input:not([type]),
   body.border-subtle input[type="text"],
   body.border-subtle input[type="search"],
   body.border-subtle select,
@@ -6080,6 +6080,7 @@ settings:
     border: 2px solid var(--border-default);
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-sm);
+    overflow: hidden;
     color: var(--text-primary);
   }
 
@@ -6105,11 +6106,6 @@ settings:
   .graph-controls-button:hover {
     background: var(--accent-primary-subtle);
     color: var(--accent-primary);
-  }
-
-  /* Hide close button when graph controls are collapsed */
-  .graph-controls.is-close .graph-controls-button.mod-close {
-    display: none;
   }
 
   /* ========================================================================

@@ -1,0 +1,635 @@
+/* ==========================================================================
+   02-typography.css — Content Typography
+   Headings · Body · Blockquotes · Lists · Links · Inline Code · HR
+   ========================================================================== */
+
+  /* ========================================================================
+     0. GLOBAL FONT RENDERING
+     ======================================================================== */
+
+  /* Crisp text rendering across all surfaces */
+  .app-container {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Smooth scrolling for all scrollable containers */
+  .markdown-preview-view,
+  .cm-scroller,
+  .nav-files-container,
+  .vertical-tab-content {
+    scroll-behavior: smooth;
+  }
+
+  /* ========================================================================
+     1. HEADINGS — H1–H6
+     Sizes/weights/line-heights are set as Obsidian vars in 01-obsidian-vars.css.
+     Here we layer on spacing, letter-spacing, and color.
+     ======================================================================== */
+
+  /* --- Shared heading base --- */
+  .markdown-rendered h1,
+  .markdown-rendered h2,
+  .markdown-rendered h3,
+  .markdown-rendered h4,
+  .markdown-rendered h5,
+  .markdown-rendered h6,
+  .cm-header-1,
+  .cm-header-2,
+  .cm-header-3,
+  .cm-header-4,
+  .cm-header-5,
+  .cm-header-6 {
+    font-family: var(--font-sans);
+    margin-top: var(--space-6);   /* section spacing above headings */
+    margin-bottom: var(--space-3);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* First heading in content — no top margin */
+  .markdown-rendered > h1:first-child,
+  .markdown-rendered > h2:first-child,
+  .markdown-rendered > h3:first-child,
+  .cm-contentContainer > .cm-line:first-child {
+    margin-top: 0;
+  }
+
+  /* --- H1 --- */
+  .markdown-rendered h1,
+  .cm-header-1 {
+    font-size: var(--h1-size);
+    font-weight: var(--h1-weight);
+    line-height: var(--h1-line-height);
+    letter-spacing: var(--tracking-tighter);  /* -0.03em */
+    color: var(--text-primary);
+  }
+
+  /* --- H2 --- */
+  .markdown-rendered h2,
+  .cm-header-2 {
+    font-size: var(--h2-size);
+    font-weight: var(--h2-weight);
+    line-height: var(--h2-line-height);
+    letter-spacing: var(--tracking-tighter);  /* -0.03em */
+    color: var(--text-primary);
+  }
+
+  /* --- H3 --- */
+  .markdown-rendered h3,
+  .cm-header-3 {
+    font-size: var(--h3-size);
+    font-weight: var(--h3-weight);
+    line-height: var(--h3-line-height);
+    letter-spacing: var(--tracking-tight);  /* -0.02em */
+    color: var(--text-primary);
+  }
+
+  /* --- H4 --- */
+  .markdown-rendered h4,
+  .cm-header-4 {
+    font-size: var(--h4-size);
+    font-weight: var(--h4-weight);
+    line-height: var(--h4-line-height);
+    letter-spacing: var(--tracking-tight);  /* -0.02em */
+    color: var(--text-primary);
+  }
+
+  /* --- H5 --- */
+  .markdown-rendered h5,
+  .cm-header-5 {
+    font-size: var(--h5-size);
+    font-weight: var(--h5-weight);
+    line-height: var(--h5-line-height);
+    letter-spacing: normal;
+    color: var(--text-secondary);
+  }
+
+  /* --- H6 --- */
+  .markdown-rendered h6,
+  .cm-header-6 {
+    font-size: var(--h6-size);
+    font-weight: var(--h6-weight);
+    line-height: var(--h6-line-height);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  /* ========================================================================
+     2. INLINE TITLE
+     The note's editable title displayed above content.
+     ======================================================================== */
+
+  .inline-title {
+    font-family: var(--font-sans);
+    font-size: var(--inline-title-size);   /* 2.488em — set in Obsidian vars */
+    font-weight: var(--inline-title-weight);
+    letter-spacing: var(--tracking-tighter);
+    line-height: var(--leading-tight);
+    color: var(--inline-title-color);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* ========================================================================
+     3. BODY TEXT
+     ======================================================================== */
+
+  /* Reading text size — override Obsidian's scaled --font-text-size
+     to decouple reading text from baseFontSize (which also controls
+     sidebar/interface). Target the view containers directly. */
+  body .markdown-preview-view {
+    font-size: var(--delightful-text-size, 14px);
+  }
+
+  body .markdown-source-view .cm-content {
+    font-size: var(--delightful-text-size, 14px);
+  }
+
+  /* Base reading/source container body text */
+  .markdown-rendered,
+  .markdown-source-view .cm-content {
+    line-height: var(--leading-normal);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+  }
+
+  /* Paragraphs — no top margin by default, controlled by cascade */
+  body .markdown-rendered p {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  /* Paragraph spacing — gap between consecutive paragraphs.
+     Obsidian wraps each <p> in <div class="el-p">, so p+p never
+     matches. Target the wrapper divs for the adjacent sibling gap. */
+  body .markdown-rendered .el-p + .el-p {
+    margin-top: var(--p-spacing);
+  }
+
+  /* Fallback for contexts without .el-p wrappers (e.g. embeds) */
+  body .markdown-rendered p + p {
+    margin-top: var(--p-spacing);
+  }
+
+  /* ========================================================================
+     4. STRONG · EM · MARK · DEL
+     ======================================================================== */
+
+  .markdown-rendered strong,
+  .cm-strong {
+    font-weight: 700;
+    color: var(--bold-color);
+  }
+
+  .markdown-rendered em,
+  .cm-em {
+    font-style: italic;
+    color: var(--italic-color);
+  }
+
+  /* Highlight / mark — gold wash */
+  .markdown-rendered mark,
+  mark {
+    background-color: var(--accent-gold-subtle);
+    color: inherit;
+    padding: 0.1em 0.2em;
+    border-radius: 4px;
+    /* Don't inherit mix-blend-mode from Obsidian defaults */
+    mix-blend-mode: normal;
+  }
+
+  /* Strikethrough */
+  .markdown-rendered del,
+  .markdown-rendered s,
+  .cm-strikethrough {
+    color: var(--text-muted);
+    text-decoration: line-through;
+  }
+
+  /* ========================================================================
+     5. BLOCKQUOTES
+     Left-bordered callout style — ivory background, italic content.
+     ======================================================================== */
+
+  .markdown-rendered blockquote {
+    border-left: 4px solid var(--blockquote-border-color);
+    background-color: var(--bg-subtle);
+    padding: var(--space-3) var(--space-5);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    margin: var(--space-4) 0;
+    color: var(--blockquote-color);
+    font-style: italic;
+  }
+
+  /* Remove double-border if Obsidian applies its own border */
+  .markdown-rendered blockquote::before {
+    display: none;
+  }
+
+  /* Nested blockquotes — tighter indent */
+  .markdown-rendered blockquote blockquote {
+    margin-left: var(--space-4);
+    border-left-color: var(--accent-cyan);
+  }
+
+  /* ========================================================================
+     6. LISTS — Ordered, Unordered, Task
+     ======================================================================== */
+
+  /* Unordered list — tight above (connect to heading), spacious below */
+  .markdown-rendered ul {
+    padding-left: var(--space-6);
+    margin: var(--space-1) 0 var(--space-4);
+  }
+
+  /* Ordered list */
+  .markdown-rendered ol {
+    padding-left: var(--space-6);
+    margin: var(--space-1) 0 var(--space-4);
+  }
+
+  /* List items — snug line-height for scannable lists */
+  .markdown-rendered li {
+    margin-bottom: 2px;
+    line-height: var(--leading-snug);   /* 1.3 — tighter than prose (1.55) */
+    color: var(--text-primary);
+  }
+
+  /* Marker color — accent pink bullet/number */
+  body .markdown-rendered ul li::marker,
+  body .markdown-rendered ol li::marker,
+  body .markdown-rendered li::marker {
+    color: var(--accent-primary) !important;
+  }
+
+  /* Nested list indentation — generous for clear hierarchy */
+  .markdown-rendered ul ul,
+  .markdown-rendered ol ol,
+  .markdown-rendered ul ol,
+  .markdown-rendered ol ul {
+    margin-top: var(--space-1);
+    margin-bottom: 0;
+    padding-left: var(--space-6);
+  }
+
+  /* ---- Task list items ---- */
+
+  /* Task list container — position-based layout so nested block
+     content (code blocks, blockquotes) flows full-width below text */
+  .markdown-rendered .task-list-item {
+    list-style: none;
+    position: relative;
+    padding-left: 24px;
+    margin-bottom: var(--space-1);  /* 4px — scannable but not cramped */
+    line-height: var(--leading-snug);
+  }
+
+  /* Remove default ::marker on task items */
+  .markdown-rendered .task-list-item::marker {
+    color: transparent;
+    content: '';
+  }
+
+  /* Checkbox — warm, tactile, DS-styled */
+  .markdown-rendered .task-list-item-checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    min-width: 18px;
+    border: 2px solid var(--border-subtle);
+    border-radius: 5px;
+    background-color: var(--bg-surface);
+    cursor: pointer;
+    position: absolute;
+    left: 0;
+    top: 4px;  /* optical alignment with text baseline */
+    transition:
+      background-color var(--motion-fast) var(--ease-out),
+      border-color     var(--motion-fast) var(--ease-out),
+      box-shadow       var(--motion-fast) var(--ease-out),
+      transform        var(--motion-instant) linear;
+  }
+
+  /* Checked state — filled with accent + white checkmark SVG */
+  .markdown-rendered .task-list-item-checkbox:checked {
+    background-color: var(--accent-primary);
+    border-color: var(--accent-primary);
+    box-shadow: 2px 2px 0 var(--accent-primary-subtle);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23ffffff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' d='M3 8l3.5 3.5L13 4.5'/%3E%3C/svg%3E");
+    background-size: 12px 12px;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  /* Checked task item text — muted */
+  .markdown-rendered .task-list-item[data-task="x"] > span,
+  .markdown-rendered .task-list-item[data-task="X"] > span {
+    color: var(--text-muted);
+    text-decoration: line-through;
+  }
+
+  /* Hover state — warm accent preview */
+  .markdown-rendered .task-list-item-checkbox:hover:not(:checked) {
+    border-color: var(--accent-primary);
+    background-color: var(--accent-primary-subtle);
+    box-shadow: 2px 2px 0 var(--accent-primary-subtle);
+  }
+
+  /* Click squeeze — satisfying tactile feedback */
+  .markdown-rendered .task-list-item-checkbox:active {
+    transform: scale(0.88);
+  }
+
+  /* Block content inside tasks — breathing room around code blocks,
+     blockquotes, and other block elements nested in task items */
+  .markdown-rendered .task-list-item pre,
+  .markdown-rendered .task-list-item blockquote,
+  .markdown-rendered .task-list-item .callout {
+    margin-top: var(--space-3);   /* 12px above block */
+    margin-bottom: var(--space-4); /* 16px below block — generous before next item */
+  }
+
+  /* ========================================================================
+     7. LINKS — Internal, External, Unresolved
+     Underline style: bottom-border (not text-decoration) for DS crispness.
+     ======================================================================== */
+
+  /* --- Internal links (wikilinks [[...]]) --- */
+  .markdown-rendered a.internal-link {
+    color: var(--accent-primary);
+    font-weight: 550;
+    text-decoration: none;
+    border-bottom: 2px solid var(--accent-primary-subtle);
+    transition:
+      border-color var(--motion-fast) var(--ease-out),
+      color        var(--motion-fast) var(--ease-out);
+  }
+
+  .markdown-rendered a.internal-link:hover {
+    border-bottom-color: var(--accent-primary);
+    color: var(--accent-primary-hover);
+  }
+
+  /* --- External links --- */
+  .markdown-rendered a.external-link {
+    color: var(--accent-cyan);
+    text-decoration: none;
+    border-bottom: 2px solid var(--accent-cyan-subtle);
+    transition:
+      border-color var(--motion-fast) var(--ease-out),
+      color        var(--motion-fast) var(--ease-out);
+  }
+
+  .markdown-rendered a.external-link:hover {
+    border-bottom-color: var(--accent-cyan);
+    color: var(--accent-cyan-hover);
+  }
+
+  /* --- Unresolved links (no matching note found) --- */
+  .markdown-rendered a.internal-link.is-unresolved {
+    color: var(--text-muted);
+    opacity: 0.7;
+    border-bottom-color: transparent;
+    font-weight: 400;
+  }
+
+  .markdown-rendered a.internal-link.is-unresolved:hover {
+    opacity: 0.9;
+  }
+
+  /* ========================================================================
+     8. INLINE CODE — defined in 04-editor-rich.css
+     ======================================================================== */
+
+  /* ========================================================================
+     9. HORIZONTAL RULE
+     ======================================================================== */
+
+  .markdown-rendered hr {
+    border: none;
+    border-top: 2px solid var(--border-subtle);
+    margin: var(--space-6) 0;
+  }
+
+  /* ========================================================================
+     10. FOOTNOTES
+     Smaller, muted reference text at bottom of notes.
+     ======================================================================== */
+
+  .markdown-rendered .footnotes {
+    color: var(--text-muted);
+    font-size: 0.875em;
+    margin-top: var(--space-8);
+    padding-top: var(--space-4);
+    border-top: 2px solid var(--border-subtle);
+  }
+
+  .markdown-rendered .footnotes ol {
+    padding-left: var(--space-5);
+  }
+
+  .markdown-rendered .footnotes li {
+    color: var(--text-muted);
+    margin-bottom: var(--space-1-5);
+  }
+
+  /* Footnote back-reference link */
+  .markdown-rendered .footnotes a {
+    color: var(--text-muted);
+    border-bottom-color: transparent;
+  }
+
+  /* Footnote superscript in body */
+  .markdown-rendered sup a,
+  .markdown-rendered .footnote-ref a {
+    color: var(--accent-primary-text);
+    font-size: 0.75em;
+    text-decoration: none;
+    border-bottom: none;
+  }
+
+  /* ========================================================================
+     11. TABLES
+     Defined in 04-editor-rich.css with DS card treatment and border-radius.
+     ======================================================================== */
+
+  /* ========================================================================
+     12. TAGS
+     Pill-shaped, accent-tinted.
+     ======================================================================== */
+
+  .markdown-rendered .tag,
+  a.tag {
+    display: inline-flex;
+    align-items: center;
+    background-color: var(--tag-background);
+    color: var(--tag-color);
+    border-radius: var(--tag-radius);
+    font-size: var(--ui-text-xs);
+    font-weight: 550;
+    padding: var(--tag-padding-y) var(--tag-padding-x);
+    text-decoration: none;
+    border: none;
+    transition:
+      background-color var(--motion-fast) var(--ease-out),
+      color            var(--motion-fast) var(--ease-out);
+    font-family: var(--font-sans);
+  }
+
+  .markdown-rendered .tag:hover,
+  a.tag:hover {
+    background-color: var(--tag-background-hover);
+    color: var(--tag-color-hover);
+  }
+
+
+  /* ========================================================================
+     11. KEYBOARD SHORTCUTS (kbd) + DEFINITION LISTS
+     ======================================================================== */
+
+  /* Keyboard shortcut keys — DS pill treatment */
+  .markdown-rendered kbd,
+  kbd {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 6px;
+    font-family: var(--font-mono);
+    font-size: var(--ui-text-xs);
+    font-weight: 500;
+    color: var(--text-secondary);
+    background: var(--bg-subtle);
+    border: 1px solid var(--border-subtle);
+    border-bottom-width: 2px;
+    border-radius: 4px;
+    line-height: 1.4;
+    white-space: nowrap;
+    box-shadow: 0 1px 0 var(--border-subtle);
+  }
+
+  /* Definition lists */
+  .markdown-rendered dl {
+    margin: var(--space-4) 0;
+  }
+
+  .markdown-rendered dt {
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-top: var(--space-3);
+  }
+
+  .markdown-rendered dd {
+    margin-left: var(--space-6);
+    color: var(--text-secondary);
+    line-height: var(--leading-normal);
+    margin-bottom: var(--space-2);
+  }
+
+  /* Abbreviations — dotted underline */
+  .markdown-rendered abbr {
+    text-decoration: underline dotted var(--border-subtle);
+    text-underline-offset: 2px;
+    cursor: help;
+  }
+
+  /* ========================================================================
+     12. COLLAPSIBLE SECTIONS (<details> / <summary>)
+     ======================================================================== */
+
+  .markdown-rendered details {
+    background: var(--bg-surface);
+    border: 2px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    margin: var(--space-4) 0;
+    overflow: hidden;
+  }
+
+  .markdown-rendered summary {
+    padding: var(--space-3) var(--space-4);
+    font-weight: 600;
+    cursor: pointer;
+    color: var(--text-primary);
+    transition:
+      background-color var(--motion-fast) var(--ease-out),
+      color            var(--motion-fast) var(--ease-out);
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  /* Custom disclosure triangle */
+  .markdown-rendered summary::before {
+    content: '▸';
+    color: var(--accent-primary);
+    font-size: 0.8em;
+    transition: transform var(--motion-instant) linear;
+    flex-shrink: 0;
+  }
+
+  .markdown-rendered details[open] summary::before {
+    transform: rotate(90deg);
+  }
+
+  /* Remove default marker */
+  .markdown-rendered summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .markdown-rendered summary:hover {
+    background-color: var(--bg-subtle);
+  }
+
+  /* Content area */
+  .markdown-rendered details > *:not(summary) {
+    padding: 0 var(--space-4);
+  }
+
+  .markdown-rendered details > *:last-child {
+    padding-bottom: var(--space-4);
+  }
+
+  /* ========================================================================
+     13. FIGURES + CAPTIONS + CITATIONS
+     ======================================================================== */
+
+  /* Figure container — centered with margin */
+  .markdown-rendered figure {
+    margin: var(--space-6) 0;
+    text-align: center;
+  }
+
+  .markdown-rendered figure img {
+    margin-bottom: var(--space-2);
+  }
+
+  /* Figure caption — muted, italic, centered */
+  .markdown-rendered figcaption {
+    font-size: var(--ui-text-sm);
+    color: var(--text-muted);
+    font-style: italic;
+    line-height: var(--leading-normal);
+    text-align: center;
+  }
+
+  /* Citation element */
+  .markdown-rendered cite {
+    font-style: italic;
+    color: var(--text-secondary);
+  }
+
+  /* Superscript / subscript */
+  .markdown-rendered sup {
+    font-size: 0.75em;
+    vertical-align: super;
+    line-height: 0;
+  }
+
+  .markdown-rendered sub {
+    font-size: 0.75em;
+    vertical-align: sub;
+    line-height: 0;
+  }

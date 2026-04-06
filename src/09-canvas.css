@@ -1,0 +1,419 @@
+/* ==========================================================================
+   09-canvas.css — Canvas View
+   Node containers · Edges · Controls · Color-coded nodes ·
+   Hover states · Selection states
+   ========================================================================== */
+
+
+  /* ========================================================================
+     1. CANVAS BACKGROUND
+     ======================================================================== */
+
+  .canvas {
+    background-color: var(--bg-page);
+  }
+
+  /* Canvas dot-grid pattern inherits from Obsidian's default;
+     we only override the background color above. */
+
+  /* ========================================================================
+     2. CANVAS NODE — BASE
+     ======================================================================== */
+
+  .canvas-node-container {
+    border-radius: var(--radius-md);
+    transition:
+      transform    var(--motion-fast) var(--ease-out),
+      box-shadow   var(--motion-fast) var(--ease-out);
+  }
+
+  .canvas-node-content {
+    background: var(--bg-elevated);
+    border: 2px solid var(--border-default);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    color: var(--text-primary);
+  }
+
+  /* Node resize handles */
+  .canvas-node-resize-handle {
+    background: var(--accent-primary);
+    border-radius: var(--radius-full);
+    opacity: 0;
+    transition: opacity var(--motion-fast) var(--ease-out);
+  }
+
+  .canvas-node:hover .canvas-node-resize-handle,
+  .canvas-node.is-selected .canvas-node-resize-handle {
+    opacity: 1;
+  }
+
+  /* ========================================================================
+     3. CANVAS NODE — HOVER STATE
+     ======================================================================== */
+
+  .canvas-node-container:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .canvas-node:hover .canvas-node-content {
+    border-color: var(--border-strong);
+    box-shadow: var(--shadow-md);
+  }
+
+  /* ========================================================================
+     4. CANVAS NODE — SELECTED STATE
+     ======================================================================== */
+
+  .canvas-node.is-selected .canvas-node-content {
+    border-color: var(--accent-primary);
+    box-shadow: var(--shadow-md);
+    outline: none;
+  }
+
+  .canvas-node.is-selected .canvas-node-container {
+    transform: translateY(-2px);
+  }
+
+  /* ========================================================================
+     5. CANVAS NODE — COLOR VARIANTS
+     Obsidian's canvas node colors 1–6. Mapped to DS accent palette.
+     ======================================================================== */
+
+  /* Color 1 — Danger / Red */
+  .canvas-node[data-color="1"] .canvas-node-content {
+    border-color: var(--accent-danger);
+    box-shadow: 2px 2px 0 var(--accent-danger);
+    background: var(--accent-danger-subtle);
+  }
+
+  .canvas-node[data-color="1"] .canvas-node-content:hover,
+  .canvas-node[data-color="1"].is-selected .canvas-node-content {
+    box-shadow: 4px 4px 0 var(--accent-danger);
+  }
+
+  /* Color 2 — Gold / Orange */
+  .canvas-node[data-color="2"] .canvas-node-content {
+    border-color: var(--accent-gold);
+    box-shadow: 2px 2px 0 var(--accent-gold);
+    background: var(--accent-gold-subtle);
+  }
+
+  .canvas-node[data-color="2"] .canvas-node-content:hover,
+  .canvas-node[data-color="2"].is-selected .canvas-node-content {
+    box-shadow: 4px 4px 0 var(--accent-gold);
+  }
+
+  /* Color 3 — Green */
+  .canvas-node[data-color="3"] .canvas-node-content {
+    border-color: var(--accent-green);
+    box-shadow: 2px 2px 0 var(--accent-green);
+    background: var(--accent-green-subtle);
+  }
+
+  .canvas-node[data-color="3"] .canvas-node-content:hover,
+  .canvas-node[data-color="3"].is-selected .canvas-node-content {
+    box-shadow: 4px 4px 0 var(--accent-green);
+  }
+
+  /* Color 4 — Cyan */
+  .canvas-node[data-color="4"] .canvas-node-content {
+    border-color: var(--accent-cyan);
+    box-shadow: 2px 2px 0 var(--accent-cyan);
+    background: var(--accent-cyan-subtle);
+  }
+
+  .canvas-node[data-color="4"] .canvas-node-content:hover,
+  .canvas-node[data-color="4"].is-selected .canvas-node-content {
+    box-shadow: 4px 4px 0 var(--accent-cyan);
+  }
+
+  /* Color 5 — Purple */
+  .canvas-node[data-color="5"] .canvas-node-content {
+    border-color: var(--accent-purple);
+    box-shadow: 2px 2px 0 var(--accent-purple);
+    background: var(--accent-purple-subtle);
+  }
+
+  .canvas-node[data-color="5"] .canvas-node-content:hover,
+  .canvas-node[data-color="5"].is-selected .canvas-node-content {
+    box-shadow: 4px 4px 0 var(--accent-purple);
+  }
+
+  /* Color 6 — Primary / Pink */
+  .canvas-node[data-color="6"] .canvas-node-content {
+    border-color: var(--accent-primary);
+    box-shadow: 2px 2px 0 var(--accent-primary);
+    background: var(--accent-primary-subtle);
+  }
+
+  .canvas-node[data-color="6"] .canvas-node-content:hover,
+  .canvas-node[data-color="6"].is-selected .canvas-node-content {
+    box-shadow: 4px 4px 0 var(--accent-primary);
+  }
+
+  /* ========================================================================
+     6. CANVAS NODE — LABEL / TITLE BAR
+     ======================================================================== */
+
+  .canvas-node-label {
+    font-family: var(--font-sans);
+    font-size: var(--ui-text-sm);
+    font-weight: 600;
+    color: var(--text-primary);
+    padding: var(--space-2) var(--space-3);
+    border-bottom: 2px solid var(--border-subtle);
+    background: var(--bg-subtle);
+    user-select: none;
+  }
+
+  /* File node heading */
+  .canvas-node-file .canvas-node-content > .markdown-embed-title {
+    font-family: var(--font-sans);
+    font-size: var(--ui-text-md);
+    font-weight: 700;
+    color: var(--text-primary);
+    padding: var(--space-3) var(--space-4) var(--space-2);
+    border-bottom: 2px solid var(--border-subtle);
+    background: var(--bg-subtle);
+  }
+
+  /* ========================================================================
+     7. CANVAS NODE — TEXT NODE
+     ======================================================================== */
+
+  .canvas-node-text .canvas-node-content {
+    padding: var(--space-4);
+  }
+
+  /* Markdown content inside a canvas text node */
+  .canvas-node-text .markdown-embed-content {
+    padding: var(--space-4);
+    font-size: var(--ui-text-md);
+    line-height: var(--leading-relaxed);
+    color: var(--text-primary);
+  }
+
+  /* ========================================================================
+     8. CANVAS NODE — FILE / EMBED NODE
+     ======================================================================== */
+
+  .canvas-node-file .markdown-embed-content {
+    padding: var(--space-4) var(--space-5);
+    max-height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  /* Link node styling */
+  .canvas-node-link .canvas-node-content {
+    background: var(--bg-subtle);
+  }
+
+  .canvas-node-link .canvas-link-url {
+    font-size: var(--ui-text-xs);
+    color: var(--text-muted);
+    padding: var(--space-2) var(--space-3);
+    border-top: 1px solid var(--border-subtle);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* ========================================================================
+     9. CANVAS NODE — GROUP
+     Group nodes use a background tint with labeled heading.
+     ======================================================================== */
+
+  .canvas-node-group .canvas-node-content {
+    background: var(--bg-subtle);
+    border-style: dashed;
+    border-color: var(--border-subtle);
+    box-shadow: none;
+  }
+
+  .canvas-node-group:hover .canvas-node-content {
+    border-style: solid;
+    border-color: var(--border-default);
+  }
+
+  .canvas-node-group.is-selected .canvas-node-content {
+    border-style: solid;
+    border-color: var(--accent-primary);
+  }
+
+  /* Group label */
+  .canvas-node-group .canvas-node-label {
+    background: transparent;
+    border-bottom: none;
+    font-size: var(--ui-text-sm);
+    color: var(--text-muted);
+    padding: var(--space-3) var(--space-4);
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  /* ========================================================================
+     10. CANVAS EDGES
+     Edges are SVG — CSS only sets stroke color/width via Obsidian's
+     --canvas-edge-color and --canvas-edge-color-focused CSS vars.
+     ======================================================================== */
+
+  .canvas {
+    --canvas-edge-color:         var(--border-subtle);
+    --canvas-edge-color-focused: var(--accent-primary);
+    --canvas-edge-width:         2px;
+  }
+
+  /* Edge SVG path — Obsidian renders these as inline SVG */
+  .canvas-edge path.canvas-edge-path {
+    stroke: var(--canvas-edge-color);
+    stroke-width: var(--canvas-edge-width);
+  }
+
+  .canvas-edge.is-selected path.canvas-edge-path,
+  .canvas-edge:hover path.canvas-edge-path {
+    stroke: var(--canvas-edge-color-focused);
+  }
+
+  /* Edge arrowhead */
+  .canvas-edge path.canvas-edge-arrow {
+    fill: var(--canvas-edge-color);
+  }
+
+  .canvas-edge.is-selected path.canvas-edge-arrow,
+  .canvas-edge:hover path.canvas-edge-arrow {
+    fill: var(--canvas-edge-color-focused);
+  }
+
+  /* Edge label */
+  .canvas-edge-label {
+    font-family: var(--font-sans);
+    font-size: var(--ui-text-xs);
+    color: var(--text-secondary);
+    background: var(--bg-elevated);
+    border: 2px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    padding: var(--space-1) var(--space-2);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .canvas-edge.is-selected .canvas-edge-label {
+    border-color: var(--accent-primary);
+    color: var(--text-primary);
+  }
+
+  /* ========================================================================
+     11. CANVAS CONTROLS TOOLBAR
+     Zoom in/out · Fit view · Reset · New node buttons
+     ======================================================================== */
+
+  .canvas-controls {
+    background: var(--bg-elevated);
+    border: 2px solid var(--border-default);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    padding: var(--space-1-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  /* Individual control buttons */
+  .canvas-controls button,
+  .canvas-controls .clickable-icon {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition:
+      background-color var(--motion-fast) var(--ease-out),
+      color            var(--motion-fast) var(--ease-out);
+  }
+
+  .canvas-controls button:hover,
+  .canvas-controls .clickable-icon:hover {
+    background-color: var(--bg-subtle);
+    color: var(--text-primary);
+  }
+
+  .canvas-controls button:active,
+  .canvas-controls .clickable-icon:active {
+    background-color: var(--accent-primary-subtle);
+    color: var(--accent-primary);
+  }
+
+  /* Separator between control groups */
+  .canvas-controls .canvas-controls-group + .canvas-controls-group {
+    border-top: 2px solid var(--border-subtle);
+    padding-top: var(--space-1);
+    margin-top: var(--space-1);
+  }
+
+  /* ========================================================================
+     12. CANVAS MENU / CONTEXT ACTIONS
+     ======================================================================== */
+
+  /* New node type picker */
+  .canvas-menu {
+    background: var(--bg-elevated);
+    border: 2px solid var(--border-default);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    padding: var(--space-1-5);
+    display: flex;
+    gap: var(--space-1);
+  }
+
+  .canvas-menu button {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition:
+      background-color var(--motion-fast) var(--ease-out),
+      color            var(--motion-fast) var(--ease-out);
+  }
+
+  .canvas-menu button:hover {
+    background-color: var(--accent-primary-subtle);
+    color: var(--accent-primary);
+  }
+
+  /* ========================================================================
+     13. CANVAS SELECTION MARQUEE
+     ======================================================================== */
+
+  .canvas-selection {
+    background: var(--accent-primary-subtle);
+    border: 2px solid var(--accent-primary);
+    border-radius: var(--radius-sm);
+    pointer-events: none;
+  }
+
+  /* ========================================================================
+     14. CANVAS EMPTY STATE
+     ======================================================================== */
+
+  .canvas-placeholder {
+    color: var(--text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--ui-text-md);
+    text-align: center;
+  }
+

@@ -1,0 +1,470 @@
+/* ==========================================================================
+   01-obsidian-vars.css — Obsidian CSS variable bridge
+   Maps ~250 Obsidian native CSS vars to Delightful Design System tokens.
+   All in @layer semantic. Use var() to DS tokens wherever possible.
+   Raw OKLCH values only for shims that have no DS token equivalent.
+   ========================================================================== */
+
+
+  /* ========================================================================
+     LIGHT MODE
+     ======================================================================== */
+
+  :root,
+  .theme-light {
+
+    /* --- Obsidian legacy shims (required for internal Obsidian rendering) --- */
+    --highlight-mix-blend-mode: darken;
+    --mono-rgb-0:   255, 255, 255;
+    --mono-rgb-100: 0, 0, 0;
+
+    /* Obsidian HSL accent decomposition shim */
+    --accent-h: 340;
+    --accent-s: 65%;
+    --accent-l: 55%;
+    --interactive-accent-hsl: var(--accent-h), var(--accent-s), var(--accent-l);
+
+    /* RGB triplets — used by Obsidian internal callout/canvas systems */
+    --color-red-rgb:    180, 70, 60;
+    --color-orange-rgb: 190, 120, 40;
+    --color-yellow-rgb: 200, 170, 40;
+    --color-green-rgb:  40, 175, 85;
+    --color-cyan-rgb:   50, 155, 170;
+    --color-blue-rgb:   70, 85, 200;
+    --color-purple-rgb: 135, 65, 185;
+    --color-pink-rgb:   185, 70, 130;
+
+    /* --- Color base scale — maps to DS bg/neutral hierarchy --- */
+    --color-base-00:  var(--bg-page);                    /* oklch(0.982 0.008 70) */
+    --color-base-05:  var(--primitive-neutral-25);       /* oklch(0.988 0.006 70) */
+    --color-base-10:  var(--bg-surface);                 /* oklch(0.995 0.004 70) */
+    --color-base-20:  var(--bg-subtle);                  /* oklch(0.965 0.012 70) */
+    --color-base-25:  var(--bg-elevated);                /* oklch(1.000 0.000 0)  */
+    --color-base-30:  var(--bg-muted);                   /* oklch(0.948 0.014 70) */
+    --color-base-35:  var(--primitive-neutral-200);      /* oklch(0.920 0.012 70) */
+    --color-base-40:  var(--border-subtle);              /* oklch(0.820 0.015 70) */
+    --color-base-50:  var(--primitive-neutral-400);      /* oklch(0.750 0.014 70) */
+    --color-base-60:  var(--text-muted);                 /* oklch(0.560 0.012 60) */
+    --color-base-70:  var(--text-secondary);             /* oklch(0.420 0.015 60) */
+    --color-base-100: var(--text-primary);               /* oklch(0.200 0.015 60) */
+
+    /* --- Extended color palette --- */
+    --color-red:    var(--accent-danger);
+    --color-orange: oklch(0.720 0.150 55);
+    --color-yellow: var(--accent-gold);
+    --color-green:  var(--accent-green);
+    --color-cyan:   var(--accent-cyan);
+    --color-blue:   oklch(0.640 0.180 260);
+    --color-purple: var(--accent-purple);
+    --color-pink:   var(--accent-primary);
+
+    /* --- Accent --- */
+    --color-accent:       var(--accent-primary);
+    --color-accent-hover: var(--accent-primary-hover);
+    --color-accent-1:     var(--accent-primary);
+    --color-accent-2:     var(--accent-primary-hover);
+
+    /* --- Background modifiers --- */
+    --background-modifier-accent:         var(--accent-primary-subtle);
+    --background-modifier-hover:          var(--bg-subtle);
+    --background-modifier-active-hover:   var(--bg-muted);
+    --background-modifier-border:         var(--border-subtle);
+    --background-modifier-border-hover:   oklch(0.720 0.018 70);
+    --background-modifier-border-focus:   var(--accent-primary);
+    --background-modifier-error:          var(--accent-danger-subtle);
+    --background-modifier-error-hover:    oklch(0.935 0.052 20);
+    --background-modifier-success:        var(--accent-green-subtle);
+    --background-modifier-message:        var(--accent-primary-subtle);
+    --background-modifier-form-field:     var(--bg-page);
+    --background-modifier-box-shadow:     oklch(0.200 0.015 60 / 0.12);
+    --background-modifier-cover:          var(--overlay-bg);
+
+    /* --- Text colors --- */
+    /* NOTE: Obsidian's naming is offset from DS by one level:
+       Obsidian --text-muted  → DS --text-secondary
+       Obsidian --text-faint  → DS --text-muted    */
+    --text-normal:             var(--text-primary);
+    --text-muted:              var(--text-secondary);
+    --text-faint:              var(--text-muted);
+    --text-on-accent:          var(--text-on-accent);
+    --text-on-accent-inverted: var(--text-primary);
+    --text-error:              var(--accent-danger-text);
+    --text-success:            var(--accent-green-text);
+    --text-warning:            var(--accent-gold-text);
+    --text-accent:             var(--accent-primary-text);
+    --text-accent-hover:       var(--accent-primary-hover);
+
+    --text-highlight-bg:        oklch(0.840 0.175 85 / 0.40);
+    --text-highlight-bg-active: oklch(0.700 0.180 55 / 0.40);
+    --text-selection:           oklch(0.640 0.270 350 / 0.15);
+
+    /* --- Bold / italic --- */
+    --bold-color:   var(--text-primary);
+    --italic-color: inherit;
+
+    /* --- Interactive states --- */
+    --interactive-normal:       var(--bg-elevated);
+    --interactive-hover:        var(--bg-subtle);
+    --interactive-accent:       var(--accent-primary);
+    --interactive-accent-hover: var(--accent-primary-hover);
+
+    /* --- Inputs --- */
+    --input-shadow:       var(--shadow-sm);
+    --input-shadow-hover: var(--shadow-pink);
+
+    /* --- Code --- */
+    --code-normal:     var(--accent-danger-text);
+    --code-background: var(--bg-subtle);
+
+    /* --- Tags --- */
+    --tag-color:            var(--accent-primary-text);
+    --tag-color-hover:      var(--accent-primary-hover);
+    --tag-background:       var(--accent-primary-subtle);
+    --tag-background-hover: oklch(0.938 0.054 350);
+
+    /* --- Links --- */
+    --link-color:                  var(--accent-primary-text);
+    --link-color-hover:            var(--accent-primary-hover);
+    --link-decoration:             underline;
+    --link-decoration-hover:       underline;
+    --link-external-color:         var(--accent-primary-text);
+    --link-external-color-hover:   var(--accent-primary-hover);
+    --link-external-decoration:    underline;
+    --link-unresolved-color:       var(--text-muted);
+    --link-unresolved-opacity:     0.7;
+
+    /* --- Headings --- */
+    --h1-color: var(--text-primary);
+    --h2-color: var(--text-primary);
+    --h3-color: var(--text-primary);
+    --h4-color: var(--text-primary);
+    --h5-color: var(--text-secondary);
+    --h6-color: var(--text-muted);
+
+    --inline-title-color:  var(--text-primary);
+    --inline-title-size:   2.074em;
+    --inline-title-weight: 800;
+
+    /* --- Navigation --- */
+    --nav-item-color:              var(--text-secondary);
+    --nav-item-color-hover:        var(--text-primary);
+    --nav-item-color-active:       var(--accent-primary-text);
+    --nav-item-color-selected:     var(--text-primary);
+    --nav-item-background-hover:   var(--bg-subtle);
+    --nav-item-background-active:  var(--bg-muted);
+    --nav-indentation-guide-color: var(--border-subtle);
+
+    /* --- Blockquote --- */
+    --blockquote-border-color:      var(--accent-primary);
+    --blockquote-color:             var(--text-secondary);
+    --blockquote-background-color:  var(--bg-page);
+
+    /* --- Table --- */
+    --table-header-background:  var(--bg-subtle);
+    --table-row-background-hover: var(--bg-page);
+    --table-row-alt-background: var(--bg-surface);
+
+    /* --- Properties / frontmatter --- */
+    --metadata-label-text-color: var(--text-secondary);
+    --metadata-input-text-color: var(--text-primary);
+
+    /* --- Paragraph --- */
+    --p-spacing: 0.75rem;
+    --line-width: 42rem;
+  }
+
+  /* ========================================================================
+     DARK MODE
+     ======================================================================== */
+
+  .theme-dark {
+
+    /* --- Obsidian legacy shims --- */
+    --highlight-mix-blend-mode: lighten;
+    --mono-rgb-0:   0, 0, 0;
+    --mono-rgb-100: 255, 255, 255;
+
+    /* Obsidian HSL accent decomposition shim */
+    --accent-h: 340;
+    --accent-s: 65%;
+    --accent-l: 60%;
+    --interactive-accent-hsl: var(--accent-h), var(--accent-s), var(--accent-l);
+
+    /* RGB triplets — dark mode variants */
+    --color-red-rgb:    235, 100, 75;
+    --color-orange-rgb: 220, 145, 50;
+    --color-yellow-rgb: 215, 195, 50;
+    --color-green-rgb:  52, 195, 108;
+    --color-cyan-rgb:   55, 175, 200;
+    --color-blue-rgb:   80, 100, 235;
+    --color-purple-rgb: 160, 80, 220;
+    --color-pink-rgb:   220, 85, 155;
+
+    /* --- Color base scale --- */
+    --color-base-00:  var(--bg-page);
+    --color-base-05:  oklch(0.152 0.014 65);
+    --color-base-10:  var(--bg-surface);
+    --color-base-20:  var(--bg-muted);
+    --color-base-25:  var(--bg-elevated);
+    --color-base-30:  var(--bg-subtle);
+    --color-base-35:  oklch(0.230 0.015 65);
+    --color-base-40:  var(--border-subtle);
+    --color-base-50:  var(--border-default);
+    --color-base-60:  var(--text-muted);
+    --color-base-70:  var(--text-secondary);
+    --color-base-100: var(--text-primary);
+
+    /* --- Extended color palette --- */
+    --color-red:    var(--accent-danger);
+    --color-orange: oklch(0.720 0.145 55);
+    --color-yellow: var(--accent-gold);
+    --color-green:  var(--accent-green);
+    --color-cyan:   var(--accent-cyan);
+    --color-blue:   oklch(0.680 0.175 260);
+    --color-purple: var(--accent-purple);
+    --color-pink:   var(--accent-primary);
+
+    /* --- Accent --- */
+    --color-accent:       var(--accent-primary);
+    --color-accent-hover: var(--accent-primary-hover);
+    --color-accent-1:     var(--accent-primary);
+    --color-accent-2:     var(--accent-primary-hover);
+
+    /* --- Background modifiers --- */
+    --background-modifier-accent:         var(--accent-primary-subtle);
+    --background-modifier-hover:          var(--bg-subtle);
+    --background-modifier-active-hover:   var(--bg-muted);
+    --background-modifier-border:         var(--border-subtle);
+    --background-modifier-border-hover:   oklch(0.420 0.014 65);
+    --background-modifier-border-focus:   var(--accent-primary);
+    --background-modifier-error:          var(--accent-danger-subtle);
+    --background-modifier-error-hover:    oklch(0.290 0.065 20);
+    --background-modifier-success:        var(--accent-green-subtle);
+    --background-modifier-message:        var(--accent-primary-subtle);
+    --background-modifier-form-field:     var(--bg-surface);
+    --background-modifier-box-shadow:     oklch(0 0 0 / 0.35);
+    --background-modifier-cover:          var(--overlay-bg);
+
+    /* --- Text colors --- */
+    --text-normal:             var(--text-primary);
+    --text-muted:              var(--text-secondary);
+    --text-faint:              var(--text-muted);
+    --text-on-accent:          var(--text-on-accent);
+    --text-on-accent-inverted: var(--text-primary);
+    --text-error:              var(--accent-danger-text);
+    --text-success:            var(--accent-green-text);
+    --text-warning:            var(--accent-gold-text);
+    --text-accent:             var(--accent-primary-text);
+    --text-accent-hover:       var(--accent-primary-hover);
+
+    --text-highlight-bg:        oklch(0.840 0.170 85 / 0.30);
+    --text-highlight-bg-active: oklch(0.720 0.140 210 / 0.30);
+    --text-selection:           oklch(0.700 0.230 350 / 0.20);
+
+    /* --- Bold / italic --- */
+    --bold-color:   var(--text-primary);
+    --italic-color: inherit;
+
+    /* --- Interactive states --- */
+    --interactive-normal:       var(--bg-elevated);
+    --interactive-hover:        var(--bg-subtle);
+    --interactive-accent:       var(--accent-primary);
+    --interactive-accent-hover: var(--accent-primary-hover);
+
+    /* --- Inputs --- */
+    --input-shadow:       var(--shadow-sm);
+    --input-shadow-hover: var(--shadow-pink);
+
+    /* --- Code --- */
+    --code-normal:     var(--accent-danger-text);
+    --code-background: var(--bg-subtle);
+
+    /* --- Tags --- */
+    --tag-color:            var(--accent-primary-text);
+    --tag-color-hover:      var(--accent-primary-hover);
+    --tag-background:       var(--accent-primary-subtle);
+    --tag-background-hover: oklch(0.300 0.080 350);
+
+    /* --- Links --- */
+    --link-color:                  var(--accent-primary-text);
+    --link-color-hover:            var(--accent-primary-hover);
+    --link-decoration:             underline;
+    --link-decoration-hover:       underline;
+    --link-external-color:         var(--accent-primary-text);
+    --link-external-color-hover:   var(--accent-primary-hover);
+    --link-external-decoration:    underline;
+    --link-unresolved-color:       var(--text-muted);
+    --link-unresolved-opacity:     0.7;
+
+    /* --- Headings --- */
+    --h1-color: var(--text-primary);
+    --h2-color: var(--text-primary);
+    --h3-color: var(--text-primary);
+    --h4-color: var(--text-primary);
+    --h5-color: var(--text-secondary);
+    --h6-color: var(--text-muted);
+
+    --inline-title-color:  var(--text-primary);
+    --inline-title-size:   2.074em;
+    --inline-title-weight: 800;
+
+    /* --- Navigation --- */
+    --nav-item-color:              var(--text-secondary);
+    --nav-item-color-hover:        var(--text-primary);
+    --nav-item-color-active:       var(--accent-primary-text);
+    --nav-item-color-selected:     var(--text-primary);
+    --nav-item-background-hover:   var(--bg-subtle);
+    --nav-item-background-active:  var(--bg-muted);
+    --nav-indentation-guide-color: var(--border-subtle);
+
+    /* --- Blockquote --- */
+    --blockquote-border-color:     var(--accent-primary);
+    --blockquote-color:            var(--text-secondary);
+    --blockquote-background-color: var(--bg-page);
+
+    /* --- Table --- */
+    --table-header-background:    var(--bg-subtle);
+    --table-row-background-hover: var(--bg-page);
+    --table-row-alt-background:   var(--bg-surface);
+
+    /* --- Properties / frontmatter --- */
+    --metadata-label-text-color: var(--text-secondary);
+    --metadata-input-text-color: var(--text-primary);
+
+    /* --- Paragraph --- */
+    --p-spacing: 0.75rem;
+    --line-width: 42rem;
+  }
+
+
+/* ==========================================================================
+   BODY-LEVEL OBSIDIAN VARIABLES
+   Applied to body; govern fonts, heading scale, structural radii, etc.
+   These are Obsidian's global theme contract — not mode-sensitive.
+   ========================================================================== */
+
+body {
+  /* --- Mode-agnostic Obsidian vars (resolve through semantic tokens) --- */
+
+  /* Scrollbar */
+  --scrollbar-bg: var(--bg-page);
+  --scrollbar-thumb-bg: var(--border-subtle);
+  --scrollbar-active-thumb-bg: var(--accent-primary);
+
+  /* Checkbox */
+  --checkbox-color: var(--accent-primary);
+  --checkbox-color-hover: var(--accent-primary-hover);
+  --checkbox-border-color: var(--border-strong);
+  --checkbox-border-color-hover: var(--accent-primary);
+
+  /* Icon */
+  --icon-size: 18px;
+  --icon-color: var(--text-muted);
+  --icon-color-hover: var(--text-primary);
+  --icon-color-active: var(--accent-primary);
+  --icon-color-focused: var(--accent-primary);
+
+  /* Embed */
+  --embed-border-left: 4px solid var(--accent-primary);
+
+  /* Indentation guides */
+  --indentation-guide-color: var(--border-subtle);
+  --indentation-guide-color-active: var(--accent-primary);
+
+  /* Tab */
+  --tab-outline-color: transparent;
+  --tab-text-color: var(--text-muted);
+  --tab-text-color-active: var(--text-primary);
+  --tab-text-color-focused: var(--text-primary);
+  --tab-text-color-focused-active: var(--accent-primary);
+
+  /* Pill / multi-select */
+  --pill-color: var(--accent-primary-text);
+  --pill-color-hover: var(--accent-primary-hover);
+  --pill-background: var(--accent-primary-subtle);
+  --pill-background-hover: var(--accent-primary);
+  --pill-color-remove: var(--text-muted);
+  --pill-color-remove-hover: var(--accent-danger);
+  --pill-border-color: transparent;
+  /* --- Typography — families + base size --- */
+  --font-text-size:        14px;
+  --delightful-text-size:  16px;  /* reading/editing text, independent of baseFontSize */
+  --font-interface-theme:  var(--font-sans);
+  --font-text-theme:       var(--font-sans);
+  --font-monospace-theme:  var(--font-mono);
+
+  /* --- Heading size scale (maps to DS fluid type steps) --- */
+  /* Fixed em sizes — Obsidian is not a fluid viewport, don't use clamp() */
+  --h1-size: 2.074em;
+  --h2-size: 1.728em;
+  --h3-size: 1.44em;
+  --h4-size: 1.2em;
+  --h5-size: 1.1em;
+  --h6-size: 1em;
+
+  /* --- Heading weights --- */
+  --h1-weight: 800;
+  --h2-weight: 700;
+  --h3-weight: 650;
+  --h4-weight: 620;
+  --h5-weight: 600;
+  --h6-weight: 600;
+
+  /* --- Heading line heights --- */
+  --h1-line-height: var(--leading-tight);   /* 1.15 */
+  --h2-line-height: var(--leading-tight);   /* 1.15 */
+  --h3-line-height: var(--leading-tight);   /* 1.15 */
+  --h4-line-height: var(--leading-snug);    /* 1.3  */
+  --h5-line-height: var(--leading-snug);    /* 1.3  */
+  --h6-line-height: var(--leading-normal);  /* 1.55 */
+
+  /* --- Base line height + bold weight --- */
+  --line-height-normal: var(--leading-normal);  /* 1.55 */
+  --line-height-tight:  var(--leading-tight);   /* 1.15 */
+  --bold-weight: 700;
+
+  /* --- Structural radii --- */
+  --radius-s:  var(--radius-sm);    /* 10px  */
+  --radius-m:  var(--radius-md);    /* 16px  */
+  --radius-l:  var(--radius-lg);    /* 24px  */
+  --radius-xl: var(--radius-xl);    /* 32px  */
+
+  /* --- Global border width --- */
+  --border-width: 2px;
+
+  /* --- Input --- */
+  --input-radius:       var(--radius-sm);   /* 10px */
+  --input-border-width: 2px;
+
+  /* --- Checkbox --- */
+  --checkbox-radius: 4px;
+
+  /* --- Modal --- */
+  --modal-radius:       var(--radius-lg);   /* 24px */
+  --modal-border-width: 2px;
+
+  /* --- Blockquote --- */
+  --blockquote-border-thickness: 4px;
+
+  /* --- HR --- */
+  --hr-thickness: 2px;
+
+  /* --- Tag shape --- */
+  --tag-radius:       var(--radius-full);   /* 9999px */
+  --tag-border-width: 0px;
+  --tag-padding-x:    0.65em;
+  --tag-padding-y:    0.25em;
+
+  /* --- Toggle --- */
+  --toggle-border-width:  2px;
+  --toggle-radius:        var(--radius-full);   /* 9999px */
+  --toggle-thumb-radius:  50%;
+
+  /* --- Tab --- */
+  --tab-radius:        var(--radius-sm);   /* 10px */
+  --tab-radius-active: 10px 10px 0 0;
+
+  /* --- Callout --- */
+  --callout-radius:       var(--radius-md);   /* 16px */
+  --callout-border-width: 2px;
+}

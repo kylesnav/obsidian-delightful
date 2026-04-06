@@ -1,0 +1,359 @@
+/* ==========================================================================
+   plugins/kanban.css — Obsidian Kanban Plugin Overrides
+   Scope: .kanban-plugin, .kanban-plugin__board, .kanban-plugin__lane,
+          .kanban-plugin__item, .kanban-plugin__item-button-wrapper
+   All rules in @layer component.
+   ========================================================================== */
+
+
+  /* ========================================================================
+     1. BOARD — PAGE-LEVEL CONTAINER
+     ======================================================================== */
+
+  .kanban-plugin {
+    background: var(--bg-page);
+    height: 100%;
+    overflow: hidden;
+  }
+
+  /* Scrollable board area */
+  .kanban-plugin__board {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--space-4);
+    padding: var(--space-6);
+    background: var(--bg-page);
+    height: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  /* ========================================================================
+     2. LANES — DS CARD COLUMNS
+     ======================================================================== */
+
+  .kanban-plugin__lane {
+    background: var(--bg-elevated);
+    border: 2px solid var(--border-default);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    width: 280px;
+    min-width: 280px;
+    max-width: 280px;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    overflow: hidden;
+    max-height: calc(100vh - var(--space-12));
+  }
+
+  /* Lane with drag-over highlight */
+  .kanban-plugin__lane.is-drop-target {
+    border-color: var(--accent-primary);
+    box-shadow: var(--shadow-pink);
+  }
+
+  /* Lane inner scroll container */
+  .kanban-plugin__lane-items {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--space-2) var(--space-3) var(--space-3);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  /* Scrollbar styling within lanes */
+  .kanban-plugin__lane-items::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .kanban-plugin__lane-items::-webkit-scrollbar-thumb {
+    background: var(--border-subtle);
+    border-radius: var(--radius-full);
+  }
+
+  /* ========================================================================
+     3. LANE HEADER
+     ======================================================================== */
+
+  .kanban-plugin__lane-header-wrapper {
+    padding: var(--space-3) var(--space-4) var(--space-2);
+    border-bottom: 2px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    flex-shrink: 0;
+  }
+
+  .kanban-plugin__lane-title {
+    flex: 1;
+    color: var(--text-secondary);
+    font-size: var(--ui-text-sm);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    line-height: var(--leading-tight);
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: text;
+  }
+
+  .kanban-plugin__lane-title:focus {
+    outline: none;
+    color: var(--text-primary);
+  }
+
+  /* Card count badge in header */
+  .kanban-plugin__lane-title-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 var(--space-1-5);
+    background: var(--bg-subtle);
+    border: 2px solid var(--border-subtle);
+    border-radius: var(--radius-full);
+    color: var(--text-muted);
+    font-size: var(--ui-text-2xs);
+    font-weight: 600;
+  }
+
+  /* Lane action buttons (settings, delete) */
+  .kanban-plugin__lane-settings-button,
+  .kanban-plugin__lane-delete-button {
+    color: var(--text-muted);
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-sm);
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition:
+      background-color var(--motion-fast) var(--ease-out),
+      color var(--motion-fast) var(--ease-out);
+    flex-shrink: 0;
+  }
+
+  .kanban-plugin__lane-settings-button:hover,
+  .kanban-plugin__lane-delete-button:hover {
+    background-color: var(--bg-subtle);
+    color: var(--text-primary);
+  }
+
+  /* ========================================================================
+     4. CARD ITEMS
+     ======================================================================== */
+
+  .kanban-plugin__item {
+    background: var(--bg-elevated);
+    border: 2px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    padding: var(--space-3);
+    cursor: grab;
+    transition:
+      transform var(--motion-fast) var(--ease-out),
+      box-shadow var(--motion-fast) var(--ease-out),
+      border-color var(--motion-fast) var(--ease-out);
+    position: relative;
+  }
+
+  /* Card hover — lift effect */
+  .kanban-plugin__item:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+    border-color: var(--border-default);
+  }
+
+  /* Card being dragged */
+  .kanban-plugin__item.is-dragging {
+    opacity: 0.6;
+    cursor: grabbing;
+    transform: rotate(1deg) scale(1.01);
+  }
+
+  /* Card content / title */
+  .kanban-plugin__item-title {
+    color: var(--text-primary);
+    font-size: var(--ui-text-sm);
+    line-height: var(--leading-normal);
+    word-break: break-word;
+  }
+
+  /* Card inner content wrapper */
+  .kanban-plugin__item-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1-5);
+  }
+
+  /* ========================================================================
+     5. CARD TAG PILLS
+     ======================================================================== */
+
+  /* Tag pills on cards — DS badge */
+  .kanban-plugin__item-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1);
+    margin-top: var(--space-1-5);
+  }
+
+  .kanban-plugin__item-tags .kanban-plugin__item-tag,
+  .kanban-plugin__item-tags .tag {
+    display: inline-block;
+    background-color: var(--accent-primary-subtle);
+    border: 2px solid var(--accent-primary);
+    border-radius: var(--radius-sm);
+    padding: var(--badge-py) var(--badge-px);
+    font-size: var(--ui-text-2xs);
+    color: var(--accent-primary-text);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    line-height: var(--leading-tight);
+  }
+
+  /* ========================================================================
+     6. CARD METADATA (dates, links)
+     ======================================================================== */
+
+  .kanban-plugin__item-metadata {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1-5);
+    align-items: center;
+    margin-top: var(--space-1-5);
+  }
+
+  .kanban-plugin__item-link,
+  .kanban-plugin__item-date {
+    color: var(--text-muted);
+    font-size: var(--ui-text-2xs);
+    text-decoration: none;
+  }
+
+  .kanban-plugin__item-link:hover {
+    color: var(--accent-primary);
+  }
+
+  /* Due date overdue */
+  .kanban-plugin__item-date.is-overdue {
+    color: var(--accent-danger-text);
+  }
+
+  /* ========================================================================
+     7. ADD CARD BUTTON — GHOST STYLE
+     ======================================================================== */
+
+  .kanban-plugin__item-button-wrapper {
+    padding: var(--space-2) var(--space-3) var(--space-3);
+    flex-shrink: 0;
+  }
+
+  .kanban-plugin__new-item-button {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1-5);
+    width: 100%;
+    padding: var(--space-2) var(--space-3);
+    background: transparent;
+    border: 2px dashed var(--border-subtle);
+    border-radius: var(--radius-sm);
+    color: var(--text-muted);
+    font-size: var(--ui-text-sm);
+    font-family: var(--font-sans);
+    cursor: pointer;
+    transition:
+      background-color var(--motion-fast) var(--ease-out),
+      border-color var(--motion-fast) var(--ease-out),
+      color var(--motion-fast) var(--ease-out);
+  }
+
+  .kanban-plugin__new-item-button:hover {
+    background-color: var(--bg-subtle);
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+  }
+
+  /* ========================================================================
+     8. ADD LANE BUTTON
+     ======================================================================== */
+
+  .kanban-plugin__add-list-button {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-4);
+    background: var(--bg-elevated);
+    border: 2px dashed var(--border-subtle);
+    border-radius: var(--radius-md);
+    color: var(--text-muted);
+    font-size: var(--ui-text-sm);
+    font-family: var(--font-sans);
+    cursor: pointer;
+    min-width: 200px;
+    white-space: nowrap;
+    transition:
+      background-color var(--motion-fast) var(--ease-out),
+      border-color var(--motion-fast) var(--ease-out),
+      color var(--motion-fast) var(--ease-out);
+    align-self: flex-start;
+    flex-shrink: 0;
+  }
+
+  .kanban-plugin__add-list-button:hover {
+    background-color: var(--bg-subtle);
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+  }
+
+  /* ========================================================================
+     9. DRAG HANDLE
+     ======================================================================== */
+
+  .kanban-plugin__item-drag-handle,
+  .kanban-plugin__lane-drag-handle {
+    color: var(--text-muted);
+    cursor: grab;
+    opacity: 0.4;
+    transition: opacity var(--motion-fast) var(--ease-out);
+  }
+
+  .kanban-plugin__item-drag-handle:hover,
+  .kanban-plugin__lane-drag-handle:hover {
+    opacity: 0.8;
+  }
+
+  /* ========================================================================
+     10. KANBAN INLINE EDITOR
+     ======================================================================== */
+
+  .kanban-plugin__item-input-wrapper {
+    padding: var(--space-1) var(--space-3);
+  }
+
+  .kanban-plugin__item-input,
+  .kanban-plugin__new-item-input {
+    width: 100%;
+    background: var(--bg-surface);
+    border: 2px solid var(--accent-primary);
+    border-radius: var(--radius-sm);
+    padding: var(--space-2) var(--space-3);
+    color: var(--text-primary);
+    font-size: var(--ui-text-sm);
+    font-family: var(--font-sans);
+    outline: none;
+    resize: vertical;
+  }
+
+  .kanban-plugin__item-input:focus,
+  .kanban-plugin__new-item-input:focus {
+    box-shadow: 0 0 0 3px var(--accent-primary-subtle);
+  }
+

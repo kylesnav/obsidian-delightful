@@ -1,0 +1,242 @@
+/* ==========================================================================
+   plugins/calendar.css — Calendar Plugin Overrides
+   Scope: .calendar
+   All rules in @layer component.
+   ========================================================================== */
+
+
+  /* ========================================================================
+     1. OUTER WRAPPER — DS CARD
+     ======================================================================== */
+
+  .calendar {
+    background: var(--bg-elevated);
+    border: 2px solid var(--border-default);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    padding: var(--space-3);
+    font-family: var(--font-sans);
+    user-select: none;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  /* ========================================================================
+     2. HEADER — MONTH NAV
+     ======================================================================== */
+
+  .calendar__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-1) var(--space-2) var(--space-3);
+    gap: var(--space-2);
+  }
+
+  /* Month/year title */
+  .calendar__header-title {
+    color: var(--text-primary);
+    font-size: var(--ui-text-md);
+    font-weight: 700;
+    letter-spacing: var(--tracking-tight);
+    flex: 1;
+    text-align: center;
+  }
+
+  /* Nav arrow buttons */
+  .calendar__nav-button {
+    background: transparent;
+    border: 2px solid transparent;
+    border-radius: var(--radius-sm);
+    color: var(--text-muted);
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition:
+      background-color var(--motion-fast) var(--ease-out),
+      border-color var(--motion-fast) var(--ease-out),
+      color var(--motion-fast) var(--ease-out);
+    flex-shrink: 0;
+  }
+
+  .calendar__nav-button:hover {
+    background-color: var(--bg-subtle);
+    border-color: var(--border-subtle);
+    color: var(--text-primary);
+  }
+
+  /* ========================================================================
+     3. WEEKDAY HEADERS
+     ======================================================================== */
+
+  .calendar__weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0;
+    padding-bottom: var(--space-1);
+    border-bottom: 2px solid var(--border-subtle);
+    margin-bottom: var(--space-1);
+  }
+
+  .calendar__weekday {
+    color: var(--text-muted);
+    font-size: var(--ui-text-2xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    text-align: center;
+    padding: var(--space-1) 0;
+  }
+
+  /* ========================================================================
+     4. DAYS GRID
+     ======================================================================== */
+
+  .calendar__days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+  }
+
+  /* Base day cell */
+  .calendar__day {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-1);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    min-height: 32px;
+    position: relative;
+    transition:
+      background-color var(--motion-fast) var(--ease-out),
+      color var(--motion-fast) var(--ease-out);
+    border: 2px solid transparent;
+  }
+
+  .calendar__day:hover {
+    background-color: var(--bg-subtle);
+    border-color: var(--border-subtle);
+  }
+
+  /* Day number label */
+  .calendar__day-number {
+    font-size: var(--ui-text-xs);
+    font-weight: 500;
+    color: var(--text-secondary);
+    line-height: 1;
+  }
+
+  /* ========================================================================
+     5. DAY STATES
+     ======================================================================== */
+
+  /* Today — primary accent */
+  .calendar__day.is-today {
+    background-color: var(--accent-primary);
+    border-color: var(--accent-primary);
+  }
+
+  .calendar__day.is-today .calendar__day-number {
+    color: var(--text-on-accent);
+    font-weight: 700;
+  }
+
+  .calendar__day.is-today:hover {
+    background-color: var(--accent-primary-hover);
+    border-color: var(--accent-primary-hover);
+  }
+
+  /* Selected day — subtle primary bg */
+  .calendar__day.is-selected {
+    background-color: var(--accent-primary-subtle);
+    border-color: var(--accent-primary);
+  }
+
+  .calendar__day.is-selected .calendar__day-number {
+    color: var(--accent-primary-text);
+    font-weight: 600;
+  }
+
+  /* Days outside current month */
+  .calendar__day.is-other-month .calendar__day-number {
+    color: var(--text-muted);
+    opacity: 0.45;
+  }
+
+  /* Weekend days — slightly muted */
+  .calendar__day.is-weekend:not(.is-today):not(.is-selected) .calendar__day-number {
+    color: var(--text-muted);
+  }
+
+  /* ========================================================================
+     6. ACTIVITY DOTS / INDICATORS
+     ======================================================================== */
+
+  /* Dot container below the day number */
+  .calendar__day-dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    margin-top: 2px;
+    min-height: 6px;
+  }
+
+  /* Individual dot */
+  .calendar__day-dot,
+  .dot {
+    width: 4px;
+    height: 4px;
+    border-radius: var(--radius-full);
+    background-color: var(--accent-primary);
+    flex-shrink: 0;
+  }
+
+  /* Today dot stays visible but uses on-accent color */
+  .calendar__day.is-today .calendar__day-dot,
+  .calendar__day.is-today .dot {
+    background-color: var(--text-on-accent);
+    opacity: 0.75;
+  }
+
+  /* ========================================================================
+     7. WEEK NUMBERS (if displayed)
+     ======================================================================== */
+
+  .calendar__week-num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-size: var(--ui-text-2xs);
+    font-weight: 600;
+    padding: var(--space-1);
+    opacity: 0.5;
+    cursor: default;
+  }
+
+  .calendar__week-num:hover {
+    opacity: 0.8;
+    background-color: var(--bg-subtle);
+    border-radius: var(--radius-sm);
+  }
+
+  /* ========================================================================
+     8. YEAR VIEW / MINI YEAR
+     ======================================================================== */
+
+  /* Year label when showing full year */
+  .calendar__year-title {
+    color: var(--text-muted);
+    font-size: var(--ui-text-xs);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-align: center;
+    padding: var(--space-1) 0;
+  }
+

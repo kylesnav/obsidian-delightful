@@ -1,0 +1,168 @@
+/* ==========================================================================
+   07-animations.css — Delightful Motion System
+   Keyframes · Transitions · Hover Lifts · Press States ·
+   Entrance Animations · Reduced Motion
+   ========================================================================== */
+
+
+  /* ========================================================================
+     1. KEYFRAMES
+     ======================================================================== */
+
+  /*
+   * NOTE: @keyframes slide-in-bottom is intentionally omitted here.
+   * It is defined in 05-components.css (@layer component) and consumed
+   * by .notice. Redefining it would cause a duplicate — the existing
+   * version (translateY(12px)) is preserved as-is.
+   */
+
+  @keyframes slide-in-top {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  @keyframes pop {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.08); }
+    100% { transform: scale(1.05); }
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* ========================================================================
+     2. TRANSITION DECLARATIONS — INTERACTIVE ELEMENTS
+     ======================================================================== */
+
+  /*
+   * Baseline transitions for nav items, clickable icons, tabs, and
+   * suggestion list items. Buttons and toggles are handled in
+   * 05-components.css and are intentionally excluded here.
+   */
+
+  /* SINK pattern: instant transform/shadow, fast color/bg */
+  .nav-file-title,
+  .nav-folder-title,
+  .clickable-icon,
+  .side-dock-ribbon-action,
+  .workspace-tab-header,
+  .suggestion-item,
+  .tree-item-self {
+    transition:
+      transform          var(--motion-instant) linear,
+      box-shadow         var(--motion-instant) linear,
+      background-color   var(--motion-fast) var(--ease-out);
+    will-change: transform;
+  }
+
+  /* ========================================================================
+     3. HOVER LIFT
+     ======================================================================== */
+
+  /*
+   * Subtle upward lift on hover for nav and icon elements.
+   * Buttons already lift via translateY(-2px) in 05-components.css.
+   */
+
+  .nav-file-title:hover,
+  .nav-folder-title:hover,
+  .side-dock-ribbon-action:hover,
+  .clickable-icon:hover {
+    transform: translateY(-1px);
+  }
+
+  /* ========================================================================
+     4. PRESS DOWN — ACTIVE STATES
+     ======================================================================== */
+
+  /*
+   * Press-down feedback on click.
+   * Buttons already press via translate(2px, 2px) in 05-components.css.
+   */
+
+  .nav-file-title:active,
+  .nav-folder-title:active,
+  .clickable-icon:active,
+  .side-dock-ribbon-action:active {
+    transform: translateY(1px);
+  }
+
+  /* ========================================================================
+     5. ENTRANCE ANIMATIONS
+     ======================================================================== */
+
+  /* General modals: smooth fade in */
+  .modal-container .modal {
+    animation: fade-in var(--motion-base) var(--ease-smooth) both;
+  }
+
+  /* Command palette: slide down from top */
+  .prompt {
+    animation: slide-in-top var(--motion-fast) var(--ease-out) both;
+  }
+
+  /* Note content: gentle fade when switching notes */
+  .markdown-preview-view,
+  .cm-editor {
+    animation: fade-in var(--motion-base) var(--ease-smooth) both;
+  }
+
+  /*
+   * Notices (.notice): slide-in-bottom entrance is already applied in
+   * 05-components.css. No duplicate rule needed here.
+   *
+   * Tags (.tag): scale(1.05) hover transform is already applied in
+   * 04-editor-rich.css. No duplicate rule needed here.
+   */
+
+  /* ========================================================================
+     6. LOADING / UTILITY ANIMATIONS
+     ======================================================================== */
+
+  /* Spinner utility — apply .is-loading or similar class as needed */
+  .loading-spinner,
+  .mod-loading > svg {
+    animation: spin 0.75s linear infinite;
+  }
+
+  /* ========================================================================
+     7. FOCUS-VISIBLE — KEYBOARD ACCESSIBILITY
+     ======================================================================== */
+
+  /* Global focus ring for keyboard navigation */
+  *:focus-visible {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: -2px;
+  }
+
+  /* Don't show focus ring on mouse click for elements that handle it */
+  *:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  /* ========================================================================
+     8. REDUCED MOTION — ACCESSIBILITY (CRITICAL)
+     ======================================================================== */
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration:        0.01ms !important;
+      animation-iteration-count: 1      !important;
+      transition-duration:       0.01ms !important;
+    }
+  }
+

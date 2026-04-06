@@ -1,0 +1,418 @@
+/* ==========================================================================
+   plugins/secondary.css — Secondary / Catch-All Plugin Overrides
+   Covers: Advanced Tables, Templater, Obsidian Git, Outliner,
+           Hover Editor, Sliding Panes
+   All rules in @layer component.
+   ========================================================================== */
+
+
+  /* ========================================================================
+     1. ADVANCED TABLES (.table-editor)
+     ======================================================================== */
+
+  /* Table editor container */
+  .table-editor {
+    border: 2px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    font-family: var(--font-sans);
+    font-size: var(--ui-text-sm);
+    margin: var(--space-4) 0;
+    width: 100%;
+  }
+
+  /* Table editor table — mirror DS table */
+  .table-editor table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-size: var(--ui-text-sm);
+    font-family: var(--font-sans);
+  }
+
+  /* Header cells */
+  .table-editor thead th,
+  .table-editor .table-header-cell {
+    background-color: var(--bg-subtle);
+    color: var(--text-muted);
+    font-size: var(--ui-text-2xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: var(--space-3) var(--space-4);
+    border-bottom: 2px solid var(--border-default);
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  /* Data cells */
+  .table-editor td,
+  .table-editor .table-cell {
+    padding: var(--space-3) var(--space-4);
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border-subtle);
+    vertical-align: top;
+    line-height: var(--leading-normal);
+  }
+
+  /* Remove bottom border on last row */
+  .table-editor tr:last-child td {
+    border-bottom: none;
+  }
+
+  /* Row hover */
+  .table-editor tbody tr {
+    transition: background-color var(--motion-fast) var(--ease-out);
+  }
+
+  .table-editor tbody tr:hover {
+    background-color: var(--bg-subtle);
+  }
+
+  /* Alternating rows */
+  .table-editor tbody tr:nth-child(even) {
+    background-color: var(--bg-surface);
+  }
+
+  /* Active / selected cell */
+  .table-editor td.is-selected,
+  .table-editor .table-cell.is-active {
+    background-color: var(--accent-primary-subtle);
+    outline: 2px solid var(--accent-primary);
+    outline-offset: -2px;
+  }
+
+  /* Toolbar — icon buttons above the table */
+  .table-editor-toolbar,
+  .table-controls {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    padding: var(--space-1-5) var(--space-2);
+    background: var(--bg-surface);
+    border-bottom: 2px solid var(--border-subtle);
+  }
+
+  .table-editor-toolbar button,
+  .table-controls button {
+    background: transparent;
+    border: 2px solid transparent;
+    border-radius: var(--radius-sm);
+    color: var(--text-muted);
+    padding: var(--space-1);
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition:
+      background-color var(--motion-fast) var(--ease-out),
+      border-color var(--motion-fast) var(--ease-out),
+      color var(--motion-fast) var(--ease-out);
+  }
+
+  .table-editor-toolbar button:hover,
+  .table-controls button:hover {
+    background-color: var(--bg-subtle);
+    border-color: var(--border-subtle);
+    color: var(--text-primary);
+  }
+
+  /* ========================================================================
+     2. TEMPLATER (.templater-*)
+     ======================================================================== */
+
+  /* Templater prompt modal — inherit DS modal base */
+  .modal.templater-modal,
+  .modal[class*="templater"] {
+    background: var(--bg-elevated);
+    border: 2px solid var(--border-default);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    color: var(--text-primary);
+  }
+
+  /* Prompt modal title */
+  .modal.templater-modal .modal-title,
+  .modal[class*="templater"] .modal-title {
+    font-size: var(--ui-text-xl);
+    font-weight: 700;
+    padding: var(--space-5) var(--space-6) var(--space-4);
+    color: var(--text-primary);
+  }
+
+  /* Templater prompt input */
+  .templater-prompt-input,
+  .modal[class*="templater"] input[type="text"],
+  .modal[class*="templater"] textarea {
+    background: var(--bg-surface);
+    border: 2px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-size: var(--ui-text-md);
+    font-family: var(--font-sans);
+    padding: var(--space-2) var(--space-3);
+    width: 100%;
+    outline: none;
+    transition: border-color var(--motion-fast) var(--ease-out);
+  }
+
+  .templater-prompt-input:focus,
+  .modal[class*="templater"] input[type="text"]:focus,
+  .modal[class*="templater"] textarea:focus {
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px var(--accent-primary-subtle);
+  }
+
+  /* Command palette items — inherits suggestion style */
+  .suggestion-item.templater-suggestion {
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-size: var(--ui-text-sm);
+    cursor: pointer;
+    transition: background-color var(--motion-fast) var(--ease-out);
+  }
+
+  .suggestion-item.templater-suggestion.is-selected,
+  .suggestion-item.templater-suggestion:hover {
+    background-color: var(--accent-primary-subtle);
+    color: var(--accent-primary-text);
+  }
+
+  /* ========================================================================
+     3. OBSIDIAN GIT (.obsidian-git-*)
+     ======================================================================== */
+
+  /* Status bar items */
+  .obsidian-git-statusbar-element,
+  .status-bar-item.plugin-obsidian-git {
+    color: var(--text-muted);
+    font-size: var(--ui-text-xs);
+    font-family: var(--font-sans);
+  }
+
+  /* Commit status indicator — clean/committed state */
+  .obsidian-git-statusbar-element.clean,
+  .obsidian-git-statusbar-element[data-state="clean"] {
+    color: var(--accent-green-text);
+  }
+
+  /* Dirty / uncommitted changes */
+  .obsidian-git-statusbar-element.dirty,
+  .obsidian-git-statusbar-element[data-state="dirty"] {
+    color: var(--accent-gold-text);
+  }
+
+  /* Error / conflict */
+  .obsidian-git-statusbar-element.error,
+  .obsidian-git-statusbar-element[data-state="error"] {
+    color: var(--accent-danger-text);
+  }
+
+  /* Diff view — added lines */
+  .obsidian-git-diff-add,
+  .diff-added,
+  .git-diff-added {
+    background-color: var(--accent-green-subtle);
+    color: var(--accent-green-text);
+    border-left: 3px solid var(--accent-green);
+    padding-left: var(--space-2);
+  }
+
+  /* Diff view — removed lines */
+  .obsidian-git-diff-remove,
+  .diff-removed,
+  .git-diff-removed {
+    background-color: var(--accent-danger-subtle);
+    color: var(--accent-danger-text);
+    border-left: 3px solid var(--accent-danger);
+    padding-left: var(--space-2);
+  }
+
+  /* Diff view — context (unchanged) lines */
+  .obsidian-git-diff-context,
+  .diff-context {
+    color: var(--text-muted);
+  }
+
+  /* Source control modal */
+  .obsidian-git-modal,
+  .modal[class*="obsidian-git"] {
+    font-family: var(--font-sans);
+  }
+
+  /* Staged / unstaged file list items */
+  .obsidian-git-file-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-1-5) var(--space-3);
+    font-size: var(--ui-text-sm);
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border-subtle);
+    cursor: pointer;
+    transition: background-color var(--motion-fast) var(--ease-out);
+  }
+
+  .obsidian-git-file-item:hover {
+    background-color: var(--bg-subtle);
+  }
+
+  /* ========================================================================
+     4. OUTLINER (.outliner-plugin-*)
+     ======================================================================== */
+
+  /* Indentation guide lines */
+  .outliner-plugin-list-item {
+    position: relative;
+  }
+
+  .outliner-plugin-indentation-lines .outliner-plugin-indentation-line,
+  .outliner-plugin-list-item::before {
+    border-left: 2px solid var(--border-subtle);
+  }
+
+  /* Drag handle icon */
+  .outliner-plugin-drag-handle {
+    color: var(--text-muted);
+    cursor: grab;
+    opacity: 0;
+    transition: opacity var(--motion-fast) var(--ease-out);
+    flex-shrink: 0;
+  }
+
+  .outliner-plugin-list-item:hover .outliner-plugin-drag-handle,
+  .outliner-plugin-drag-handle:hover {
+    opacity: 0.5;
+  }
+
+  .outliner-plugin-drag-handle:active {
+    cursor: grabbing;
+    opacity: 0.8;
+  }
+
+  /* Highlighted drop target */
+  .outliner-plugin-drop-zone {
+    border: 2px solid var(--accent-primary);
+    border-radius: var(--radius-sm);
+    background-color: var(--accent-primary-subtle);
+  }
+
+  /* ========================================================================
+     5. HOVER EDITOR (.popover.hover-editor)
+     ======================================================================== */
+
+  /* Hover editor popover window */
+  .popover.hover-editor {
+    border: 2px solid var(--border-default);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    background: var(--bg-elevated);
+    overflow: hidden;
+  }
+
+  /* Hover editor title bar */
+  .popover.hover-editor .popover-titlebar,
+  .popover.hover-editor .hover-editor-titlebar {
+    background: var(--bg-subtle);
+    border-bottom: 2px solid var(--border-subtle);
+    padding: var(--space-2) var(--space-3);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    cursor: move;
+  }
+
+  /* Title text */
+  .popover.hover-editor .popover-titlebar-title,
+  .popover.hover-editor .hover-editor-title {
+    flex: 1;
+    color: var(--text-secondary);
+    font-size: var(--ui-text-xs);
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Hover editor control buttons */
+  .popover.hover-editor .popover-titlebar-button,
+  .popover.hover-editor .hover-editor-control-button {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    border-radius: var(--radius-sm);
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition:
+      background-color var(--motion-fast) var(--ease-out),
+      color var(--motion-fast) var(--ease-out);
+    flex-shrink: 0;
+  }
+
+  .popover.hover-editor .popover-titlebar-button:hover,
+  .popover.hover-editor .hover-editor-control-button:hover {
+    background-color: var(--bg-muted);
+    color: var(--text-primary);
+  }
+
+  /* Hover editor content area */
+  .popover.hover-editor .popover-content,
+  .popover.hover-editor .hover-editor-content {
+    background: var(--bg-elevated);
+    padding: var(--space-3);
+    color: var(--text-primary);
+    font-size: var(--ui-text-sm);
+    overflow: auto;
+  }
+
+  /* Resize handle */
+  .popover.hover-editor .popover-resize-handle {
+    background: var(--border-subtle);
+    opacity: 0.5;
+  }
+
+  .popover.hover-editor .popover-resize-handle:hover {
+    opacity: 1;
+    background: var(--accent-primary);
+  }
+
+  /* ========================================================================
+     6. SLIDING PANES / ANDY MODE (.workspace-split.mod-horizontal)
+     ======================================================================== */
+
+  /* Pane separator borders */
+  .workspace-split.mod-horizontal > .workspace-leaf:not(:last-child) {
+    border-right: 2px solid var(--border-subtle);
+  }
+
+  /* Leaf active border highlight */
+  .workspace-split.mod-horizontal > .workspace-leaf.is-focused {
+    border-right-color: var(--accent-primary);
+  }
+
+  /* Spine / header for stacked panes */
+  .workspace-split.mod-horizontal .workspace-leaf-header {
+    border-bottom: 2px solid var(--border-subtle);
+    background: var(--bg-page);
+  }
+
+  /* Stacked tab spine label */
+  .workspace-split.mod-horizontal .workspace-leaf-header .view-header-title {
+    color: var(--text-muted);
+    font-size: var(--ui-text-xs);
+    writing-mode: vertical-lr;
+    text-orientation: mixed;
+  }
+
+  /* Collapsed pane width indicator */
+  .workspace-split.mod-horizontal > .workspace-leaf.is-collapsed {
+    border-right: 2px solid var(--border-subtle);
+  }
+

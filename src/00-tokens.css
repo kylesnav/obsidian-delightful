@@ -1,0 +1,369 @@
+/* ==========================================================================
+   00-tokens.css — Delightful Design System token foundation
+   Tier 1: Primitives → Tier 2: Semantic → Tier 3: Component/Infrastructure
+   ========================================================================== */
+
+
+/* ==========================================================================
+   TIER 1 — PRIMITIVES
+   Raw OKLCH values with no semantic meaning.
+   Never referenced by component CSS directly.
+   ========================================================================== */
+
+  :root {
+    /* Neutrals */
+    --primitive-neutral-0:   oklch(1.000 0.000 0);
+    --primitive-neutral-25:  oklch(0.988 0.006 70);
+    --primitive-neutral-50:  oklch(0.980 0.008 70);
+    --primitive-neutral-100: oklch(0.960 0.010 70);
+    --primitive-neutral-150: oklch(0.940 0.012 70);
+    --primitive-neutral-200: oklch(0.920 0.012 70);
+    --primitive-neutral-300: oklch(0.860 0.014 70);
+    --primitive-neutral-400: oklch(0.750 0.014 70);
+    --primitive-neutral-500: oklch(0.600 0.012 70);
+    --primitive-neutral-600: oklch(0.480 0.010 70);
+    --primitive-neutral-700: oklch(0.350 0.010 70);
+    --primitive-neutral-800: oklch(0.250 0.012 60);
+    --primitive-neutral-900: oklch(0.180 0.012 60);
+    --primitive-neutral-950: oklch(0.140 0.012 60);
+
+    /* Pink */
+    --primitive-pink-100: oklch(0.920 0.060 350);
+    --primitive-pink-200: oklch(0.840 0.140 350);
+    --primitive-pink-300: oklch(0.720 0.220 350);
+    --primitive-pink-400: oklch(0.640 0.270 350);
+    --primitive-pink-500: oklch(0.560 0.280 350);
+
+    /* Red */
+    --primitive-red-100: oklch(0.930 0.050 20);
+    --primitive-red-200: oklch(0.850 0.110 20);
+    --primitive-red-300: oklch(0.720 0.180 20);
+    --primitive-red-400: oklch(0.620 0.220 20);
+    --primitive-red-500: oklch(0.540 0.230 20);
+
+    /* Gold */
+    --primitive-gold-100: oklch(0.960 0.050 85);
+    --primitive-gold-200: oklch(0.920 0.110 85);
+    --primitive-gold-300: oklch(0.870 0.160 85);
+    --primitive-gold-400: oklch(0.840 0.175 85);
+    --primitive-gold-500: oklch(0.820 0.165 84);
+
+    /* Cyan */
+    --primitive-cyan-100: oklch(0.930 0.038 210);
+    --primitive-cyan-200: oklch(0.850 0.085 210);
+    --primitive-cyan-300: oklch(0.740 0.125 210);
+    --primitive-cyan-400: oklch(0.650 0.148 210);
+    --primitive-cyan-500: oklch(0.570 0.155 210);
+
+    /* Green */
+    --primitive-green-100: oklch(0.930 0.042 148);
+    --primitive-green-200: oklch(0.840 0.095 148);
+    --primitive-green-300: oklch(0.730 0.145 148);
+    --primitive-green-400: oklch(0.630 0.170 148);
+    --primitive-green-500: oklch(0.540 0.165 148);
+
+    /* Purple */
+    --primitive-purple-100: oklch(0.940 0.040 300);
+    --primitive-purple-200: oklch(0.860 0.080 300);
+    --primitive-purple-300: oklch(0.720 0.160 300);
+    --primitive-purple-400: oklch(0.640 0.220 300);
+    --primitive-purple-500: oklch(0.560 0.260 300);
+  }
+
+/* ==========================================================================
+   TIER 2 — SEMANTIC TOKENS
+   Contextual meaning. Light mode defaults on :root / .theme-light,
+   dark mode overrides on .theme-dark.
+   ========================================================================== */
+
+  :root,
+  .theme-light {
+    color-scheme: light;
+
+    /* Backgrounds */
+    --bg-page:     oklch(0.982 0.008 70);
+    --bg-surface:  oklch(0.995 0.004 70);
+    --bg-elevated: oklch(1.000 0.000 0);
+    --bg-subtle:   oklch(0.965 0.012 70);
+    --bg-muted:    oklch(0.948 0.014 70);
+
+    /* Text */
+    --text-primary:   oklch(0.200 0.015 60);
+    --text-secondary: oklch(0.420 0.015 60);
+    --text-muted:     oklch(0.560 0.012 60);
+    --text-on-accent: oklch(1.000 0.000 0);
+    --text-on-gold:   oklch(0.220 0.020 70);
+
+    /* Borders */
+    --border-default: oklch(0.340 0.025 60);
+    --border-strong:  oklch(0.250 0.020 60);
+    --border-subtle:  oklch(0.820 0.015 70);
+
+    /* Accent — Pink (primary) */
+    --accent-primary:        oklch(0.640 0.270 350);
+    --accent-primary-hover:  oklch(0.580 0.280 350);
+    --accent-primary-subtle: oklch(0.955 0.040 350);
+    --accent-primary-text:   oklch(0.560 0.270 350);
+
+    /* Accent — Danger (red) */
+    --accent-danger:        oklch(0.620 0.220 20);
+    --accent-danger-hover:  oklch(0.570 0.230 20);
+    --accent-danger-subtle: oklch(0.950 0.040 20);
+    --accent-danger-text:   oklch(0.570 0.220 20);
+
+    /* Accent — Gold */
+    --accent-gold:        oklch(0.840 0.175 85);
+    --accent-gold-hover:  oklch(0.820 0.165 84);
+    --accent-gold-subtle: oklch(0.965 0.060 85);
+    --accent-gold-text:   oklch(0.560 0.170 85);
+
+    /* Accent — Cyan */
+    --accent-cyan:        oklch(0.650 0.148 210);
+    --accent-cyan-hover:  oklch(0.600 0.150 210);
+    --accent-cyan-subtle: oklch(0.945 0.030 210);
+    --accent-cyan-text:   oklch(0.560 0.148 210);
+
+    /* Accent — Green */
+    --accent-green:        oklch(0.630 0.170 148);
+    --accent-green-hover:  oklch(0.580 0.165 148);
+    --accent-green-subtle: oklch(0.945 0.035 148);
+    --accent-green-text:   oklch(0.520 0.170 148);
+
+    /* Accent — Purple */
+    --accent-purple:        oklch(0.640 0.220 300);
+    --accent-purple-hover:  oklch(0.580 0.230 300);
+    --accent-purple-subtle: oklch(0.950 0.035 300);
+    --accent-purple-text:   oklch(0.560 0.230 300);
+
+    /* Status aliases */
+    --status-info:    var(--accent-primary);
+    --status-error:   var(--accent-danger);
+    --status-warning: var(--accent-gold);
+    --status-success: var(--accent-green);
+
+    /* Misc */
+    --focus-ring:   var(--accent-primary);
+    --overlay-bg:   oklch(0.200 0.015 60 / 0.30);
+
+    /* Shadows — hard offset + ambient depth per DS convention */
+    --shadow-sm:     2px 2px 0 var(--border-default);
+    --shadow-md:     4px 4px 0 var(--border-default), 0 4px 8px oklch(0 0 0 / 0.08);
+    --shadow-lg:     8px 8px 0 var(--border-default), 0 12px 24px oklch(0 0 0 / 0.12);
+    --shadow-pink:   4px 4px 0 var(--accent-primary);
+    --shadow-danger: 4px 4px 0 var(--accent-danger);
+    --shadow-gold:   4px 4px 0 var(--accent-gold);
+    --shadow-cyan:   4px 4px 0 var(--accent-cyan);
+    --shadow-green:  4px 4px 0 var(--accent-green);
+    --shadow-purple: 4px 4px 0 var(--accent-purple);
+  }
+
+  .theme-dark {
+    color-scheme: dark;
+
+    /* Backgrounds */
+    --bg-page:     oklch(0.140 0.014 65);
+    --bg-surface:  oklch(0.165 0.015 65);
+    --bg-elevated: oklch(0.190 0.015 65);
+    --bg-subtle:   oklch(0.210 0.015 65);
+    --bg-muted:    oklch(0.180 0.013 65);
+
+    /* Text */
+    --text-primary:   oklch(0.935 0.008 70);
+    --text-secondary: oklch(0.690 0.012 70);
+    --text-muted:     oklch(0.540 0.010 70);
+    --text-on-accent: oklch(1.000 0.000 0);
+    --text-on-gold:   oklch(0.140 0.014 65);
+
+    /* Borders */
+    --border-default: oklch(0.550 0.010 65);
+    --border-strong:  var(--text-primary);
+    --border-subtle:  oklch(0.330 0.015 65);
+
+    /* Accent — Pink (primary) */
+    --accent-primary:        oklch(0.700 0.230 350);
+    --accent-primary-hover:  oklch(0.740 0.220 350);
+    --accent-primary-subtle: oklch(0.250 0.065 350);
+    --accent-primary-text:   oklch(0.750 0.210 350);
+
+    /* Accent — Danger (red) */
+    --accent-danger:        oklch(0.660 0.200 20);
+    --accent-danger-hover:  oklch(0.700 0.190 20);
+    --accent-danger-subtle: oklch(0.250 0.055 20);
+    --accent-danger-text:   oklch(0.720 0.180 20);
+
+    /* Accent — Gold */
+    --accent-gold:        oklch(0.840 0.170 85);
+    --accent-gold-hover:  oklch(0.870 0.155 84);
+    --accent-gold-subtle: oklch(0.260 0.065 85);
+    --accent-gold-text:   oklch(0.870 0.155 85);
+
+    /* Accent — Cyan */
+    --accent-cyan:        oklch(0.720 0.140 210);
+    --accent-cyan-hover:  oklch(0.760 0.130 210);
+    --accent-cyan-subtle: oklch(0.250 0.045 210);
+    --accent-cyan-text:   oklch(0.780 0.130 210);
+
+    /* Accent — Green */
+    --accent-green:        oklch(0.680 0.155 148);
+    --accent-green-hover:  oklch(0.720 0.145 148);
+    --accent-green-subtle: oklch(0.250 0.048 148);
+    --accent-green-text:   oklch(0.740 0.145 148);
+
+    /* Accent — Purple */
+    --accent-purple:        oklch(0.700 0.200 300);
+    --accent-purple-hover:  oklch(0.740 0.190 300);
+    --accent-purple-subtle: oklch(0.250 0.055 300);
+    --accent-purple-text:   oklch(0.760 0.180 300);
+
+    /* Status aliases */
+    --status-info:    var(--accent-primary);
+    --status-error:   var(--accent-danger);
+    --status-warning: var(--accent-gold);
+    --status-success: var(--accent-green);
+
+    /* Misc */
+    --focus-ring: var(--accent-primary);
+    --overlay-bg: oklch(0 0 0 / 0.60);
+
+    /* Shadows — hard offset + ambient depth, alpha-transparent in dark mode */
+    --shadow-sm:     2px 2px 0 oklch(0.920 0.010 65 / 0.20);
+    --shadow-md:     4px 4px 0 oklch(0.920 0.010 65 / 0.20), 0 4px 12px oklch(0 0 0 / 0.30);
+    --shadow-lg:     8px 8px 0 oklch(0.920 0.010 65 / 0.20), 0 12px 32px oklch(0 0 0 / 0.40);
+    --shadow-pink:   4px 4px 0 var(--accent-primary);
+    --shadow-danger: 4px 4px 0 var(--accent-danger);
+    --shadow-gold:   4px 4px 0 var(--accent-gold);
+    --shadow-cyan:   4px 4px 0 var(--accent-cyan);
+    --shadow-green:  4px 4px 0 var(--accent-green);
+    --shadow-purple: 4px 4px 0 var(--accent-purple);
+  }
+
+/* ==========================================================================
+   TIER 3 — COMPONENT / INFRASTRUCTURE TOKENS
+   Shared across light and dark. These are fixed values (not mode-sensitive).
+   ========================================================================== */
+
+  :root {
+    /* Typography — families */
+    --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Code', monospace;
+
+    /* Fluid type scale (editorial / content) */
+    --step--2: clamp(0.694rem, 0.650rem + 0.22vi, 0.800rem);
+    --step--1: clamp(0.833rem, 0.775rem + 0.29vi, 1.000rem);
+    --step-0:  clamp(1.000rem, 0.913rem + 0.43vi, 1.250rem);
+    --step-1:  clamp(1.200rem, 1.074rem + 0.63vi, 1.5625rem);
+    --step-2:  clamp(1.440rem, 1.261rem + 0.89vi, 1.953rem);
+    --step-3:  clamp(1.728rem, 1.480rem + 1.24vi, 2.441rem);
+    --step-4:  clamp(2.074rem, 1.734rem + 1.70vi, 3.052rem);
+    --step-5:  clamp(2.488rem, 2.028rem + 2.30vi, 3.815rem);
+
+    /* Letter spacing */
+    --tracking-tight:    -0.02em;
+    --tracking-tighter:  -0.03em;
+    --tracking-tightest: -0.04em;
+
+    /* Line height */
+    --leading-none:    1.0;
+    --leading-tight:   1.15;
+    --leading-snug:    1.3;
+    --leading-normal:  1.55;
+    --leading-relaxed: 1.65;
+
+    /* UI text scale (fixed, non-fluid) */
+    --ui-text-2xs: 0.6875rem;  /* 11px */
+    --ui-text-xs:  0.7500rem;  /* 12px */
+    --ui-text-sm:  0.8125rem;  /* 13px */
+    --ui-text-md:  0.8750rem;  /* 14px */
+    --ui-text-lg:  0.9375rem;  /* 15px */
+    --ui-text-xl:  1.0625rem;  /* 17px */
+
+    /* Spacing */
+    --space-1:   4px;
+    --space-1-5: 6px;
+    --space-2:   8px;
+    --space-3:   12px;
+    --space-4:   16px;
+    --space-5:   20px;
+    --space-6:   24px;
+    --space-8:   32px;
+    --space-10:  40px;
+    --space-12:  48px;
+    --space-16:  64px;
+    --space-20:  80px;
+
+    /* Border radius */
+    --radius-sm:   10px;
+    --radius-md:   16px;
+    --radius-lg:   24px;
+    --radius-xl:   32px;
+    --radius-full: 9999px;
+
+    /* Control heights */
+    --control-sm: 32px;
+    --control-md: 36px;
+    --control-lg: 44px;
+    --control-xl: 56px;
+
+    /* Motion — duration */
+    --motion-instant:    100ms;
+    --motion-fast:       160ms;
+    --motion-base:       240ms;
+    --motion-slow:       360ms;
+    --motion-deliberate: 500ms;
+
+    /* Motion — easing */
+    --ease-out:     cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-bounce:  cubic-bezier(0.34, 1.56, 0.64, 1);
+    --ease-smooth:  cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-slam:    cubic-bezier(0.55, 0.06, 0.68, 0.19);
+    --ease-elastic: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    /* Spring easings — true multi-oscillation via linear() */
+    --ease-spring-gentle: linear(
+      0, 0.006, 0.025 2.8%, 0.101 6.1%, 0.539 18.9%,
+      0.721 25.3%, 0.849 31.5%, 0.937 38.1%, 0.968 41.8%,
+      0.991 45.7%, 1.006 50%, 1.015 55%, 1.017 63.9%,
+      1.001 85.9%, 1
+    );
+    --ease-spring-bouncy: linear(
+      0, 0.004, 0.016, 0.035, 0.063 9.1%,
+      0.141, 0.25, 0.391, 0.563, 0.765, 1,
+      0.891, 0.813 45.5%, 0.785, 0.766, 0.754, 0.75,
+      0.754, 0.766, 0.785, 0.813 63.6%, 0.891, 1 72.7%,
+      0.973, 0.953, 0.941, 0.938, 0.941, 0.953, 0.973, 1,
+      0.988, 0.984, 0.988, 1
+    );
+
+    /* Button tokens */
+    --btn-primary-bg:   var(--accent-primary);
+    --btn-primary-text: var(--text-on-accent);
+    --btn-danger-bg:    var(--accent-danger);
+    --btn-danger-text:  var(--text-on-accent);
+    --btn-gold-bg:      var(--accent-gold);
+    --btn-gold-text:    var(--text-on-gold);
+    --btn-cyan-bg:      var(--accent-cyan);
+    --btn-cyan-text:    var(--text-on-accent);
+    --btn-green-bg:     var(--accent-green);
+    --btn-green-text:   var(--text-on-accent);
+    --btn-purple-bg:    var(--accent-purple);
+    --btn-purple-text:  var(--text-on-accent);
+    --btn-gap:          var(--space-1-5);
+
+    /* Badge tokens */
+    --badge-py: 2px;
+    --badge-px: 10px;
+
+    /* Toggle tokens */
+    --toggle-off-bg:  var(--primitive-neutral-300);
+    --toggle-on-bg:   var(--accent-primary);
+    --toggle-knob:    var(--primitive-neutral-0);
+
+    /* Z-index scale */
+    --z-base:    1;
+    --z-sticky:  100;
+    --z-fixed:   200;
+    --z-overlay: 300;
+    --z-modal:   1000;
+    --z-toast:   1100;
+    --z-tooltip: 1500;
+  }
