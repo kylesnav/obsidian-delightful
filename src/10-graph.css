@@ -44,7 +44,6 @@
     border: 2px solid var(--border-default);
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-sm);
-    overflow: hidden;
     color: var(--text-primary);
   }
 
@@ -70,6 +69,11 @@
   .graph-controls-button:hover {
     background: var(--accent-primary-subtle);
     color: var(--accent-primary);
+  }
+
+  /* Hide close button when graph controls are collapsed */
+  .graph-controls.is-close .graph-controls-button.mod-close {
+    display: none;
   }
 
   /* ========================================================================

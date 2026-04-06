@@ -383,11 +383,10 @@
      6. BACKLINKS + SEARCH RESULTS
      ======================================================================== */
 
-  /* Backlinks footer — clean break between note content and backlinks */
+  /* Backlinks footer — spacing only, no visible divider */
   .mod-footer {
     margin-top: var(--space-6);
     padding-top: var(--space-4);
-    border-top: 2px solid var(--border-subtle);
   }
 
   /* Backlink section headers — "Linked mentions", "Unlinked mentions" */

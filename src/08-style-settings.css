@@ -228,6 +228,7 @@ settings:
   body.border-subtle .graph-controls,
   body.border-subtle .graph-control-section,
   body.border-subtle button,
+  body.border-subtle input:not([type]),
   body.border-subtle input[type="text"],
   body.border-subtle input[type="search"],
   body.border-subtle select,

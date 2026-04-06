@@ -556,6 +556,7 @@
 
   /* ----- Text inputs ----- */
 
+  input:not([type]),
   input[type="text"],
   input[type="search"],
   input[type="email"],
@@ -600,6 +601,7 @@
   }
 
   /* Focus state */
+  input:not([type]):focus,
   input[type="text"]:focus,
   input[type="search"]:focus,
   input[type="email"]:focus,
@@ -610,6 +612,35 @@
     border-color: var(--accent-primary);
     box-shadow: 4px 4px 0 var(--accent-primary);
     outline: none;
+  }
+
+  /* ----- Search container inputs ----- */
+  /* Obsidian wraps search bars in .search-input-container which provides
+     the visual boundary — strip the DS treatment from the inner input */
+
+  .search-input-container {
+    display: flex;
+    align-items: center;
+    background: var(--bg-surface);
+    border: 2px solid var(--border-default);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-sm);
+    transition:
+      border-color var(--motion-fast) var(--ease-out),
+      box-shadow   var(--motion-instant) linear;
+  }
+
+  .search-input-container input {
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    outline: none !important;
+    padding-left: var(--space-8) !important;
+  }
+
+  .search-input-container:focus-within {
+    border-color: var(--accent-primary);
+    box-shadow: 4px 4px 0 var(--accent-primary);
   }
 
   /* Placeholder */
@@ -656,68 +687,9 @@
     outline: none;
   }
 
-  /* ----- Toggle (CRITICAL — replace Obsidian default) ----- */
-  /* body prefix for specificity over Obsidian's app.css */
-
-  body .checkbox-container {
-    width: 40px;
-    height: 22px;
-    border-radius: var(--radius-full);
-    background: var(--toggle-off-bg);
-    border: 2px solid var(--border-default);
-    position: relative;
-    cursor: pointer;
-    flex-shrink: 0;
-    transition: background var(--motion-fast) var(--ease-bounce),
-                border-color var(--motion-fast) var(--ease-bounce);
-    /* Remove any Obsidian default positioning */
-    display: inline-block;
-    vertical-align: middle;
-  }
-
-  /* ON state — uses toggle token so accent swaps propagate */
+  /* ----- Toggle — Obsidian default with DS accent color ----- */
   body .checkbox-container.is-enabled {
-    background: var(--toggle-on-bg);
-    border-color: var(--toggle-on-bg);
-  }
-
-  /* Knob */
-  body .checkbox-container::after {
-    content: '';
-    position: absolute;
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    background: var(--toggle-knob);
-    top: 2px;
-    left: 2px;
-    box-shadow: 0 1px 3px var(--background-modifier-box-shadow);
-    transition: transform var(--motion-fast) var(--ease-spring-gentle);
-  }
-
-  body .checkbox-container.is-enabled::after {
-    transform: translateX(18px);
-  }
-
-  /* Toggle squeeze on click */
-  body .checkbox-container:active {
-    transform: scale(0.9);
-  }
-
-  /* Remove Obsidian's own ::before knob */
-  body .checkbox-container::before {
-    display: none;
-  }
-
-  /* Obsidian toggle input (the hidden real checkbox) */
-  .checkbox-container input[type="checkbox"] {
-    position: absolute;
-    opacity: 0;
-    width: 0;
-    height: 0;
-    margin: 0;
-    padding: 0;
-    pointer-events: none;
+    background-color: var(--toggle-on-bg) !important;
   }
 
   /* ----- Checkbox ----- */
