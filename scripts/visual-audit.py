@@ -234,21 +234,35 @@ def scroll_source_to(px: int) -> None:
 # Style toggle helpers
 # ---------------------------------------------------------------------------
 
-# Maps style key -> (body class to add, body class to remove if any)
+# Maps visual-audit style keys to the body classes used by Style Settings.
 _STYLE_CLASSES = {
-    "accent-pink":       ("delightful-accent-pink",   None),
-    "accent-danger":     ("delightful-accent-danger",  None),
-    "accent-gold":       ("delightful-accent-gold",    None),
-    "accent-cyan":       ("delightful-accent-cyan",    None),
-    "accent-green":      ("delightful-accent-green",   None),
-    "accent-purple":     ("delightful-accent-purple",  None),
-    "shadow-subtle":     ("delightful-shadow-subtle",  None),
-    "shadow-none":       ("delightful-shadow-none",    None),
-    "border-subtle":     ("delightful-border-subtle",  None),
-    "heading-compact":   ("delightful-heading-compact", None),
-    "heading-large":     ("delightful-heading-large",  None),
-    "animations-off":    ("delightful-animations-off", None),
+    "accent-pink":       None,
+    "accent-danger":     "accent-danger",
+    "accent-gold":       "accent-gold",
+    "accent-cyan":       "accent-cyan",
+    "accent-green":      "accent-green",
+    "accent-purple":     "accent-purple",
+    "shadow-subtle":     "shadow-subtle",
+    "shadow-none":       "shadow-none",
+    "border-subtle":     "border-subtle",
+    "heading-compact":   "heading-scale-compact",
+    "heading-large":     "heading-scale-large",
+    "animations-off":    None,
 }
+
+_ALL_STYLE_CLASSES = [
+    "accent-danger",
+    "accent-gold",
+    "accent-cyan",
+    "accent-green",
+    "accent-purple",
+    "shadow-subtle",
+    "shadow-none",
+    "border-subtle",
+    "heading-scale-compact",
+    "heading-scale-large",
+    "delightful-animations",
+]
 
 
 def set_style(settings: dict) -> None:
@@ -259,20 +273,23 @@ def set_style(settings: dict) -> None:
     adds = []
     for key, enabled in settings.items():
         if enabled and key in _STYLE_CLASSES:
-            cls = _STYLE_CLASSES[key][0]
-            adds.append(cls)
+            cls = _STYLE_CLASSES[key]
+            if cls:
+                adds.append(cls)
 
     if adds:
         cls_str = "','".join(adds)
         evaluate(f"document.body.classList.add('{cls_str}')")
+    if settings.get("animations-off"):
+        evaluate("document.body.classList.remove('delightful-animations')")
     time.sleep(0.3)
 
 
 def reset_style() -> None:
     """Remove all delightful style-variant classes from body."""
-    all_classes = [v[0] for v in _STYLE_CLASSES.values()]
-    cls_str = "','".join(all_classes)
+    cls_str = "','".join(_ALL_STYLE_CLASSES)
     evaluate(f"document.body.classList.remove('{cls_str}')")
+    evaluate("document.body.classList.add('delightful-animations')")
     time.sleep(0.3)
 
 # ---------------------------------------------------------------------------
