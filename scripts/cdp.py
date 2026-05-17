@@ -14,7 +14,7 @@ Usage:
   python3 scripts/cdp.py style <selector> <property>
 
 Requires: pip install websocket-client
-Obsidian must be running with: --remote-debugging-port=9333
+Obsidian must be running with: --remote-debugging-port=9222 --remote-allow-origins=*
 """
 
 import sys
@@ -22,7 +22,7 @@ import json
 import base64
 import urllib.request
 
-CDP_PORT = 9333
+CDP_PORT = 9222
 CDP_HOST = "localhost"
 
 

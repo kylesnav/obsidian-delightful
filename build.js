@@ -17,13 +17,11 @@ function getVersion() {
 
 function getHeader() {
   const version = getVersion();
-  const timestamp = new Date().toISOString().slice(0, 19).replace('T', ' ');
   return `/*
  * @name Delightful
  * @description A joyous, neo-brutalist theme built on the Delightful Design System.
  * @author Kyle Snavely
  * @version ${version}
- * @built ${timestamp}
  */
 
 /* ==========================================================================

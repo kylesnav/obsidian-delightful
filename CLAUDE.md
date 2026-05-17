@@ -30,7 +30,7 @@ Uses Chrome DevTools Protocol to connect to Obsidian (Electron app):
 
 ```sh
 # Launch Obsidian with CDP
-open -a Obsidian --args --remote-debugging-port=8315
+open -a Obsidian --args --remote-debugging-port=9222 --remote-allow-origins=*
 
 # Run visual audit
 python3 scripts/visual-audit.py
